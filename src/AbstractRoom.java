@@ -3,14 +3,17 @@
  * as well as information about the width and height (in pixels) of
  * the room.
  */
-private static class AbstractRoom {
+
+import org.newdawn.slick.*;
+
+public class AbstractRoom {
 	/**
 	 * The width and height (in pixels).
 	 */
 	private int w;
 	private int h;
 
-	private Image
+	private Image bg;
 
 		/**
 		 * Return the width of the room.

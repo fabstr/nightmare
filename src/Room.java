@@ -15,7 +15,7 @@ public class Room {
 	/**
 	 * The doors in the room.
 	 */
-	private Door[] doors;
+	private Door[] doors;
 
 	/**
 	 * The AbstractRoom of this room.
