@@ -4,7 +4,7 @@ public class Gameplay extends BasicGame {
 	private static int windowWidth = 800;
 	private static int windowHeight = 640;
 	
-	private Character player;
+	private Player player;
 	private Room currentRoom;
 	private Time timer;
 
@@ -23,11 +23,13 @@ public class Gameplay extends BasicGame {
 	public void init(GameContainer arg0) throws SlickException {
 		// create a room for the nightmare
 		currentRoom = new Room(400, 300, "/Users/fabianstrom/uv/nightmare/resources/graphics/rooms/room0.png", 0, 0);
-
+		currentRoom.addGhost();
+		currentRoom.addGhost();
+		currentRoom.addGhost();
 		// create a nightmare
 	//	Nightmare nm = new Nightmare(
 
-		player = new Character(3, 200, 150, new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/sprites/characters.png"));
+		player = new Player(3, 200, 150, new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/sprites/characters.png"));
 	}
 
 	@Override

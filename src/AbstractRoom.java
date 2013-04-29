@@ -12,6 +12,9 @@ public class AbstractRoom {
 	 */
 	private int w;
 	private int h;
+	
+	public int floorX;
+	public int floorY;
 
 	private Image bg;
 
@@ -37,6 +40,8 @@ public class AbstractRoom {
 	public AbstractRoom(int w, int h, int floorX, int floorY) {
 		this.w = w;
 		this.h = h;
+		this.floorX = floorX;
+		this.floorY = floorY;
 	}
 
 	/**

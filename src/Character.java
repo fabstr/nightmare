@@ -1,6 +1,6 @@
 import org.newdawn.slick.*;
 
-public class Character implements Drawable {
+public abstract class Character implements Drawable {
 	/**
 	 * The health of the character.
 	 */
@@ -15,12 +15,8 @@ public class Character implements Drawable {
 	/**
 	 * The image of the character.
 	 */
-	private Animation currentAnimation;
-	
-	private Animation left;
-	private Animation right;
-	private Animation up;
-	private Animation down;
+	protected Animation currentAnimation;
+
 
 	/**
 	 * Create a new character with the given health, the coordinates and
@@ -38,16 +34,7 @@ public class Character implements Drawable {
 		this.x = x;
 		this.y = y;
 		
-		Image rightImg = img.getSubImage(0, 0, 78, 37);
-		Image leftImg = img.getSubImage(0, 37, 78, 37);
-		Image upImg = img.getSubImage(0, 74, 78, 37);
-		Image downImg = img.getSubImage(0, 111, 78, 37);
-		left = new Animation(new SpriteSheet(leftImg, 26, 37), 300);
-		right = new Animation(new SpriteSheet(rightImg, 26, 37), 300);
-		up = new Animation(new SpriteSheet(upImg, 26, 37), 300);
-		down = new Animation(new SpriteSheet(downImg, 26, 37), 300);
 		
-		currentAnimation = down;
 	}
 
 	/**
@@ -146,21 +133,5 @@ public class Character implements Drawable {
 	
 	public void moveY(int amount) {
 		this.y += amount;
-	}
-
-	public void faceDown() {
-		currentAnimation = down;
-	}
-	
-	public void faceUp() {
-		currentAnimation = up;
-	}
-	
-	public void faceLeft() {
-		currentAnimation = left;
-	}
-	
-	public void faceRight() {
-		currentAnimation = right;
 	}
 }

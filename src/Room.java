@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Random;
+
 import org.newdawn.slick.*;
 
 public class Room {
@@ -10,7 +12,7 @@ public class Room {
 	/**
 	 * The moving characters (the ghosts) in the room.
 	 */
-	private ArrayList<Character> characters;
+	private ArrayList<Ghost> characters;
 
 	/**
 	 * The doors in the room.
@@ -27,10 +29,16 @@ public class Room {
 	 */
 	private Image floorImage;
 
+	private Image ghostImage;
+
 	public Room(int width, int height, String imgPath, int floorX, 
 			int floorY) throws SlickException {
 		abstractRoom = new AbstractRoom(width, height, floorX, floorY);
 		floorImage = new Image(imgPath);
+		
+		ghostImage = new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/sprites/ghost.png");
+		
+		characters = new ArrayList<Ghost>();
 	}
 
 	/**
@@ -62,6 +70,20 @@ public class Room {
 
 	public void draw() {
 		floorImage.draw(0.0f,0.0f);
+		for (Character c : characters) {
+			c.draw();
+		}
+	}
+	
+	public void moveGhosts() {
 		
+	}
+	
+	public void addGhost() throws SlickException {
+		Random r = new Random();
+		int x = Math.abs(r.nextInt(abstractRoom.width()) + abstractRoom.floorX - 64);
+		int y = Math.abs(r.nextInt(abstractRoom.height()) + abstractRoom.floorY - 64);
+		Ghost g = new Ghost(4, x, y, ghostImage);
+		characters.add(g);
 	}
 }
