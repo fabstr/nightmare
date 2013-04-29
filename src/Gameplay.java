@@ -1,4 +1,5 @@
 import org.newdawn.slick.*;
+import org.newdawn.slick.font.effects.ColorEffect;
 
 public class Gameplay extends BasicGame {
 	private static int windowWidth = 800;
@@ -9,6 +10,9 @@ public class Gameplay extends BasicGame {
 	private Time timer;
 	
 	private Image window;
+	private Image heart;
+	
+	private UnicodeFont font;
 
 	public Gameplay() {
 		super("Nightmare");
@@ -20,6 +24,10 @@ public class Gameplay extends BasicGame {
 		window.draw();
 		currentRoom.draw();
 		player.draw();
+		drawHearts();
+		
+		String timeLeft = "Time left: " + timer.getSecondsLeft() + " seconds";
+		font.drawString(160, 2, timeLeft, Color.black);
 	}
 
 	@Override
@@ -33,8 +41,17 @@ public class Gameplay extends BasicGame {
 	//	Nightmare nm = new Nightmare(
 
 		player = new Player(3, 200, 150, new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/sprites/characters.png"));
-		
+
 		window = new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/window.png");
+		heart = new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/sprites/heart.png");
+
+		font = new UnicodeFont("/Users/fabianstrom/uv/nightmare/resources/fonts/acme.ttf", 20, false, false);
+		font.addAsciiGlyphs();
+		font.getEffects().add(new ColorEffect());
+		font.loadGlyphs();
+		
+		timer = new Time(300000);
+		timer.start();
 	}
 
 	@Override
@@ -66,5 +83,12 @@ public class Gameplay extends BasicGame {
 		AppGameContainer app = new AppGameContainer(new Gameplay());
 		app.setDisplayMode(windowWidth, windowHeight, false);
 		app.start();
+	}
+	
+	private void drawHearts() {
+		int health = player.getHealth();
+		for (int i=0; i<health; i++) {
+			heart.draw(i*42+10, 2);
+		}
 	}
 }

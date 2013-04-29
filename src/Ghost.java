@@ -18,14 +18,7 @@ public class Ghost extends Character {
 		currentAnimation = new Animation(new SpriteSheet(img, 64, 64), 75);
 		
 		r = new Random();
-		
-		xSpeed = r.nextFloat();
-		
-		while (xSpeed < 0.3f || xSpeed > 0.7f) {
-			xSpeed = r.nextFloat();
-		}
-		
-		ySpeed = (float) Math.sqrt(1 - xSpeed * xSpeed);
+		randomizeDirection();
 	}
 
 	public void move(Room room) {
@@ -45,5 +38,10 @@ public class Ghost extends Character {
 		}
 		setX(newX);
 		setY(newY);
+	}
+	
+	private void randomizeDirection() {
+		xSpeed = r.nextFloat();	
+		ySpeed = (float) Math.sqrt(1 - xSpeed * xSpeed);
 	}
 }
