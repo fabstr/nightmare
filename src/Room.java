@@ -31,14 +31,20 @@ public class Room {
 
 	private Image ghostImage;
 	
+	private int x;
+	private int y;
+	
 	private static Random r;
 
-	public Room(int width, int height, String imgPath, int floorX, 
+	public Room(String imgPath, String ghostPath, int floorX, 
 			int floorY) throws SlickException {
-		abstractRoom = new AbstractRoom(width, height, floorX, floorY);
+		ghostImage = new Image(ghostPath);
 		floorImage = new Image(imgPath);
 		
-		ghostImage = new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/sprites/ghost.png");
+		int width = ghostImage.getWidth();
+		int height = ghostImage.getHeight();
+		
+		abstractRoom = new AbstractRoom(width, height, floorX, floorY);
 		
 		characters = new ArrayList<Ghost>();
 		
@@ -65,7 +71,7 @@ public class Room {
 	 * false.
 	 */
 	public boolean isPositionOutOfRoom(int x, int y) {
-		if (abstractRoom.positionIsInRoom(x, y) == false) {
+		if (abstractRoom.positionIsInRoom(this.x+x, this.y+y) == false) {
 			return true;
 		}
 
@@ -73,7 +79,7 @@ public class Room {
 	}
 
 	public void draw() {
-		floorImage.draw(abstractRoom.floorX, abstractRoom.floorY);
+		floorImage.draw(x, y);
 		for (Character c : characters) {
 			c.draw();
 		}
@@ -102,10 +108,12 @@ public class Room {
 	}
 
 	public boolean canSetY(int newY) {
+		newY += this.y;
 		return newY > abstractRoom.floorY && newY < abstractRoom.height() + abstractRoom.floorY;
 	}
 	
 	public boolean canSetX(int newX) {
+		newX += this.x;
 		return newX > abstractRoom.floorX && newX < abstractRoom.width() + abstractRoom.floorX;
 	}
 
