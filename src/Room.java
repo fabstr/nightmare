@@ -90,11 +90,11 @@ public class Room {
 		int y = r.nextInt(abstractRoom.height()) + abstractRoom.floorY;
 
 		while (!canSetX(x, 64)) {
-			x = r.nextInt(abstractRoom.width()) + abstractRoom.floorX - 64;
+			x = r.nextInt(abstractRoom.width()) + abstractRoom.floorX;
 		}
 		
 		while (!canSetY(y, 64)) {
-			y = r.nextInt(abstractRoom.height()) + abstractRoom.floorY - 64;
+			y = r.nextInt(abstractRoom.height()) + abstractRoom.floorY;
 		}
 		
 		Ghost g = new Ghost(4, x, y, ghostImage);
