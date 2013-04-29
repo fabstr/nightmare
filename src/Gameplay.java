@@ -33,7 +33,7 @@ public class Gameplay extends BasicGame {
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		// create a room for the nightmare
-		currentRoom = new Room("/Users/fabianstrom/uv/nightmare/resources/graphics/rooms/room0.png", "/Users/fabianstrom/uv/nightmare/resources/graphics/sprites/ghost.png", 20, 20);
+		currentRoom = new Room(640, 480, "/Users/fabianstrom/uv/nightmare/resources/graphics/rooms/room0.png", 100, 70);
 		currentRoom.addGhost();
 		currentRoom.addGhost();
 		currentRoom.addGhost();
@@ -76,10 +76,6 @@ public class Gameplay extends BasicGame {
 		
 		if (currentRoom.isPlayerOnAGhost(player.x, player.y, 26, 37)) {
 			player.decreaseHealth(1);
-			
-			if (player.getHealth() == 0) {
-				System.out.println("You lost");
-			}
 		}
 	}
 	
