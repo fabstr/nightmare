@@ -73,7 +73,7 @@ public class Room {
 	}
 
 	public void draw() {
-		floorImage.draw(0.0f,0.0f);
+		floorImage.draw(abstractRoom.floorX, abstractRoom.floorY);
 		for (Character c : characters) {
 			c.draw();
 		}
@@ -86,27 +86,47 @@ public class Room {
 	}
 	
 	public void addGhost() throws SlickException {
-		int x = Math.abs(r.nextInt(abstractRoom.width()) + abstractRoom.floorX - 64);
-		int y = Math.abs(r.nextInt(abstractRoom.height()) + abstractRoom.floorY - 64);
+		int x = r.nextInt(abstractRoom.width()) + abstractRoom.floorX;
+		int y = r.nextInt(abstractRoom.height()) + abstractRoom.floorY;
+
+		while (!canSetX(x, 64)) {
+			x = r.nextInt(abstractRoom.width()) + abstractRoom.floorX - 64;
+		}
+		
+		while (!canSetY(y, 64)) {
+			y = r.nextInt(abstractRoom.height()) + abstractRoom.floorY - 64;
+		}
+		
 		Ghost g = new Ghost(4, x, y, ghostImage);
 		characters.add(g);
 	}
 
 	public boolean canSetY(int newY) {
-		return newY > abstractRoom.floorY && newY < abstractRoom.height();
+		return newY > abstractRoom.floorY && newY < abstractRoom.height() + abstractRoom.floorY;
 	}
 	
 	public boolean canSetX(int newX) {
-		return newX > abstractRoom.floorX && newX < abstractRoom.width();
+		return newX > abstractRoom.floorX && newX < abstractRoom.width() + abstractRoom.floorX;
 	}
 
 	public boolean canSetY(int newY, int height) {
-		newY += height;
-		return newY > abstractRoom.floorY && newY < abstractRoom.height();
+		return canSetY(newY+height);
 	}
 	
 	public boolean canSetX(int newX, int width) {
-		newX += width;
-		return newX > abstractRoom.floorX && newX < abstractRoom.width();
+		return canSetX(newX+width);
+	}
+	
+	public boolean isPlayerOnAGhost(int playerX, int playerY, int playerWidth, int playerHeight) {
+		int ghostHeight = 64;
+		int ghostWidth = 64;
+		
+		for (Character c : characters) {
+			if (playerX > c.x && playerX + playerWidth < c.x + ghostWidth &&
+				playerY > c.y && playerY + playerHeight < c.y + ghostHeight) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
