@@ -40,12 +40,12 @@ public class Room {
 		abstractRoom = new AbstractRoom(width, height, floorX, floorY);
 		floorImage = new Image(imgPath);
 		
-		ghostImage = new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/sprites/ghost.png");
+		ghostImage = new Image("resources/graphics/sprites/ghost.png");
 		
 		characters = new ArrayList<Ghost>();
 		
 		r = new Random();
-		key = new Item("The key", new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/sprites/key.png"), 500, 300);
+		key = new Item("The key", new Image("resources/graphics/sprites/key.png"), 500, 300);
 	}
 
 	/**

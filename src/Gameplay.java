@@ -37,19 +37,19 @@ public class Gameplay extends BasicGame {
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		// create a room for the nightmare
-		currentRoom = new Room(640, 480, "/Users/fabianstrom/uv/nightmare/resources/graphics/rooms/room0.png", 100, 70);
+		currentRoom = new Room(640, 480, "resources/graphics/rooms/room0.png", 100, 70);
 		currentRoom.addGhost();
 		currentRoom.addGhost();
 		currentRoom.addGhost();
 		// create a nightmare
 	//	Nightmare nm = new Nightmare(
 
-		player = new Player(3, 200, 150, new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/sprites/characters.png"));
+		player = new Player(3, 200, 150, new Image("resources/graphics/sprites/characters.png"));
 
-		window = new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/window.png");
-		heart = new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/sprites/heart.png");
+		window = new Image("resources/graphics/window.png");
+		heart = new Image("resources/graphics/sprites/heart.png");
 
-		font = new UnicodeFont("/Users/fabianstrom/uv/nightmare/resources/fonts/acme.ttf", 20, false, false);
+		font = new UnicodeFont("resources/fonts/acme.ttf", 20, false, false);
 		font.addAsciiGlyphs();
 		font.getEffects().add(new ColorEffect());
 		font.loadGlyphs();
