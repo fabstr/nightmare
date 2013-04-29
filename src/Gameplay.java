@@ -12,6 +12,7 @@ public class Gameplay extends BasicGame {
 	private Image window;
 	private Image heart;
 	
+	
 	private UnicodeFont font;
 
 	public Gameplay() {
@@ -26,8 +27,11 @@ public class Gameplay extends BasicGame {
 		player.draw();
 		drawHearts();
 		
-		String timeLeft = "Time left: " + timer.getSecondsLeft() + " seconds";
+		String timeLeft = String.format("Time left: %3d seconds.", timer.getSecondsLeft());
 		font.drawString(160, 2, timeLeft, Color.black);
+		
+		player.drawInventory();
+		
 	}
 
 	@Override
@@ -50,8 +54,8 @@ public class Gameplay extends BasicGame {
 		font.getEffects().add(new ColorEffect());
 		font.loadGlyphs();
 		
-		timer = new Time(300000);
-		timer.start();
+		timer = new Time(110000);
+		timer.start();		
 	}
 
 	@Override
@@ -76,6 +80,11 @@ public class Gameplay extends BasicGame {
 		
 		if (currentRoom.isPlayerOnAGhost(player.x, player.y, 26, 37)) {
 			player.decreaseHealth(1);
+		}
+		
+		if (currentRoom.isPlayerOnKey(player.x, player.y)) {
+			System.out.println("on key");
+			player.getInventory().addItem(currentRoom.removeKey());
 		}
 	}
 	

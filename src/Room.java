@@ -19,6 +19,8 @@ public class Room {
 	 */
 //	private Door[] doors;
 
+	private Item key;
+	
 	/**
 	 * The AbstractRoom of this room.
 	 */
@@ -43,6 +45,7 @@ public class Room {
 		characters = new ArrayList<Ghost>();
 		
 		r = new Random();
+		key = new Item("The key", new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/sprites/key.png"), 500, 300);
 	}
 
 	/**
@@ -74,6 +77,11 @@ public class Room {
 
 	public void draw() {
 		floorImage.draw(abstractRoom.floorX, abstractRoom.floorY);
+		
+		if (key != null) {
+			key.draw();
+		}
+		
 		for (Character c : characters) {
 			c.draw();
 		}
@@ -127,6 +135,25 @@ public class Room {
 				return true;
 			}
 		}
+		return false;
+	}
+
+	public Item removeKey() {
+		Item toReturn = key;
+		key = null;
+		return toReturn;
+	}
+
+	public boolean isPlayerOnKey(int x, int y) {
+		if (key == null) {
+			// there is no key, the player can't be on it
+			return false;
+		}
+		if (x > key.getX() && x < key.getX() + key.getImage().getWidth() &&
+			y > key.getY() && y < key.getY() + key.getImage().getHeight()) {
+			return true;
+		}
+		
 		return false;
 	}
 }

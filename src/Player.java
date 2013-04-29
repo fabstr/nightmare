@@ -14,6 +14,7 @@ public class Player extends Character {
 	// to avoid the player getting hurt twice or more by a ghost
 	private TimingLock tl;
 	
+	private Inventory inventory;
 	
 	public Player(int health, int x, int y, Image img) throws SlickException {
 		super(health, x, y, img);
@@ -30,6 +31,8 @@ public class Player extends Character {
 		tl = new TimingLock(1000);
 		
 		currentAnimation = down;
+		
+		inventory = new Inventory();
 	}
 
 
@@ -97,5 +100,17 @@ public class Player extends Character {
 		}
 		
 		setY(newY);
+	}
+
+
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+
+
+	public void drawInventory() {
+		inventory.drawInventory();
 	}
 }
