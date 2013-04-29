@@ -9,8 +9,8 @@ public abstract class Character implements Drawable {
 	/**
 	 * The current x and y coordinates of the character.
 	 */
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
 
 	/**
 	 * The image of the character.
@@ -126,6 +126,8 @@ public abstract class Character implements Drawable {
 		this.x = x;
 		this.y = y;
 	}
+	
+	
 	
 	public void moveX(int amount) {
 		this.x += amount;

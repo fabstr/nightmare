@@ -30,6 +30,8 @@ public class Room {
 	private Image floorImage;
 
 	private Image ghostImage;
+	
+	private static Random r;
 
 	public Room(int width, int height, String imgPath, int floorX, 
 			int floorY) throws SlickException {
@@ -39,6 +41,8 @@ public class Room {
 		ghostImage = new Image("/Users/fabianstrom/uv/nightmare/resources/graphics/sprites/ghost.png");
 		
 		characters = new ArrayList<Ghost>();
+		
+		r = new Random();
 	}
 
 	/**
@@ -76,14 +80,23 @@ public class Room {
 	}
 	
 	public void moveGhosts() {
-		
+		for (Ghost g : characters) {
+			g.move(this);
+		}
 	}
 	
 	public void addGhost() throws SlickException {
-		Random r = new Random();
 		int x = Math.abs(r.nextInt(abstractRoom.width()) + abstractRoom.floorX - 64);
 		int y = Math.abs(r.nextInt(abstractRoom.height()) + abstractRoom.floorY - 64);
 		Ghost g = new Ghost(4, x, y, ghostImage);
 		characters.add(g);
+	}
+
+	public boolean canSetY(int newY) {
+		return newY > abstractRoom.floorY && newY < abstractRoom.height();
+	}
+	
+	public boolean canSetX(int newX) {
+		return newX > abstractRoom.floorX && newX < abstractRoom.width();
 	}
 }

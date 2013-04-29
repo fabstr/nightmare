@@ -37,18 +37,20 @@ public class Gameplay extends BasicGame {
 		Input i = gc.getInput();
 		
 		if (i.isKeyDown(Input.KEY_DOWN)) {
-			player.moveY(1);
+			player.moveY(1, currentRoom, true);
 			player.faceDown();
 		} else if (i.isKeyDown(Input.KEY_UP)){
-			player.moveY(-1);
+			player.moveY(-1, currentRoom, false);
 			player.faceUp();
 		} else if (i.isKeyDown(Input.KEY_LEFT)) {
-			player.moveX(-1);
+			player.moveX(-1, currentRoom, false);
 			player.faceLeft();
 		} else if (i.isKeyDown(Input.KEY_RIGHT)) {
-			player.moveX(1);
+			player.moveX(1, currentRoom, true);
 			player.faceRight();
 		}
+		
+		currentRoom.moveGhosts();
 	}
 	
 	public static void main(String[] args) throws SlickException {

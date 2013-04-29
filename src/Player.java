@@ -43,4 +43,40 @@ public class Player extends Character {
 	public void faceRight() {
 		currentAnimation = right;
 	}
+	
+	public void moveX(int amount, Room room, boolean countImageWidth) {
+		int newX = this.x + amount;
+		
+		if (countImageWidth) {
+			newX += currentAnimation.getWidth();
+		}
+		
+		if (!room.canSetX(newX)) {
+			return;
+		}
+		
+		if (countImageWidth) {
+			newX -= currentAnimation.getWidth();
+		}
+		
+		setX(newX);
+	}
+	
+	public void moveY(int amount, Room room, boolean countImageWidth) {
+		int newY = this.y + amount;
+		
+		if (countImageWidth) {
+			newY += currentAnimation.getHeight();
+		}
+		
+		if (!room.canSetY(newY)) {
+			return;
+		}
+		
+		if (countImageWidth) {
+			newY -= currentAnimation.getHeight();
+		}
+		
+		setY(newY);
+	}
 }
