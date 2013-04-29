@@ -36,7 +36,7 @@ public void start() {
  */
 public boolean timeLeft() {
 	if(startTime == -1) {   //  Alert when writing code.
-		System.out.println("Error, start() must be called before timeLeft().");
+		System.err.println("Error, start() must be called before timeLeft().");
 	}
 	if(System.currentTimeMillis() - startTime < timeLimit) {
 		return true;
