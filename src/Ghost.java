@@ -11,15 +11,17 @@ public class Ghost extends Character {
 	private float xSpeed;
 	private float ySpeed;
 	
+	private static Random r;
+	
 	public Ghost(int health, int x, int y, Image img) throws SlickException {
 		super(health, x, y, img);
 		currentAnimation = new Animation(new SpriteSheet(img, 64, 64), 75);
 		
-		Random r = new Random();
+		r = new Random();
 		
 		xSpeed = r.nextFloat();
 		
-		if (xSpeed < 0.2 || xSpeed > 0.8) {
+		while (xSpeed < 0.3f || xSpeed > 0.7f) {
 			xSpeed = r.nextFloat();
 		}
 		
