@@ -15,7 +15,7 @@ public class Room {
 	/**
 	 * The doors in the room.
 	 */
-	private Door[] doors;
+//	private Door[] doors;
 
 	/**
 	 * The AbstractRoom of this room.
@@ -58,5 +58,10 @@ public class Room {
 		}
 
 		return false;
+	}
+
+	public void draw() {
+		floorImage.draw(0.0f,0.0f);
+		
 	}
 }

@@ -15,7 +15,12 @@ public class Character implements Drawable {
 	/**
 	 * The image of the character.
 	 */
-	private Image img;
+	private Animation currentAnimation;
+	
+	private Animation left;
+	private Animation right;
+	private Animation up;
+	private Animation down;
 
 	/**
 	 * Create a new character with the given health, the coordinates and
@@ -23,16 +28,26 @@ public class Character implements Drawable {
 	 * @param health The (initial) health of the character.
 	 * @param x The x coordinate to start at
 	 * @param y The y coordinate to start at
-	 * @param imgPath The image to draw
+	 * @param img The image to draw (as a spritesheet of the animations)
 	 * @throws SlickException If there was an error creating the Image 
 	 * 			  object.
 	 */
-	public Character(int health, int x, int y, String imgPath) throws
+	public Character(int health, int x, int y, Image img) throws
 		SlickException {
 		this.health = health;
 		this.x = x;
 		this.y = y;
-		img = new Image(imgPath);
+		
+		Image rightImg = img.getSubImage(0, 0, 78, 37);
+		Image leftImg = img.getSubImage(0, 37, 78, 37);
+		Image upImg = img.getSubImage(0, 74, 78, 37);
+		Image downImg = img.getSubImage(0, 111, 78, 37);
+		left = new Animation(new SpriteSheet(leftImg, 26, 37), 300);
+		right = new Animation(new SpriteSheet(rightImg, 26, 37), 300);
+		up = new Animation(new SpriteSheet(upImg, 26, 37), 300);
+		down = new Animation(new SpriteSheet(downImg, 26, 37), 300);
+		
+		currentAnimation = down;
 	}
 
 	/**
@@ -41,12 +56,14 @@ public class Character implements Drawable {
 	 * @param y The y coordinage.
 	 */
 	public void draw(float x, float y) {
+		currentAnimation.draw(x, y);
 	}
 
 	/**
 	 * Draw the character at its current position.
 	 */
 	public void draw() {
+		currentAnimation.draw(x, y);
 	}
 
 	/**
@@ -121,5 +138,29 @@ public class Character implements Drawable {
 	public void moveTo(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+	
+	public void moveX(int amount) {
+		this.x += amount;
+	}
+	
+	public void moveY(int amount) {
+		this.y += amount;
+	}
+
+	public void faceDown() {
+		currentAnimation = down;
+	}
+	
+	public void faceUp() {
+		currentAnimation = up;
+	}
+	
+	public void faceLeft() {
+		currentAnimation = left;
+	}
+	
+	public void faceRight() {
+		currentAnimation = right;
 	}
 }
