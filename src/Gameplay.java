@@ -75,7 +75,7 @@ public class Gameplay extends BasicGame {
 		currentRoom.moveGhosts();
 		
 		if (currentRoom.isPlayerOnAGhost(player.x, player.y, 26, 37)) {
-			System.out.println("THe player is on a ghost.");
+			player.decreaseHealth(1);
 		}
 	}
 	

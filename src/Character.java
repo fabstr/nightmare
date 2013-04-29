@@ -4,7 +4,7 @@ public abstract class Character implements Drawable {
 	/**
 	 * The health of the character.
 	 */
-	private int health;
+	protected int health;
 
 	/**
 	 * The current x and y coordinates of the character.

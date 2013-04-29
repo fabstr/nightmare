@@ -11,6 +11,9 @@ public class Player extends Character {
 	private Animation up;
 	private Animation down;
 	
+	// to avoid the player getting hurt twice or more by a ghost
+	private TimingLock tl;
+	
 	
 	public Player(int health, int x, int y, Image img) throws SlickException {
 		super(health, x, y, img);
@@ -24,10 +27,26 @@ public class Player extends Character {
 		up = new Animation(new SpriteSheet(upImg, 26, 37), 300);
 		down = new Animation(new SpriteSheet(downImg, 26, 37), 300);
 		
+		tl = new TimingLock(1000);
+		
 		currentAnimation = down;
 	}
 
 
+
+	/**
+	 * Decrease the health.
+	 * @param amount The amount to Decrease the health with.
+	 */
+	public void decreaseHealth(int amount) {
+		if (tl.isLocked()) {
+			return;
+		}
+		
+		tl.lock();
+		health -= amount;
+	}
+	
 	public void faceDown() {
 		currentAnimation = down;
 	}
