@@ -30,12 +30,14 @@ public class Ghost extends Character {
 		int newX = Math.round(x + xSpeed);
 		int newY = Math.round(y + ySpeed);
 		
-		if (!room.canSetX(newX)) {
+		int width = (xSpeed > 0) ? 64 : 0;
+		if (!room.canSetX(newX, width)) {
 			xSpeed = -xSpeed;
 			return;
 		}
-		
-		if (!room.canSetY(newY)) {
+
+		int height = (ySpeed > 0) ? 64 : 0;
+		if (!room.canSetY(newY, height)) {
 			ySpeed = -ySpeed;
 			return;
 		}

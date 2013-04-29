@@ -99,4 +99,14 @@ public class Room {
 	public boolean canSetX(int newX) {
 		return newX > abstractRoom.floorX && newX < abstractRoom.width();
 	}
+
+	public boolean canSetY(int newY, int height) {
+		newY += height;
+		return newY > abstractRoom.floorY && newY < abstractRoom.height();
+	}
+	
+	public boolean canSetX(int newX, int width) {
+		newX += width;
+		return newX > abstractRoom.floorX && newX < abstractRoom.width();
+	}
 }
