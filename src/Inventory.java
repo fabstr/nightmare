@@ -83,7 +83,7 @@ public class Inventory {
 	}
 	
 	public void drawInventory() {
-		int pos = 400;
+		int pos = 430;
 		for (Item i : items) {
 			if (i != null) {
 				Image img = i.getImage();

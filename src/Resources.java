@@ -13,7 +13,6 @@ public class Resources {
 	
 	public static final String ROOM0_PATH = ROOMS_FOLDER + "room0.tmx";
 	
-	public static final String CARPET_PATH = SPRITES_FOLDER + "carpet.png";
 	public static final String GREEN_GUY_PATH = SPRITES_FOLDER + "green_guy.png";
 	public static final String BROWN_GYU_PATH = SPRITES_FOLDER + "brown_guy.png";
 	public static final String GHOST_SPRITESHEET = SPRITES_FOLDER + "ghost.png";
@@ -162,5 +161,11 @@ public class Resources {
 
 	public static Animation getPlayerStandingDown(Image img) {
 		return getPlayerStanding(3, img);
+	}
+
+	public static Image getCarpetImage() throws SlickException {
+		SpriteSheet objects = new SpriteSheet(OBJECTS_SPRITESHEET, OBJECTS_TILES_WIDTH, OBJECTS_TILES_HEIGHT);
+		//return objects.getSubImage(1*OBJECTS_TILES_WIDTH, 0*OBJECTS_TILES_HEIGHT);
+		return objects.getSprite(1, 0);
 	}
 }

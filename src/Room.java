@@ -1,13 +1,12 @@
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.tiled.GroupObject;
 import org.newdawn.slick.tiled.ObjectGroup;
-//import org.newdawn.slick.tiled.TiledMap;
 import org.newdawn.slick.tiled.TiledMapPlus;
-import org.newdawn.slick.geom.*;
 
 public class Room {
 	/**
@@ -45,6 +44,9 @@ public class Room {
 	
 	// the objects as placed by the map
 	private ObjectGroup roomObjects;
+	
+	// the images for the objects on the map
+	private HashMap<String, Image> objectImageMap;
 
 	/**
 	 * Create a room.
@@ -68,11 +70,27 @@ public class Room {
 		ghostImage = Resources.getGhostImage();
 		
 		characters = new ArrayList<Ghost>();
-		
 		r = new Random();
+		objectImageMap = new HashMap<String, Image>();
 		//key = new Item("The key", Resources.getKeyImage(), 500, 300);
 		
 		roomObjects = map.getObjectGroup("objects");
+		
+		// add the needed images 
+		for (GroupObject go : roomObjects.objects) {
+			// we assume that every object with the same type string should have
+			// the same image
+			String type = go.type;
+			Image toAdd = null;
+			
+			if (type.equals("key")) {
+				toAdd = Resources.getKeyImage();
+			} else if (type.equals("carpet")) {
+				toAdd = Resources.getCarpetImage();
+			}
+			
+			objectImageMap.put(type, toAdd);
+		}
 	}
 	
 	/**
@@ -117,6 +135,13 @@ public class Room {
 		}
 		
 		// draw the objects
+//		for (GroupObject go : roomObjects.objects) {
+//			Image toRender = objectImageMap.get(go.type);
+//			if (toRender != null) {
+//				toRender.draw(go.x+abstractRoom.getFloorX(), 
+//						go.y+abstractRoom.getFloorY());
+//			}
+//		}
 		for (GroupObject go : roomObjects.objects) {
 			// the x/y coordinates where to draw the image on screen
 			int x = go.x + abstractRoom.getFloorX();
