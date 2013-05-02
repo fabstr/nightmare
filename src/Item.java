@@ -6,6 +6,7 @@
  */
 
 import org.newdawn.slick.*;
+import org.newdawn.slick.tiled.GroupObject;
 
 public class Item {
 
@@ -18,6 +19,8 @@ public class Item {
 	 * The image of the item.
 	 */
 	private Image img;
+	
+	public GroupObject go;
 	
 	private int x;
 	private int y;
@@ -32,6 +35,14 @@ public class Item {
 		this.img = img;
 		this.x = x;
 		this.y = y;
+	}
+	
+	public Item (GroupObject go) throws SlickException {
+		this.description = go.name;
+		this.img = go.getImage();
+		this.x = go.x;
+		this.y = go.y;
+		this.go = go;
 	}
 
 	/**

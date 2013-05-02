@@ -35,6 +35,8 @@ public class Resources {
 	
 	public static final int WALL_WIDTH = 32;
 	
+	public static final String KEY_STRING_ID = "key";
+	
 	/**
 	 * Return the key image.
 	 * @return

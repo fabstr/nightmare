@@ -34,6 +34,7 @@ public class Gameplay extends BasicGame {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		// create a room for the nightmare
@@ -84,9 +85,13 @@ public class Gameplay extends BasicGame {
 			player.decreaseHealth(1);
 		}
 		
-		if (currentRoom.isPlayerOnKey(player.x, player.y)) {
-			System.out.println("on key");
-			player.getInventory().addItem(currentRoom.removeKey());
+		if (i.isKeyPressed(Input.KEY_E)) {
+			if (currentRoom.isPlayerOnKey(player.x, player.y)) {
+				System.out.println("on key");
+				player.getInventory().addItem(currentRoom.removeKey());
+			} else {
+				System.out.println("nope");
+			}
 		}
 	}
 	

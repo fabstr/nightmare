@@ -123,7 +123,7 @@ public class Player extends Character {
 			newY += currentAnimation.getHeight();
 		}
 		
-		if (!room.canSetY(newY, (direction == direction.UP) ? -32 : 32)) {
+		if (!room.canSetY(newY, (direction == directions.UP) ? -32 : 32)) {
 			return;
 		}
 		

@@ -1,8 +1,13 @@
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.tiled.TiledMap;
+import org.newdawn.slick.tiled.GroupObject;
+import org.newdawn.slick.tiled.ObjectGroup;
+//import org.newdawn.slick.tiled.TiledMap;
+import org.newdawn.slick.tiled.TiledMapPlus;
+import org.newdawn.slick.geom.*;
 
 public class Room {
 	/**
@@ -20,7 +25,7 @@ public class Room {
 	 */
 //	private Door[] doors;
 
-	private Item key;
+	//private Item key;
 	
 	/**
 	 * The AbstractRoom of this room.
@@ -32,11 +37,14 @@ public class Room {
 	 */
 //	private Image floorImage;
 
-	private TiledMap map;
+	private TiledMapPlus map;
 	
 	private Image ghostImage;
 	
 	private static Random r;
+	
+	// the objects as placed by the map
+	private ObjectGroup roomObjects;
 
 	/**
 	 * Create a room.
@@ -56,15 +64,17 @@ public class Room {
 	public Room(int width, int height, String roomFile, int floorX, 
 			int floorY, int wallWidth) throws SlickException {
 		abstractRoom = new AbstractRoom(width, height, floorX, floorY, wallWidth);
-		map = new TiledMap(roomFile, Resources.ROOM_TILESHEETS_FOLDER);
+		map = new TiledMapPlus(roomFile, Resources.ROOM_TILESHEETS_FOLDER);
 		ghostImage = Resources.getGhostImage();
 		
 		characters = new ArrayList<Ghost>();
 		
 		r = new Random();
-		key = new Item("The key", Resources.getKeyImage(), 500, 300);
+		//key = new Item("The key", Resources.getKeyImage(), 500, 300);
+		
+		roomObjects = map.getObjectGroup("objects");
 	}
-
+	
 	/**
 	 * Get (access to) the inventory of the room.
 	 * @return The inventory
@@ -92,16 +102,29 @@ public class Room {
 		return false;
 	}
 
-	public void draw() {
+	public void draw() throws SlickException {
 //		floorImage.draw(abstractRoom.getFloorX(), abstractRoom.getFloorY());
 		map.render(abstractRoom.getFloorX(), abstractRoom.getFloorY());
 		
-		if (key != null) {
-			key.draw();
-		}
 		
+//		if (key != null) {
+//			key.draw();
+//		}
+		
+		// draw the ghosts		
 		for (Character c : characters) {
 			c.draw();
+		}
+		
+		// draw the objects
+		for (GroupObject go : roomObjects.objects) {
+			// the x/y coordinates where to draw the image on screen
+			int x = go.x + abstractRoom.getFloorX();
+			int y = go.y + abstractRoom.getFloorY();
+			
+			// get the image to draw and draw it
+			Image img = go.getImage();
+			img.draw(x, y);
 		}
 	}
 	
@@ -143,32 +166,61 @@ public class Room {
 		return canSetX(newX+width);
 	}
 	
+	/**
+	 * Get the object the player is standing on.
+	 * 
+	 * {@link Resources.PLAYER_WIDTH} and {@link Resources.PLAYER_HEIGHT} are
+	 * used to determine whether the player is on a object.
+	 * 
+	 * @param px The player's x position
+	 * @param py The player's y position
+	 * @return The object, or null if it does not exist.
+	 */
+	public GroupObject getTheObjectThePlayerIsStandingOn(int px, int py) {
+		// since the objects' positions are relative the map and not the screen,
+		// remove floorX and floorY from the player's position
+		px -= abstractRoom.getFloorX();
+		py -= abstractRoom.getFloorY();
+		
+		// construct the player's bounding box
+		Rectangle playerBox = new Rectangle(px, py, Resources.PLAYER_WIDTH, Resources.PLAYER_HEIGHT);
+		
+		for (GroupObject go : roomObjects.objects) {
+			Rectangle objShape = new Rectangle(go.x, go.y, go.width, go.height);
+			// if the boxes intersects, the player stands on the object
+			if (playerBox.intersects(objShape)) {
+				return go;
+			}
+		}
+		
+		// the player was not on any object
+		return null;
+	}
+
 	public boolean isPlayerOnAGhost(int playerX, int playerY, int playerWidth, int playerHeight) {
+		Rectangle playerBox = new Rectangle(playerX, playerY, playerWidth, playerHeight);
+		
 		for (Character c : characters) {
-			if (playerX > c.x && playerX + playerWidth < c.x + Resources.GHOST_WIDTH &&
-				playerY > c.y && playerY + playerHeight < c.y + Resources.GHOST_HEIGHT) {
+			Rectangle ghostBox = new Rectangle(c.x, c.y, Resources.GHOST_WIDTH, Resources.GHOST_HEIGHT);
+			if (playerBox.intersects(ghostBox)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public Item removeKey() {
-		Item toReturn = key;
-		key = null;
+	public GroupObject removeKey() {
+		GroupObject toReturn = roomObjects.getObject(Resources.KEY_STRING_ID);
+		roomObjects.removeObject(Resources.KEY_STRING_ID);
 		return toReturn;
 	}
 
 	public boolean isPlayerOnKey(int x, int y) {
-		if (key == null) {
-			// there is no key, the player can't be on it
+		GroupObject currentObject = getTheObjectThePlayerIsStandingOn(x, y);
+		if (currentObject == null || !Resources.KEY_STRING_ID.equals(currentObject.name)) {
 			return false;
 		}
-		if (x > key.getX() && x < key.getX() + key.getImage().getWidth() &&
-			y > key.getY() && y < key.getY() + key.getImage().getHeight()) {
-			return true;
-		}
 		
-		return false;
+		return true;
 	}
 }
