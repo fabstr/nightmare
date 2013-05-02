@@ -28,7 +28,7 @@ public abstract class Character implements Drawable {
 	 * @throws SlickException If there was an error creating the Image 
 	 * 			  object.
 	 */
-	public Character(int health, int x, int y, Image img) throws
+	public Character(int health, int x, int y) throws
 		SlickException {
 		this.health = health;
 		this.x = x;

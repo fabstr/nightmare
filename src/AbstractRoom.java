@@ -4,8 +4,6 @@
  * the room.
  */
 
-import org.newdawn.slick.*;
-
 public class AbstractRoom {
 	/**
 	 * The width and height (in pixels).
@@ -13,10 +11,31 @@ public class AbstractRoom {
 	private int w;
 	private int h;
 	
-	public int floorX;
-	public int floorY;
+	private int floorX;
+	private int floorY;
+	
+	/**
+	 * @return the floorX
+	 */
+	public int getFloorX() {
+		return floorX;
+	}
+	
+	/**
+	 * @return the floorY
+	 */
+	public int getFloorY() {
+		return floorY;
+	}
 
-	private Image bg;
+	/**
+	 * @return the wallWidth
+	 */
+	public int getWallWidth() {
+		return wallWidth;
+	}
+
+	private int wallWidth;
 
 		/**
 		 * Return the width of the room.
@@ -31,17 +50,19 @@ public class AbstractRoom {
 	public int height() {
 		return h;
 	}
+	
 
 	/**
 	 * Create a new AbstractRoom with the given width and height.
 	 * @param w The width.
 	 * @param h The height.
 	 */
-	public AbstractRoom(int w, int h, int floorX, int floorY) {
+	public AbstractRoom(int w, int h, int floorX, int floorY, int wallWidth) {
 		this.w = w;
 		this.h = h;
 		this.floorX = floorX;
 		this.floorY = floorY;
+		this.wallWidth = wallWidth;
 	}
 
 	/**
@@ -56,7 +77,7 @@ public class AbstractRoom {
 	 * false.
 	 */
 	public boolean positionIsInRoom(int x, int y) {
-		if (x >= 0 && x < w && y >= 0 && y < h) {
+		if (x > wallWidth && x < w-wallWidth && y > wallWidth && y < h-wallWidth) {
 			return true;
 		} 
 

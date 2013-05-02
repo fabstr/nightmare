@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.newdawn.slick.*;
+import org.newdawn.slick.tiled.TiledMap;
 
 public class Room {
 	/**
@@ -29,23 +30,39 @@ public class Room {
 	/**
 	 * The image of this room.
 	 */
-	private Image floorImage;
+//	private Image floorImage;
 
+	private TiledMap map;
+	
 	private Image ghostImage;
 	
 	private static Random r;
 
-	public Room(int width, int height, String imgPath, int floorX, 
-			int floorY) throws SlickException {
-		abstractRoom = new AbstractRoom(width, height, floorX, floorY);
-		floorImage = new Image(imgPath);
-		
-		ghostImage = new Image("resources/graphics/sprites/ghost.png");
+	/**
+	 * Create a room.
+	 * 
+	 * The ghosts can climb on the walls, the player can not. This means the 
+	 * player has to stay within getFloorX()+wallWidth and getFloorX()+width-wallWidth 
+	 * (and the same for y).
+	 * 
+	 * @param width The width of the room
+	 * @param height The height of the room
+	 * @param roomFile The tmx file of the room
+	 * @param getFloorX() Where to draw the room
+	 * @param getFloorY() Where to draw the room
+	 * @param wallWidth The width of the walls
+	 * @throws SlickException
+	 */
+	public Room(int width, int height, String roomFile, int floorX, 
+			int floorY, int wallWidth) throws SlickException {
+		abstractRoom = new AbstractRoom(width, height, floorX, floorY, wallWidth);
+		map = new TiledMap(roomFile, Resources.ROOM_TILESHEETS_FOLDER);
+		ghostImage = Resources.getGhostImage();
 		
 		characters = new ArrayList<Ghost>();
 		
 		r = new Random();
-		key = new Item("The key", new Image("resources/graphics/sprites/key.png"), 500, 300);
+		key = new Item("The key", Resources.getKeyImage(), 500, 300);
 	}
 
 	/**
@@ -76,7 +93,8 @@ public class Room {
 	}
 
 	public void draw() {
-		floorImage.draw(abstractRoom.floorX, abstractRoom.floorY);
+//		floorImage.draw(abstractRoom.getFloorX(), abstractRoom.getFloorY());
+		map.render(abstractRoom.getFloorX(), abstractRoom.getFloorY());
 		
 		if (key != null) {
 			key.draw();
@@ -94,27 +112,27 @@ public class Room {
 	}
 	
 	public void addGhost() throws SlickException {
-		int x = r.nextInt(abstractRoom.width()) + abstractRoom.floorX;
-		int y = r.nextInt(abstractRoom.height()) + abstractRoom.floorY;
+		int x = r.nextInt(abstractRoom.width()) + abstractRoom.getFloorX();
+		int y = r.nextInt(abstractRoom.height()) + abstractRoom.getFloorY();
 
 		while (!canSetX(x, 64)) {
-			x = r.nextInt(abstractRoom.width()) + abstractRoom.floorX;
+			x = r.nextInt(abstractRoom.width()) + abstractRoom.getFloorX();
 		}
 		
 		while (!canSetY(y, 64)) {
-			y = r.nextInt(abstractRoom.height()) + abstractRoom.floorY;
+			y = r.nextInt(abstractRoom.height()) + abstractRoom.getFloorY();
 		}
 		
 		Ghost g = new Ghost(4, x, y, ghostImage);
 		characters.add(g);
 	}
 
-	public boolean canSetY(int newY) {
-		return newY > abstractRoom.floorY && newY < abstractRoom.height() + abstractRoom.floorY;
+	public boolean canSetY(int newY) {		
+		return newY > abstractRoom.getFloorY() && newY < abstractRoom.height() + abstractRoom.getFloorY();
 	}
 	
 	public boolean canSetX(int newX) {
-		return newX > abstractRoom.floorX && newX < abstractRoom.width() + abstractRoom.floorX;
+		return newX > abstractRoom.getFloorX() && newX < abstractRoom.width() + abstractRoom.getFloorX();
 	}
 
 	public boolean canSetY(int newY, int height) {
@@ -126,12 +144,9 @@ public class Room {
 	}
 	
 	public boolean isPlayerOnAGhost(int playerX, int playerY, int playerWidth, int playerHeight) {
-		int ghostHeight = 64;
-		int ghostWidth = 64;
-		
 		for (Character c : characters) {
-			if (playerX > c.x && playerX + playerWidth < c.x + ghostWidth &&
-				playerY > c.y && playerY + playerHeight < c.y + ghostHeight) {
+			if (playerX > c.x && playerX + playerWidth < c.x + Resources.GHOST_WIDTH &&
+				playerY > c.y && playerY + playerHeight < c.y + Resources.GHOST_HEIGHT) {
 				return true;
 			}
 		}

@@ -1,9 +1,7 @@
 import java.util.Random;
 
-import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
 
 
 public class Ghost extends Character {
@@ -14,8 +12,8 @@ public class Ghost extends Character {
 	private static Random r;
 	
 	public Ghost(int health, int x, int y, Image img) throws SlickException {
-		super(health, x, y, img);
-		currentAnimation = new Animation(new SpriteSheet(img, 64, 64), 75);
+		super(health, x, y);
+		currentAnimation = Resources.getGhostsAnimation();
 		
 		r = new Random();
 		randomizeDirection();

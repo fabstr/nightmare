@@ -37,19 +37,19 @@ public class Gameplay extends BasicGame {
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		// create a room for the nightmare
-		currentRoom = new Room(640, 480, "resources/graphics/rooms/room0.png", 100, 70);
+		currentRoom = new Room(480, 480, Resources.ROOM0_PATH, 100, 70, Resources.WALL_WIDTH);
 		currentRoom.addGhost();
 		currentRoom.addGhost();
 		currentRoom.addGhost();
 		// create a nightmare
 	//	Nightmare nm = new Nightmare(
 
-		player = new Player(3, 200, 150, new Image("resources/graphics/sprites/characters.png"));
+		player = new Player(3, 200, 150);
 
-		window = new Image("resources/graphics/window.png");
-		heart = new Image("resources/graphics/sprites/heart.png");
+		window = Resources.getWindowImage();
+		heart = Resources.getHeartImage();
 
-		font = new UnicodeFont("resources/fonts/acme.ttf", 20, false, false);
+		font = new UnicodeFont(Resources.ACME_FONT_PATH, 20, false, false);
 		font.addAsciiGlyphs();
 		font.getEffects().add(new ColorEffect());
 		font.loadGlyphs();
@@ -64,21 +64,23 @@ public class Gameplay extends BasicGame {
 		
 		if (i.isKeyDown(Input.KEY_DOWN)) {
 			player.moveY(1, currentRoom, true);
-			player.faceDown();
+			player.walkDown();
 		} else if (i.isKeyDown(Input.KEY_UP)){
 			player.moveY(-1, currentRoom, false);
-			player.faceUp();
+			player.walkUp();
 		} else if (i.isKeyDown(Input.KEY_LEFT)) {
 			player.moveX(-1, currentRoom, false);
-			player.faceLeft();
+			player.walkLeft();
 		} else if (i.isKeyDown(Input.KEY_RIGHT)) {
 			player.moveX(1, currentRoom, true);
-			player.faceRight();
+			player.walkRight();
+		} else {
+			player.stopWalking();
 		}
 		
 		currentRoom.moveGhosts();
 		
-		if (currentRoom.isPlayerOnAGhost(player.x, player.y, 26, 37)) {
+		if (currentRoom.isPlayerOnAGhost(player.x, player.y, Resources.PLAYER_WIDTH, Resources.PLAYER_HEIGHT)) {
 			player.decreaseHealth(1);
 		}
 		
