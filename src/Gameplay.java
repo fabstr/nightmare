@@ -191,14 +191,15 @@ public class Gameplay extends BasicGame {
 		if (i.isKeyPressed(Input.KEY_E)) {
 			if (currentRoom.isPlayerOnKey((int) player.x, (int) player.y)) {
 				System.out.println("on key");
-				player.getInventory().addItem(currentRoom.removeKey());
-				player.hasKey(true);
+				currentRoom.removeKey();
+				player.addKey();
 			} else if (currentRoom.isPlayerOnACarpet((int) player.x, (int) player.y)) {
 				Carpet carpet = currentRoom.getTheCarpetThePlayerIsStandingOn((int) player.x, (int) player.y);
 				if (carpet != null) {
 					if (carpet.isLocked()) {
 						if (player.hasKey()) {
 							carpet.unlock();
+							player.removeAKey();
 						}
 					}
 

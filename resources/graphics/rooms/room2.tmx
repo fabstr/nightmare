@@ -9,6 +9,12 @@
  <tileset firstgid="33" name="carpet" tilewidth="32" tileheight="32">
   <image source="../sprites/carpet.png" width="32" height="32"/>
  </tileset>
+ <tileset firstgid="34" name="bed" tilewidth="64" tileheight="64">
+  <image source="../sprites/bed.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="35" name="objects" tilewidth="32" tileheight="32">
+  <image source="../sprites/objects.png" width="128" height="128"/>
+ </tileset>
  <layer name="Tile Layer 1" width="15" height="15">
   <data encoding="base64" compression="zlib">
    eJzjZGBgYMWBJfHIcQExOxAzomF0MQ4sajhG9Y7qHWZ6uYGYDYiloTQyxifGA8QAJZcDIg==
@@ -35,5 +41,7 @@
     <property name="target" value="5"/>
    </properties>
   </object>
+  <object name="bed" type="bed" gid="34" x="338" y="215" width="16" height="32"/>
+  <object name="key" type="key" gid="35" x="74" y="207" width="32" height="16"/>
  </objectgroup>
 </map>

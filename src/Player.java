@@ -19,9 +19,6 @@ public class Player extends Character {
 	private Animation standingUp;
 	private Animation standingDown;
 	
-	// true if the player has the key
-	private boolean hasKey;
-	
 	// to avoid the player getting hurt twice or more by a ghost within a time period
 	private TimingLock tl;
 	
@@ -148,11 +145,15 @@ public class Player extends Character {
 		inventory.drawInventory();
 	}
 
-	public void hasKey(boolean status) {
-		hasKey = status;
+	public void addKey() throws SlickException {
+		inventory.addAKey();
 	}
 
 	public boolean hasKey() {
-		return hasKey == true;
+		return inventory.hasAKey();
+	}
+	
+	public void removeAKey() {
+		inventory.removeAKey();
 	}
 }

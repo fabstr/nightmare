@@ -21,6 +21,8 @@ public class Inventory {
 	private int numItems = 0;  // the number of items stored in the inventory.
 	//private int iteratorPosition = -1;
 	
+	private int numberOfKeys;
+	
 	/**
 	 * Constructor.
 	 */
@@ -82,6 +84,8 @@ public class Inventory {
 		return false;
 	}
 	
+	
+	
 	//Draws all the objects in the inventory in the status bar.
 	public void drawInventory() {
 		int pos = 430;
@@ -91,6 +95,26 @@ public class Inventory {
 				int width = img.getWidth();
 				pos += width + 10;
 				img.draw(pos, 1);
+			}
+		}
+	}
+	
+	public void addAKey() throws SlickException {
+		addItem(new Item("A key", Resources.getKeyImage(), 0, 0));
+		numberOfKeys++;
+	}
+	
+	public boolean hasAKey() {
+		return numberOfKeys > 0;
+	}
+	
+	public void removeAKey() {
+		numberOfKeys--;
+		// find a key object
+		for (Item i : items) {
+			if (i.getDescription().equals("A key")) {
+				remove(i);
+				return;
 			}
 		}
 	}
