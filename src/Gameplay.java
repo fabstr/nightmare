@@ -41,19 +41,41 @@ public class Gameplay extends BasicGame {
 	}
 
 	private void initRooms() throws SlickException {
-
-		// create a room for the nightmare
 		Room room0 = new Room(480, 480, Resources.ROOM0_PATH, 0, 38, Resources.WALL_WIDTH, "0");
-		room0.addGhost();
-		room0.addGhost();
-		room0.addGhost();
-		room0.addGhost();
-		
 		Room room1 = new Room(480, 480, Resources.ROOM1_PATH, 0, 38, Resources.WALL_WIDTH, "1");
+		Room room2 = new Room(480, 480, Resources.ROOM2_PATH, 0, 38, Resources.WALL_WIDTH, "2");
+		Room room3 = new Room(480, 480, Resources.ROOM3_PATH, 0, 38, Resources.WALL_WIDTH, "3");
+		Room room4 = new Room(480, 480, Resources.ROOM4_PATH, 0, 38, Resources.WALL_WIDTH, "4");
+		Room room5 = new Room(480, 480, Resources.ROOM5_PATH, 0, 38, Resources.WALL_WIDTH, "5");
+		
+		// the first room (room0) has no ghosts
+
 		room1.addGhost();
+
+		room2.addGhost();
+		room2.addGhost();
+
+		room3.addGhost();
+		room3.addGhost();
+		room3.addGhost();
+
+		room4.addGhost();
+		room4.addGhost();
+		room4.addGhost();
+		room4.addGhost();
+
+		room5.addGhost();
+		room5.addGhost();
+		room5.addGhost();
+		room5.addGhost();
+		room5.addGhost();
 
 		rooms.put("0", room0);
 		rooms.put("1", room1);
+		rooms.put("2", room2);
+		rooms.put("3", room3);
+		rooms.put("4", room4);
+		rooms.put("5", room5);
 	}
 	
 	@Override

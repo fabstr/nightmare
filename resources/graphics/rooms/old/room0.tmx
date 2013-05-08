@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="15" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="floor" tilewidth="32" tileheight="32">
+  <image source="../sprites/tiles-wall-floor.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="17" name="objects" tilewidth="32" tileheight="32">
+  <image source="../sprites/objects.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="33" name="carpet" tilewidth="32" tileheight="32">
+  <image source="../sprites/carpet.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="34" name="walls-with-door" tilewidth="32" tileheight="32">
+  <image source="../sprites/walls-with-door.png" width="128" height="128"/>
+ </tileset>
+ <layer name="floor" width="15" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxTY2BgUAJiLShNLFYHYlUgZiQDq4zqHdU7zPRqALEyEVgHja8JxAAC/QiP
+  </data>
+ </layer>
+ <objectgroup name="objects" width="15" height="15">
+  <object name="carpet" type="carpet" gid="33" x="320" y="432" width="32" height="16">
+   <properties>
+    <property name="locked" value="yes"/>
+    <property name="target" value="exit"/>
+   </properties>
+  </object>
+  <object name="carpet" type="carpet" gid="33" x="64" y="32" width="32" height="16">
+   <properties>
+    <property name="target" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

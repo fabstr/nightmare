@@ -13,9 +13,13 @@ public class Resources {
 
 	public static final String ROOM0_PATH = ROOMS_FOLDER + "room0.tmx";
 	public static final String ROOM1_PATH = ROOMS_FOLDER + "room1.tmx";
+	public static final String ROOM2_PATH = ROOMS_FOLDER + "room2.tmx";
+	public static final String ROOM3_PATH = ROOMS_FOLDER + "room3.tmx";
+	public static final String ROOM4_PATH = ROOMS_FOLDER + "room4.tmx";
+	public static final String ROOM5_PATH = ROOMS_FOLDER + "room5.tmx";
 	
 	public static final String GREEN_GUY_PATH = SPRITES_FOLDER + "green_guy.png";
-	public static final String BROWN_GYU_PATH = SPRITES_FOLDER + "brown_guy.png";
+	public static final String BROWN_GUY_PATH = SPRITES_FOLDER + "brown_guy.png";
 	public static final String GHOST_SPRITESHEET = SPRITES_FOLDER + "ghost.png";
 	public static final String OBJECTS_SPRITESHEET = SPRITES_FOLDER + "objects.png";
 	public static final String HEART_PATH = SPRITES_FOLDER + "heart.png";

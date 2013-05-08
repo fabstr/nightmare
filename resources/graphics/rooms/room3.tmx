@@ -15,16 +15,7 @@
   </data>
  </layer>
  <objectgroup name="objects" width="15" height="15">
-  <object name="carpet" type="carpet" gid="33" x="64" y="33" width="32" height="16">
-   <properties>
-    <property name="target" value="1"/>
-   </properties>
-  </object>
-  <object name="carpet" type="carpet" gid="33" x="384" y="432" width="32" height="16">
-   <properties>
-    <property name="locked" value="yes"/>
-    <property name="target" value="2"/>
-   </properties>
-  </object>
+  <object gid="33" x="64" y="33"/>
+  <object gid="33" x="384" y="432"/>
  </objectgroup>
 </map>

@@ -52,6 +52,5 @@ public class Ghost extends Character {
 		}
 		
 		ySpeed = (float) Math.sqrt(1 - xSpeed * xSpeed);
-		System.out.println("Setting " + xSpeed + " " + ySpeed);
 	}
 }

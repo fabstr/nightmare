@@ -42,7 +42,6 @@ public class Carpet {
 	 * Return true if the carpet is locked.
 	 */
 	public boolean isLocked() {
-		System.out.println("islocked");
 		return locked == true;
 	}
 	
