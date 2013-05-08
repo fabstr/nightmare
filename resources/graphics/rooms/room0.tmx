@@ -9,11 +9,15 @@
  <tileset firstgid="33" name="carpet" tilewidth="32" tileheight="32">
   <image source="../sprites/carpet.png" width="32" height="32"/>
  </tileset>
+ <tileset firstgid="34" name="giant carpet" tilewidth="400" tileheight="300">
+  <image source="../sprites/giantCarpet.png" width="400" height="300"/>
+ </tileset>
  <layer name="Tile Layer 1" width="15" height="15">
   <data encoding="base64" compression="zlib">
    eJzjZGBgYAViSShNLOYCYnYgZiQDc4zqHdU7zPRyAzEbCVgaSvMAMQD2KQJP
   </data>
  </layer>
+ <objectgroup name="carpet" width="15" height="15"/>
  <objectgroup name="objects" width="15" height="15">
   <object name="carpet" type="carpet" gid="33" x="64" y="33" width="32" height="16">
    <properties>
@@ -26,5 +30,6 @@
     <property name="target" value="2"/>
    </properties>
   </object>
+  <object gid="34" x="39" y="94"/>
  </objectgroup>
 </map>
