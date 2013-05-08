@@ -6,27 +6,24 @@
  <tileset firstgid="17" name="objects" tilewidth="32" tileheight="32">
   <image source="../sprites/objects.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="33" name="walls" tilewidth="32" tileheight="32">
-  <properties>
-   <property name="blocked" value="true"/>
-  </properties>
-  <image source="../sprites/tiles-wall-floor.png" width="128" height="128"/>
- </tileset>
- <tileset firstgid="49" name="carpet" tilewidth="32" tileheight="32">
+ <tileset firstgid="33" name="carpet" tilewidth="32" tileheight="32">
   <image source="../sprites/carpet.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="34" name="walls-with-door" tilewidth="32" tileheight="32">
+  <image source="../sprites/walls-with-door.png" width="128" height="128"/>
  </tileset>
  <layer name="floor" width="15" height="15">
   <data encoding="base64" compression="zlib">
-   eJzTZGBgUCUDawGxOhAzkoE1RvWO6h1merWBWI0MrAPEAAxACSY=
+   eJxTY2BgUCIDqwOxKhAzkoFVRvWO6h1mejWAWJkIrIPG1wRiAOcOCIc=
   </data>
  </layer>
  <objectgroup name="objects" width="15" height="15">
   <object name="key" type="key" gid="17" x="139" y="322" width="32" height="32">
    <properties>
-    <property name="target" value="EXIT"/>
+    <property name="target" value="exit"/>
    </properties>
   </object>
-  <object name="carpet" type="carpet" gid="49" x="324" y="431" width="32" height="16">
+  <object name="carpet" type="carpet" gid="33" x="320" y="432" width="32" height="16">
    <properties>
     <property name="target" value="exit"/>
    </properties>

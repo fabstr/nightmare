@@ -124,24 +124,7 @@ public class Room {
 //		floorImage.draw(abstractRoom.getFloorX(), abstractRoom.getFloorY());
 		map.render(abstractRoom.getFloorX(), abstractRoom.getFloorY());
 		
-		
-//		if (key != null) {
-//			key.draw();
-//		}
-		
-		// draw the ghosts		
-		for (Character c : characters) {
-			c.draw();
-		}
-		
 		// draw the objects
-//		for (GroupObject go : roomObjects.objects) {
-//			Image toRender = objectImageMap.get(go.type);
-//			if (toRender != null) {
-//				toRender.draw(go.x+abstractRoom.getFloorX(), 
-//						go.y+abstractRoom.getFloorY());
-//			}
-//		}
 		for (GroupObject go : roomObjects.objects) {
 			// the x/y coordinates where to draw the image on screen
 			Image toRender = go.getImage();
@@ -150,6 +133,11 @@ public class Room {
 				int y = go.y + abstractRoom.getFloorY();
 				toRender.draw(x, y);
 			}
+		}
+		
+		// draw the ghosts		
+		for (Character c : characters) {
+			c.draw();
 		}
 	}
 	

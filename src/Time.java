@@ -11,6 +11,10 @@ public class Time {
 	 */
 	private long startTime = -1;
 	private int timeLimit;
+	private long currTime;
+	
+	// true if the timer is stopped
+	boolean isStopped;
 
 	/**
 	 * Constructor.
@@ -26,6 +30,7 @@ public class Time {
 	 */
 	public void start() {
 		this.startTime = System.currentTimeMillis();
+		isStopped = false;
 	}
 
 	/**
@@ -47,7 +52,14 @@ public class Time {
 	}
 
 	public long getSecondsLeft() {
-		long passedTime = System.currentTimeMillis() - startTime;
-		return (timeLimit - passedTime) / 1000;
+		if (isStopped == false) {
+			currTime = System.currentTimeMillis() - startTime;
+		}
+		
+		return (timeLimit - currTime) / 1000;
+	}
+	
+	public void stop() {
+		isStopped = true;
 	}
 }

@@ -36,6 +36,12 @@ public class Resources {
 
 	public static final String KEY_STRING_ID = "key";
 	public static final String CARPET_STRING_ID = "carpet";
+
+	public static final int POPUP_X = 100;
+	public static final int POPUP_Y = 100;
+	public static final int POPUP_WIDTH = 300;
+	public static final int POPUP_HEIGHT = 200;
+	public static final String POPUP_IMAGE = SPRITES_FOLDER + "box.png";
 	
 	/**
 	 * Return the key image.

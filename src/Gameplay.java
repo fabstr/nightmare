@@ -12,12 +12,14 @@ public class Gameplay extends BasicGame {
 	private Image window;
 	private Image heart;
 	
+	private Popup popup;
+	
 	private enum STATES {
 		playing, paused, lost, won
 	}
 	
 	//State of the game
-	private STATES state;
+	private STATES state = STATES.playing;
 	
 	private UnicodeFont text;
 
@@ -28,16 +30,26 @@ public class Gameplay extends BasicGame {
 
 	@Override
 	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
+		switch (state) {
+		case won:
+			popup.displayInBox("You have won!");
+			break;
+		case lost:
+			popup.displayInBox("You have lost!");
+			break;
+		}
+
 		window.draw();
 		currentRoom.draw();
 		player.draw();
 		drawHearts();
-		
+
 		String timeLeft = String.format("Time left: %3d seconds.", timer.getSecondsLeft());
 		text.drawString(160, 2, timeLeft, Color.black);
-		
+
 		player.drawInventory();
-		
+
+		popup.draw();		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -61,12 +73,18 @@ public class Gameplay extends BasicGame {
 		text.getEffects().add(new ColorEffect());
 		text.loadGlyphs();
 		
-		timer = new Time(110000);
+		timer = new Time(10000);
 		timer.start();		
+		
+		popup = new Popup();
 	}
 
 	@Override
 	public void update(GameContainer gc, int arg1) throws SlickException {
+		if (state != STATES.playing) {
+			return;
+		}
+		
 		Input i = gc.getInput();
 		
 		// move the player and set the right animation
@@ -100,13 +118,25 @@ public class Gameplay extends BasicGame {
 			if (currentRoom.isPlayerOnKey((int) player.x, (int) player.y)) {
 				System.out.println("on key");
 				player.getInventory().addItem(currentRoom.removeKey());
+				player.hasKey(true);
 			} else if (currentRoom.isPlayerOnCarpet((int) player.x, (int) player.y)) {
-				System.out.println("on carpet");
+				if (player.hasKey() == true) {
+						System.out.println("won");
+						state = STATES.won;
+				} else {
+					popup.display("The door won't open without the key.");
+				}
 			} else {
 				System.out.println("nope");
 			}
 		}
+		
+		if (timer.timeLeft() == false) {
+			state = STATES.lost;
+			timer.stop();
+		}
 	}
+	
 	//Main
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Gameplay());
@@ -117,6 +147,12 @@ public class Gameplay extends BasicGame {
 	//Draws the number of heart (lives) of the player up in the status bar.
 	private void drawHearts() {
 		int health = player.getHealth();
+		
+		if (health == 0) {
+			state = STATES.lost;
+			return;
+		}
+		
 		for (int i=0; i<health; i++) {
 			heart.draw(i*42+10, 2);
 		}
