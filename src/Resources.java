@@ -43,6 +43,10 @@ public class Resources {
 	public static final int POPUP_HEIGHT = 200;
 	public static final String POPUP_IMAGE = SPRITES_FOLDER + "box.png";
 	
+	public static final String INSTRUCTIONS_IMAGE = SPRITES_FOLDER + "instructions.png";
+	public static final int INSTRUCTIONS_X = 480;
+	public static final int INSTRUCTIONS_Y = 38;
+	
 	/**
 	 * Return the key image.
 	 * @return

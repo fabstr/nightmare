@@ -3,7 +3,7 @@ import org.newdawn.slick.font.effects.ColorEffect;
 
 public class Gameplay extends BasicGame {
 	private static int windowWidth = 800;
-	private static int windowHeight = 600;
+	private static int windowHeight = 518;
 	
 	private Player player;
 	private Room currentRoom;
@@ -11,8 +11,11 @@ public class Gameplay extends BasicGame {
 	
 	private Image window;
 	private Image heart;
+	private Image instructions;
 	
 	private Popup popup;
+	
+	private AppGameContainer app;
 	
 	private enum STATES {
 		playing, paused, lost, won
@@ -27,15 +30,19 @@ public class Gameplay extends BasicGame {
 	public Gameplay() {
 		super("Nightmare");
 	}
+	
+	public void setGameContainer(AppGameContainer app) {
+		this.app = app;
+	}
 
 	@Override
 	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
 		switch (state) {
 		case won:
-			popup.displayInBox("You have won!");
+			popup.displayInBox("You have won!\n\nPress SPACE to start a new game.");
 			break;
 		case lost:
-			popup.displayInBox("You have lost!");
+			popup.displayInBox("You have lost!\n\nPress SPACE to start a new game.");
 			break;
 		}
 
@@ -49,6 +56,8 @@ public class Gameplay extends BasicGame {
 
 		player.drawInventory();
 
+		instructions.draw(Resources.INSTRUCTIONS_X, Resources.INSTRUCTIONS_Y);
+		
 		popup.draw();		
 	}
 
@@ -56,7 +65,7 @@ public class Gameplay extends BasicGame {
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		// create a room for the nightmare
-		currentRoom = new Room(480, 480, Resources.ROOM0_PATH, 100, 70, Resources.WALL_WIDTH);
+		currentRoom = new Room(480, 480, Resources.ROOM0_PATH, 0, 38, Resources.WALL_WIDTH);
 		currentRoom.addGhost();
 		currentRoom.addGhost();
 		currentRoom.addGhost();
@@ -77,13 +86,14 @@ public class Gameplay extends BasicGame {
 		timer.start();		
 		
 		popup = new Popup();
+		
+		instructions = new Image(Resources.INSTRUCTIONS_IMAGE);
 	}
 
 	@Override
 	public void update(GameContainer gc, int arg1) throws SlickException {
 		Input i = gc.getInput();
 		if (i.isKeyPressed(Input.KEY_P)){
-			System.out.println("You pressed p.");
 			if (state == STATES.paused) {
 				state = STATES.playing;
 				timer.start();
@@ -93,15 +103,17 @@ public class Gameplay extends BasicGame {
 			}
 		}
 		
+		if ((state == STATES.lost || state == STATES.won) && i.isKeyPressed(Input.KEY_SPACE)) {
+			// we want to start a new game
+			init(app);
+			state = STATES.playing;
+		}
+		
 		if (state == STATES.lost) {
-			popup.displayInBox("You have lost!\n\nPress SPACE to start a new game.");
 			return;
 		} else if (state == STATES.paused) {
-			
-			popup.display("The game is paused. Press P to continue.");
 			return;
 		} else if (state == STATES.won) {
-			popup.displayInBox("You have won!");
 			return;
 		}
 		
@@ -159,8 +171,10 @@ public class Gameplay extends BasicGame {
 	
 	//Main
 	public static void main(String[] args) throws SlickException {
-		AppGameContainer app = new AppGameContainer(new Gameplay());
+		Gameplay g = new Gameplay();
+		AppGameContainer app = new AppGameContainer(g);
 		app.setDisplayMode(windowWidth, windowHeight, false);
+		g.setGameContainer(app);
 		app.start();
 	}
 	
