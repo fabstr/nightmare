@@ -73,7 +73,7 @@ public class Gameplay extends BasicGame {
 		text.getEffects().add(new ColorEffect());
 		text.loadGlyphs();
 		
-		timer = new Time(10000);
+		timer = new Time(15000);
 		timer.start();		
 		
 		popup = new Popup();
@@ -102,6 +102,7 @@ public class Gameplay extends BasicGame {
 			return;
 		} else if (state == STATES.won) {
 			popup.displayInBox("You have won!");
+			return;
 		}
 		
 		
@@ -141,6 +142,7 @@ public class Gameplay extends BasicGame {
 				if (player.hasKey() == true) {
 						System.out.println("won");
 						state = STATES.won;
+						timer.stop();
 				} else {
 					popup.display("The door won't open without the key.");
 				}
@@ -168,6 +170,7 @@ public class Gameplay extends BasicGame {
 		
 		if (health == 0) {
 			state = STATES.lost;
+			timer.stop();
 			return;
 		}
 		
