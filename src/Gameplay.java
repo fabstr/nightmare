@@ -13,16 +13,17 @@ public class Gameplay extends BasicGame {
 	private Image heart;
 	
 	private enum STATES {
-		playing, paused, lost
+		playing, paused, lost, won
 	}
 	
+	//State of the game
 	private STATES state;
 	
 	private UnicodeFont text;
 
+	// title of the window
 	public Gameplay() {
 		super("Nightmare");
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class Gameplay extends BasicGame {
 		window = Resources.getWindowImage();
 		heart = Resources.getHeartImage();
 
-		// the text on the scresen
+		// the text on the screen
 		text = new UnicodeFont(Resources.ACME_FONT_PATH, 20, false, false);
 		text.addAsciiGlyphs();
 		text.getEffects().add(new ColorEffect());
@@ -101,20 +102,20 @@ public class Gameplay extends BasicGame {
 				System.out.println("on key");
 				player.getInventory().addItem(currentRoom.removeKey());
 			} else if (currentRoom.isPlayerOnCarpet(player.x, player.y)) {
-				
 				System.out.println("on carpet");
 			} else {
 				System.out.println("nope");
 			}
 		}
 	}
-	
+	//Main
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Gameplay());
 		app.setDisplayMode(windowWidth, windowHeight, false);
 		app.start();
 	}
 	
+	//Draws the number of heart (lives) of the player up in the status bar.
 	private void drawHearts() {
 		int health = player.getHealth();
 		for (int i=0; i<health; i++) {
