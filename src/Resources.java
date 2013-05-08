@@ -52,6 +52,8 @@ public class Resources {
 	public static final int INSTRUCTIONS_X = 480;
 	public static final int INSTRUCTIONS_Y = 38;
 	
+	public static final String GARGOYLE_SPRITESHEET = SPRITES_FOLDER + "movingGargoyle.png";
+	
 	/**
 	 * Return the key image.
 	 * @return
