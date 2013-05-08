@@ -81,11 +81,29 @@ public class Gameplay extends BasicGame {
 
 	@Override
 	public void update(GameContainer gc, int arg1) throws SlickException {
-		if (state != STATES.playing) {
-			return;
+		Input i = gc.getInput();
+		if (i.isKeyPressed(Input.KEY_P)){
+			System.out.println("You pressed p.");
+			if (state == STATES.paused) {
+				state = STATES.playing;
+				timer.start();
+			} else {
+				state = STATES.paused;
+				timer.stop();
+			}
 		}
 		
-		Input i = gc.getInput();
+		if (state == STATES.lost) {
+			popup.displayInBox("You have lost!\n\nPress SPACE to start a new game.");
+			return;
+		} else if (state == STATES.paused) {
+			
+			popup.display("The game is paused. Press P to continue.");
+			return;
+		} else if (state == STATES.won) {
+			popup.displayInBox("You have won!");
+		}
+		
 		
 		// move the player and set the right animation
 		if (i.isKeyDown(Input.KEY_DOWN)) {

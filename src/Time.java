@@ -12,6 +12,7 @@ public class Time {
 	private long startTime = -1;
 	private int timeLimit;
 	private long currTime;
+	private long paused;
 	
 	// true if the timer is stopped
 	boolean isStopped;
@@ -29,8 +30,14 @@ public class Time {
 	 * Starts the timer.
 	 */
 	public void start() {
+		if (isStopped){
+			//if the game was paused, subtracts the paused time
+			this.startTime = startTime + System.currentTimeMillis() - paused;
+			isStopped = false;
+		}
+		else {
 		this.startTime = System.currentTimeMillis();
-		isStopped = false;
+		}
 	}
 
 	/**
@@ -43,7 +50,7 @@ public class Time {
 		if(startTime == -1) {   //  Alert when writing code.
 			System.err.println("Error, start() must be called before timeLeft().");
 		}
-		if(System.currentTimeMillis() - startTime < timeLimit) {
+		if (System.currentTimeMillis() - startTime < timeLimit) {
 			return true;
 		}
 		else {
@@ -61,5 +68,6 @@ public class Time {
 	
 	public void stop() {
 		isStopped = true;
+	    paused = System.currentTimeMillis();
 	}
 }
