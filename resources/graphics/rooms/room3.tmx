@@ -11,11 +11,24 @@
  </tileset>
  <layer name="Tile Layer 1" width="15" height="15">
   <data encoding="base64" compression="zlib">
-   eJzjZGBgYAViSShNLOYCYnYgZiQDc4zqHdU7zPRyAzEbCVgaSvMAMQD2KQJP
+   eJzjZGBgYAViQSgNw5JofHRxLiBmB2JGMjAHHr3Idg1mvdjCBh3TQu9QDKuhrpeY9MwNxGxALA2lCWEhKM0DxACz7wMv
   </data>
  </layer>
  <objectgroup name="objects" width="15" height="15">
-  <object gid="33" x="64" y="33"/>
-  <object gid="33" x="384" y="432"/>
+  <object name="carpet" type="carpet" gid="33" x="64" y="432" width="32" height="16">
+   <properties>
+    <property name="target" value="4"/>
+   </properties>
+  </object>
+  <object name="carpet" type="carpet" gid="33" x="386" y="33" width="32" height="16">
+   <properties>
+    <property name="target" value="5"/>
+   </properties>
+  </object>
+  <object name="carpet" type="carpet" gid="33" x="192" y="32" width="32" height="16">
+   <properties>
+    <property name="target" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

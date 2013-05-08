@@ -50,12 +50,10 @@ public class Carpet {
 	}
 	
 	public int x() {
-		System.out.println("x is " + x);
 		return x;
 	}
 	
 	public int y() {
-		System.out.println("y is " + y);
 		return y;
 	}
 }

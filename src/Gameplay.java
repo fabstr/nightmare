@@ -121,7 +121,7 @@ public class Gameplay extends BasicGame {
 		text.getEffects().add(new ColorEffect());
 		text.loadGlyphs();
 		
-		timer = new Time(15000);
+		timer = new Time(1500000);
 		timer.start();		
 		
 		popup = new Popup();

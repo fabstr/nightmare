@@ -270,7 +270,6 @@ public class Room {
 	 * @return
 	 */
 	public Carpet getTheCarpetWithTheTarget(String target) {
-		System.out.println("Wanting a carpet with the target " + target);
 		for (GroupObject go : roomObjects.objects) {
 			if (go.name.toUpperCase().equals("CARPET")) {
 				if (go.props.getProperty("target").equals(target)) {
