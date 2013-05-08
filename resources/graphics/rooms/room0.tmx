@@ -14,18 +14,19 @@
  </tileset>
  <layer name="floor" width="15" height="15">
   <data encoding="base64" compression="zlib">
-   eJxTY2BgUCIDqwOxKhAzkoFVRvWO6h1mejWAWJkIrIPG1wRiAOcOCIc=
+   eJxTY2BgUAJiLShNLFYHYlUgZiQDq4zqHdU7zPRqALEyEVgHja8JxAAC/QiP
   </data>
  </layer>
  <objectgroup name="objects" width="15" height="15">
-  <object name="key" type="key" gid="17" x="139" y="322" width="32" height="32">
+  <object name="carpet" type="carpet" gid="33" x="320" y="432" width="32" height="16">
    <properties>
+    <property name="locked" value="yes"/>
     <property name="target" value="exit"/>
    </properties>
   </object>
-  <object name="carpet" type="carpet" gid="33" x="320" y="432" width="32" height="16">
+  <object name="carpet" type="carpet" gid="33" x="64" y="32" width="32" height="16">
    <properties>
-    <property name="target" value="exit"/>
+    <property name="target" value="1"/>
    </properties>
   </object>
  </objectgroup>

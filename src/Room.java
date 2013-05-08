@@ -42,6 +42,9 @@ public class Room {
 	
 	private static Random r;
 	
+	// the id of the room, used for carpet room-switching
+	private String id;
+	
 	// the objects as placed by the map
 	private ObjectGroup roomObjects;
 	
@@ -64,7 +67,8 @@ public class Room {
 	 * @throws SlickException
 	 */
 	public Room(int width, int height, String roomFile, int floorX, 
-			int floorY, int wallWidth) throws SlickException {
+			int floorY, int wallWidth, String id) throws SlickException {
+		this.id = id;
 		abstractRoom = new AbstractRoom(width, height, floorX, floorY, wallWidth);
 		map = new TiledMapPlus(roomFile, Resources.ROOM_TILESHEETS_FOLDER);
 		ghostImage = Resources.getGhostImage();
@@ -139,6 +143,10 @@ public class Room {
 		for (Character c : characters) {
 			c.draw();
 		}
+	}
+	
+	public String getId() {
+		return id;
 	}
 	
 	public void moveGhosts() {
@@ -236,12 +244,41 @@ public class Room {
 		return true;
 	}
 
-	public boolean isPlayerOnCarpet(int x, int y) {
+	public boolean isPlayerOnACarpet(int x, int y) {
+		return getTheCarpetThePlayerIsStandingOn(x, y) != null;
+	}
+	
+	/**
+	 * Return the carpet the player stands on, or null if the player is not
+	 * standing on a carpet.
+	 * @return
+	 */
+	public Carpet getTheCarpetThePlayerIsStandingOn(int x, int y) {
 		GroupObject currentObject = getTheObjectThePlayerIsStandingOn(x, y);
 		if (currentObject == null || !Resources.CARPET_STRING_ID.equals(currentObject.name)) {
-			return false;
+			return null;
+		}
+		return new Carpet(currentObject.props.getProperty("target"),
+				currentObject.props.getProperty("locked", "false"),
+				currentObject.x, currentObject.y);
+	}
+	
+	/**
+	 * Return the carpet whose target is the given target. If there is no such
+	 * carpet, return null.
+	 * @param target
+	 * @return
+	 */
+	public Carpet getTheCarpetWithTheTarget(String target) {
+		System.out.println("Wanting a carpet with the target " + target);
+		for (GroupObject go : roomObjects.objects) {
+			if (go.name.toUpperCase().equals("CARPET")) {
+				if (go.props.getProperty("target").equals(target)) {
+					return new Carpet(target, go.props.getProperty("locked", "NO"), go.x, go.y);
+				}
+			}
 		}
 		
-		return true;
+		return null;
 	}
 }

@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.font.effects.ColorEffect;
 
@@ -17,6 +19,8 @@ public class Gameplay extends BasicGame {
 	
 	private AppGameContainer app;
 	
+	private HashMap<String, Room> rooms;
+	
 	private enum STATES {
 		playing, paused, lost, won
 	}
@@ -29,12 +33,29 @@ public class Gameplay extends BasicGame {
 	// title of the window
 	public Gameplay() {
 		super("Nightmare");
+		rooms = new HashMap<String, Room>();
 	}
 	
 	public void setGameContainer(AppGameContainer app) {
 		this.app = app;
 	}
 
+	private void initRooms() throws SlickException {
+
+		// create a room for the nightmare
+		Room room0 = new Room(480, 480, Resources.ROOM0_PATH, 0, 38, Resources.WALL_WIDTH, "0");
+		room0.addGhost();
+		room0.addGhost();
+		room0.addGhost();
+		room0.addGhost();
+		
+		Room room1 = new Room(480, 480, Resources.ROOM1_PATH, 0, 38, Resources.WALL_WIDTH, "1");
+		room1.addGhost();
+
+		rooms.put("0", room0);
+		rooms.put("1", room1);
+	}
+	
 	@Override
 	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
 		switch (state) {
@@ -64,13 +85,9 @@ public class Gameplay extends BasicGame {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
-		// create a room for the nightmare
-		currentRoom = new Room(480, 480, Resources.ROOM0_PATH, 0, 38, Resources.WALL_WIDTH);
-		currentRoom.addGhost();
-		currentRoom.addGhost();
-		currentRoom.addGhost();
-		currentRoom.addGhost();
-
+		initRooms();
+		currentRoom = rooms.get("0");
+		
 		player = new Player(3, 200, 150);
 
 		window = Resources.getWindowImage();
@@ -90,6 +107,11 @@ public class Gameplay extends BasicGame {
 		instructions = new Image(Resources.INSTRUCTIONS_IMAGE);
 	}
 
+	public void restartGame() throws SlickException {
+		init(app);
+		state = STATES.playing;
+	}
+	
 	@Override
 	public void update(GameContainer gc, int arg1) throws SlickException {
 		Input i = gc.getInput();
@@ -105,8 +127,7 @@ public class Gameplay extends BasicGame {
 		
 		if ((state == STATES.lost || state == STATES.won) && i.isKeyPressed(Input.KEY_SPACE)) {
 			// we want to start a new game
-			init(app);
-			state = STATES.playing;
+			restartGame();
 		}
 		
 		if (state == STATES.lost) {
@@ -143,20 +164,46 @@ public class Gameplay extends BasicGame {
 		if (currentRoom.isPlayerOnAGhost(player.getBoundingBox())) {
 			player.decreaseHealth(1);
 		}
-		
+
 		// e is the action key, check if we are on an object and do something
 		if (i.isKeyPressed(Input.KEY_E)) {
 			if (currentRoom.isPlayerOnKey((int) player.x, (int) player.y)) {
 				System.out.println("on key");
 				player.getInventory().addItem(currentRoom.removeKey());
 				player.hasKey(true);
-			} else if (currentRoom.isPlayerOnCarpet((int) player.x, (int) player.y)) {
-				if (player.hasKey() == true) {
-						System.out.println("won");
-						state = STATES.won;
-						timer.stop();
+			} else if (currentRoom.isPlayerOnACarpet((int) player.x, (int) player.y)) {
+				Carpet carpet = currentRoom.getTheCarpetThePlayerIsStandingOn((int) player.x, (int) player.y);
+				if (carpet != null) {
+					if (carpet.isLocked()) {
+						if (player.hasKey()) {
+							carpet.unlock();
+						}
+					}
+
+					if (carpet.isExitCarpet()) {
+						if (carpet.isLocked() == false) {
+							System.out.println("won");
+							state = STATES.won;
+							timer.stop();
+						}
+					} else if (carpet.isLocked() == false) {
+						// we want the carpet in the other room that points to the current room
+						String currentId = currentRoom.getId();
+						
+						// the room we are about to switch to
+						Room otherRoom = rooms.get(carpet.getTarget());
+						
+						// get the carpet on the other side
+						Carpet carpetOnTheOtherSide = otherRoom.getTheCarpetWithTheTarget(currentId);
+						
+						// switch to the other room
+						currentRoom = otherRoom;
+						
+						// move the player to the carpet in the room we switched to
+						player.moveTo(carpetOnTheOtherSide.x(), carpetOnTheOtherSide.y());
+					}
 				} else {
-					popup.display("The door won't open without the key.");
+					System.out.println("The carpet is null");
 				}
 			} else {
 				System.out.println("nope");
