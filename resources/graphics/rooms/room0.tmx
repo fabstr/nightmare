@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="15" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="floor" tilewidth="32" tileheight="32">
+  <image source="../sprites/tiles-wall-floor.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="17" name="objects" tilewidth="32" tileheight="32">
+  <image source="../sprites/objects.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="33" name="walls" tilewidth="32" tileheight="32">
+  <properties>
+   <property name="blocked" value="true"/>
+  </properties>
+  <image source="../sprites/tiles-wall-floor.png" width="128" height="128"/>
+ </tileset>
+ <layer name="floor" width="15" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzTZGBgUCUDawGxOhAzkoE1RvWO6h1merWBWI0MrAPEAAxACSY=
+  </data>
+ </layer>
+ <objectgroup name="objects" width="15" height="15">
+  <object name="key" type="key" gid="17" x="139" y="322" width="32" height="32">
+   <properties>
+    <property name="target" value="EXIT"/>
+   </properties>
+  </object>
+  <object name="carpet" type="carpet" gid="18" x="304" y="463" width="32" height="32">
+   <properties>
+    <property name="target" value="exit"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
