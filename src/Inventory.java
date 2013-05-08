@@ -82,6 +82,7 @@ public class Inventory {
 		return false;
 	}
 	
+	//Draws all the objects in the inventory in the status bar.
 	public void drawInventory() {
 		int pos = 430;
 		for (Item i : items) {
