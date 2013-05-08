@@ -25,7 +25,7 @@ public class Player extends Character {
 	private Inventory inventory;
 	
 	public Player(int health, int x, int y) throws SlickException {
-		super(health, x, y);
+		super(health, x, y, Resources.PLAYER_WIDTH, Resources.PLAYER_HEIGHT);
 		
 		Image img = new Image(Resources.GREEN_GUY_PATH);
 		
@@ -99,7 +99,7 @@ public class Player extends Character {
 	}
 	
 	public void moveX(int amount, Room room, boolean countImageWidth) {
-		int newX = this.x + amount;
+		int newX = (int) this.x + amount;
 		
 		if (countImageWidth) {
 			newX += currentAnimation.getWidth();
@@ -117,7 +117,7 @@ public class Player extends Character {
 	}
 	
 	public void moveY(int amount, Room room, boolean countImageWidth) {
-		int newY = this.y + amount;
+		int newY = (int) this.y + amount;
 		
 		if (countImageWidth) {
 			newY += currentAnimation.getHeight();

@@ -48,8 +48,7 @@ public class Gameplay extends BasicGame {
 		currentRoom.addGhost();
 		currentRoom.addGhost();
 		currentRoom.addGhost();
-		// create a nightmare
-	//	Nightmare nm = new Nightmare(
+		currentRoom.addGhost();
 
 		player = new Player(3, 200, 150);
 
@@ -92,16 +91,16 @@ public class Gameplay extends BasicGame {
 		currentRoom.moveGhosts();
 		
 		// if we are on a ghost, decrease the health
-		if (currentRoom.isPlayerOnAGhost(player.x, player.y, Resources.PLAYER_WIDTH, Resources.PLAYER_HEIGHT)) {
+		if (currentRoom.isPlayerOnAGhost(player.getBoundingBox())) {
 			player.decreaseHealth(1);
 		}
 		
 		// e is the action key, check if we are on an object and do something
 		if (i.isKeyPressed(Input.KEY_E)) {
-			if (currentRoom.isPlayerOnKey(player.x, player.y)) {
+			if (currentRoom.isPlayerOnKey((int) player.x, (int) player.y)) {
 				System.out.println("on key");
 				player.getInventory().addItem(currentRoom.removeKey());
-			} else if (currentRoom.isPlayerOnCarpet(player.x, player.y)) {
+			} else if (currentRoom.isPlayerOnCarpet((int) player.x, (int) player.y)) {
 				System.out.println("on carpet");
 			} else {
 				System.out.println("nope");

@@ -1,3 +1,5 @@
+import java.awt.Rectangle;
+
 import org.newdawn.slick.*;
 
 public abstract class Character implements Drawable {
@@ -9,8 +11,11 @@ public abstract class Character implements Drawable {
 	/**
 	 * The current x and y coordinates of the character.
 	 */
-	protected int x;
-	protected int y;
+	protected float x;
+	protected float y;
+	
+	protected int width;
+	protected int height;
 
 	/**
 	 * The image of the character.
@@ -28,13 +33,17 @@ public abstract class Character implements Drawable {
 	 * @throws SlickException If there was an error creating the Image 
 	 * 			  object.
 	 */
-	public Character(int health, int x, int y) throws
+	public Character(int health, int x, int y, int width, int height) throws
 		SlickException {
 		this.health = health;
 		this.x = x;
 		this.y = y;
-		
-		
+		this.width = width;
+		this.height = height;
+	}
+	
+	public Rectangle getBoundingBox() {
+		return new Rectangle((int) x, (int) y, width, height);
 	}
 
 	/**
@@ -89,7 +98,7 @@ public abstract class Character implements Drawable {
 	 * Get the x position of the character.
 	 * @return The x position.
 	 */
-	public int getXPos() {
+	public float getXPos() {
 		return x;
 	}
 
@@ -97,7 +106,7 @@ public abstract class Character implements Drawable {
 	 * Get the y position of the character.
 	 * @return The y position.
 	 */
-	public int getYPos() {
+	public float getYPos() {
 		return y;
 	}
 
@@ -105,7 +114,7 @@ public abstract class Character implements Drawable {
 	 * Set the x position.
 	 * @param x The new x position.
 	 */
-	public void setX(int x) {
+	public void setX(float x) {
 		this.x = x;
 	}
 
@@ -113,7 +122,7 @@ public abstract class Character implements Drawable {
 	 * Set the y position.
 	 * @param y The new y position.
 	 */
-	public void setY(int y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 

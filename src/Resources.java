@@ -24,7 +24,7 @@ public class Resources {
 	public static final int PLAYER_WIDTH = 26;
 	public static final int PLAYER_HEIGHT = 37;
 	public static final int GHOST_WIDTH = 64;
-	public static final int GHOST_HEIGHT = 64;
+	public static final int GHOST_HEIGHT = 50;
 	
 	public static final int OBJECTS_TILES_WIDTH = 32;
 	public static final int OBJECTS_TILES_HEIGHT = 32;

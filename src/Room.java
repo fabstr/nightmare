@@ -175,19 +175,19 @@ public class Room {
 		characters.add(g);
 	}
 
-	public boolean canSetY(int newY) {		
+	public boolean canSetY(float newY) {		
 		return newY > abstractRoom.getFloorY() && newY < abstractRoom.height() + abstractRoom.getFloorY();
 	}
 	
-	public boolean canSetX(int newX) {
+	public boolean canSetX(float newX) {
 		return newX > abstractRoom.getFloorX() && newX < abstractRoom.width() + abstractRoom.getFloorX();
 	}
 
-	public boolean canSetY(int newY, int height) {
+	public boolean canSetY(float newY, int height) {
 		return canSetY(newY+height);
 	}
 	
-	public boolean canSetX(int newX, int width) {
+	public boolean canSetX(float newX, int width) {
 		return canSetX(newX+width);
 	}
 	
@@ -222,12 +222,11 @@ public class Room {
 		return null;
 	}
 
-	public boolean isPlayerOnAGhost(int playerX, int playerY, int playerWidth, int playerHeight) {
-		Rectangle playerBox = new Rectangle(playerX, playerY, playerWidth, playerHeight);
+	public boolean isPlayerOnAGhost(Rectangle playerBoundingBox) {
 		
 		for (Character c : characters) {
-			Rectangle ghostBox = new Rectangle(c.x, c.y, Resources.GHOST_WIDTH, Resources.GHOST_HEIGHT);
-			if (playerBox.intersects(ghostBox)) {
+			Rectangle ghostBox = c.getBoundingBox();
+			if (playerBoundingBox.intersects(ghostBox)) {
 				return true;
 			}
 		}
