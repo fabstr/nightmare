@@ -9,6 +9,9 @@
  <tileset firstgid="33" name="carpet" tilewidth="32" tileheight="32">
   <image source="../sprites/carpet.png" width="32" height="32"/>
  </tileset>
+ <tileset firstgid="34" name="heart" tilewidth="32" tileheight="32">
+  <image source="../sprites/heart.png" width="32" height="32"/>
+ </tileset>
  <layer name="Tile Layer 1" width="15" height="15">
   <data encoding="base64" compression="zlib">
    eJzjZGBgYAViSShNLOYCYnYgZiQDc4zqHdU7zPRyAzEbCVgaSvMAMQD2KQJP
@@ -25,5 +28,12 @@
     <property name="target" value="3"/>
    </properties>
   </object>
+  <object name="heart" type="heart" gid="34" x="46" y="301" width="32" height="32"/>
+  <object name="heart" type="heart" gid="34" x="97" y="391" width="32" height="32"/>
  </objectgroup>
+ <layer name="walls" width="15" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAuYEdic9BBLxsU49LLzkAaoIdediRMrr2jesnTS4w4tfQSCwDjTwEN
+  </data>
+ </layer>
 </map>

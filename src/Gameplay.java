@@ -2,6 +2,7 @@ import java.util.HashMap;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.font.effects.ColorEffect;
+import org.newdawn.slick.tiled.GroupObject;
 
 public class Gameplay extends BasicGame {
 	private static int windowWidth = 800;
@@ -50,25 +51,28 @@ public class Gameplay extends BasicGame {
 		
 		// the first room (room0) has no ghosts
 
-		room1.addGhost();
+		room1.addCharacter(Room.CharacterTypes.ghost);
+		room1.addCharacter(Room.CharacterTypes.ghost);
 
-		room2.addGhost();
-		room2.addGhost();
+		room2.addCharacter(Room.CharacterTypes.ghost);
+		room2.addCharacter(Room.CharacterTypes.ghost);
 
-		room3.addGhost();
-		room3.addGhost();
-		room3.addGhost();
+		room3.addCharacter(Room.CharacterTypes.ghost);
+		room3.addCharacter(Room.CharacterTypes.ghost);
+		room3.addCharacter(Room.CharacterTypes.ghost);
+		room3.addCharacter(Room.CharacterTypes.gargoyle);
+		room3.addCharacter(Room.CharacterTypes.gargoyle);
 
-		room4.addGhost();
-		room4.addGhost();
-		room4.addGhost();
-		room4.addGhost();
+		room4.addCharacter(Room.CharacterTypes.ghost);
+		room4.addCharacter(Room.CharacterTypes.ghost);
+		room4.addCharacter(Room.CharacterTypes.ghost);
+		room4.addCharacter(Room.CharacterTypes.ghost);
 
-		room5.addGhost();
-		room5.addGhost();
-		room5.addGhost();
-		room5.addGhost();
-		room5.addGhost();
+		room5.addCharacter(Room.CharacterTypes.ghost);
+		room5.addCharacter(Room.CharacterTypes.ghost);
+		room5.addCharacter(Room.CharacterTypes.ghost);
+		room5.addCharacter(Room.CharacterTypes.ghost);
+		room5.addCharacter(Room.CharacterTypes.ghost);
 
 		rooms.put("0", room0);
 		rooms.put("1", room1);
@@ -110,7 +114,7 @@ public class Gameplay extends BasicGame {
 		initRooms();
 		currentRoom = rooms.get("0");
 		
-		player = new Player(3, 200, 150);
+		player = new Player(30, 200, 150);
 
 		window = Resources.getWindowImage();
 		heart = Resources.getHeartImage();
@@ -180,7 +184,7 @@ public class Gameplay extends BasicGame {
 		}
 		
 		// move the ghosts
-		currentRoom.moveGhosts();
+		currentRoom.moveCharaters();
 		
 		// if we are on a ghost, decrease the health
 		if (currentRoom.isPlayerOnAGhost(player.getBoundingBox())) {
@@ -190,7 +194,6 @@ public class Gameplay extends BasicGame {
 		// e is the action key, check if we are on an object and do something
 		if (i.isKeyPressed(Input.KEY_E)) {
 			if (currentRoom.isPlayerOnKey((int) player.x, (int) player.y)) {
-				System.out.println("on key");
 				currentRoom.removeKey();
 				player.addKey();
 			} else if (currentRoom.isPlayerOnACarpet((int) player.x, (int) player.y)) {
@@ -225,11 +228,17 @@ public class Gameplay extends BasicGame {
 						// move the player to the carpet in the room we switched to
 						player.moveTo(carpetOnTheOtherSide.x(), carpetOnTheOtherSide.y());
 					}
-				} else {
-					System.out.println("The carpet is null");
 				}
 			} else {
-				System.out.println("nope");
+				GroupObject go = currentRoom.getTheObjectThePlayerIsStandingOn((int) player.x, (int) player.y);
+				if (go != null) {
+					if (go.name.toUpperCase().equals("BED")) {
+						state = STATES.won;
+					} else if (go.name.toUpperCase().equals("HEART")) {
+						player.increaseHealth(1);
+						currentRoom.removeGroupObject(go);
+					}
+				}
 			}
 		}
 		

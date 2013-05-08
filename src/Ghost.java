@@ -28,7 +28,7 @@ public class Ghost extends Character {
 		
 		// if we are moving to the right, we want to count width the ghost's width.
 		int width = (xSpeed > 0) ? 64 : 0;
-		if (!room.canSetX(newX, width)) {
+		if (!room.canSetXY(newX, y, width, height)) {
 			// we hit a wall
 			xSpeed = -xSpeed;
 			return;
@@ -36,7 +36,7 @@ public class Ghost extends Character {
 
 		// if we are moving down, we want to count width the ghost's height.
 		int height = (ySpeed > 0) ? 64 : 0;
-		if (!room.canSetY(newY, height)) {
+		if (!room.canSetXY(x, newY, width, height)) {
 			// we hit a wall
 			ySpeed = -ySpeed;
 			return;

@@ -1,3 +1,5 @@
+import org.newdawn.slick.tiled.GroupObject;
+
 
 public class Carpet {
 	// the target of the door, the carpet that exits the level has the target 
@@ -8,10 +10,12 @@ public class Carpet {
 	// true if the door is locked
 	private boolean locked;
 	
+	private GroupObject carpetObject;
+	
 	private int x;
 	private int y;
 	
-	public Carpet(String target, String lockedString, int x, int y) {
+	public Carpet(String target, String lockedString, int x, int y, GroupObject carpetObject) {
 		this.target = target;
 		if (lockedString.toUpperCase().equals("YES")) {
 			locked = true;
@@ -21,14 +25,16 @@ public class Carpet {
 		
 		this.x = x;
 		this.y = y;
+		
+		this.carpetObject = carpetObject;
 	}
 	
 	/**
 	 * Unlock the carpet.
 	 */
 	public void unlock() {
-		System.out.println("unlocking");
 		locked = false;
+		carpetObject.props.setProperty("locked", "no");
 	}
 	
 	/**

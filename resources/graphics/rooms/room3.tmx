@@ -34,6 +34,7 @@
   </object>
   <object name="carpet" type="carpet" gid="33" x="386" y="33" width="32" height="16">
    <properties>
+    <property name="locked" value="yes"/>
     <property name="target" value="5"/>
    </properties>
   </object>
@@ -42,8 +43,6 @@
     <property name="target" value="2"/>
    </properties>
   </object>
-  <object gid="38" x="346" y="352"/>
-  <object gid="38" x="104" y="151"/>
  </objectgroup>
  <layer name="Tile Layer 2" width="15" height="15">
   <data encoding="base64" compression="zlib">

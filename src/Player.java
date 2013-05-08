@@ -4,7 +4,7 @@ import org.newdawn.slick.SlickException;
 
 
 public class Player extends Character {
-	private static enum directions {
+	public static enum directions {
 		LEFT, RIGHT, UP, DOWN;
 	}
 	
@@ -105,7 +105,7 @@ public class Player extends Character {
 			newX += currentAnimation.getWidth();
 		}
 		
-		if (!room.canSetX(newX, (direction == directions.LEFT) ? -32 : 32)) {
+		if (!room.canSetXY(newX, y, (direction == directions.LEFT) ? -32 : 32, height, direction)) {
 			return;
 		}
 		
@@ -123,7 +123,7 @@ public class Player extends Character {
 			newY += currentAnimation.getHeight();
 		}
 		
-		if (!room.canSetY(newY, (direction == directions.UP) ? -32 : 32)) {
+		if (!room.canSetXY(x, newY, width, (direction == directions.UP) ? -32 : 32, direction)) {
 			return;
 		}
 		

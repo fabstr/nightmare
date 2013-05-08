@@ -24,6 +24,10 @@ public class Item {
 	
 	private int x;
 	private int y;
+	
+	public static enum ItemTypes {
+		HEART
+	}
 
 
 	/**

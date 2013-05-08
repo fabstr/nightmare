@@ -186,4 +186,9 @@ public class Resources {
 		//return objects.getSubImage(1*OBJECTS_TILES_WIDTH, 0*OBJECTS_TILES_HEIGHT);
 		return objects.getSprite(1, 0);
 	}
+	
+	public static Animation getGargoyleAnimation() throws SlickException {
+		SpriteSheet garg = new SpriteSheet(GARGOYLE_SPRITESHEET, 64, 64);
+		return new Animation(garg, 100);
+	}
 }

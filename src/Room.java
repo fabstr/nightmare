@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.tiled.GroupObject;
+import org.newdawn.slick.tiled.Layer;
 import org.newdawn.slick.tiled.ObjectGroup;
 import org.newdawn.slick.tiled.TiledMapPlus;
 
@@ -17,7 +18,7 @@ public class Room {
 	/**
 	 * The moving characters (the ghosts) in the room.
 	 */
-	private ArrayList<Ghost> characters;
+	private ArrayList<Character> characters;
 
 	/**
 	 * The doors in the room.
@@ -30,6 +31,10 @@ public class Room {
 	 * The AbstractRoom of this room.
 	 */
 	private AbstractRoom abstractRoom;
+	
+	public static enum CharacterTypes {
+		ghost, gargoyle
+	}
 
 	/**
 	 * The image of this room.
@@ -42,6 +47,11 @@ public class Room {
 	
 	private static Random r;
 	
+	// true if there are walls in the room (ie there are a "walls" layer in the
+	// tmx map
+	private boolean thereAreWalls;
+	private Layer wallsLayer;
+
 	// the id of the room, used for carpet room-switching
 	private String id;
 	
@@ -73,7 +83,7 @@ public class Room {
 		map = new TiledMapPlus(roomFile, Resources.ROOM_TILESHEETS_FOLDER);
 		ghostImage = Resources.getGhostImage();
 		
-		characters = new ArrayList<Ghost>();
+		characters = new ArrayList<Character>();
 		r = new Random();
 		objectImageMap = new HashMap<String, Image>();
 		//key = new Item("The key", Resources.getKeyImage(), 500, 300);
@@ -94,6 +104,16 @@ public class Room {
 			}
 			
 			objectImageMap.put(type, toAdd);
+		}
+		
+		// check if there are a "walls" layer
+		for (Layer l : map.getLayers()) {
+			if (l.name.toUpperCase().equals("WALLS")) {
+				// there is a walls layer
+				thereAreWalls = true;
+				wallsLayer = l;
+				break;
+			}
 		}
 	}
 	
@@ -149,42 +169,74 @@ public class Room {
 		return id;
 	}
 	
-	public void moveGhosts() {
-		for (Ghost g : characters) {
+	public void moveCharaters() {
+		for (Character g : characters) {
 			g.move(this);
 		}
 	}
 	
-	public void addGhost() throws SlickException {
+	public void addCharacter(CharacterTypes ct) throws SlickException {
 		int x = r.nextInt(abstractRoom.width()) + abstractRoom.getFloorX();
 		int y = r.nextInt(abstractRoom.height()) + abstractRoom.getFloorY();
 
-		while (!canSetX(x, 64)) {
+		while (!canSetXY(x, y, 64, 64)) {
 			x = r.nextInt(abstractRoom.width()) + abstractRoom.getFloorX();
-		}
-		
-		while (!canSetY(y, 64)) {
 			y = r.nextInt(abstractRoom.height()) + abstractRoom.getFloorY();
 		}
 		
-		Ghost g = new Ghost(4, x, y, ghostImage);
-		characters.add(g);
+		Character c = null;
+		switch (ct) {
+		case ghost:
+			c = new Ghost(4, x, y, ghostImage);
+			break;
+		case gargoyle:
+			c = new Gargoyle(x, y);
+			break;
+		}
+		
+		characters.add(c);
 	}
 
-	public boolean canSetY(float newY) {		
-		return newY > abstractRoom.getFloorY() && newY < abstractRoom.height() + abstractRoom.getFloorY();
+	public boolean canSetXY(float newX, float newY, Player.directions direction) {
+		if (thereAreWalls == true) {
+			int x = (int) (newX-abstractRoom.getFloorX())/Resources.WALL_WIDTH;
+			int y = (int) (newY-abstractRoom.getFloorY())/Resources.WALL_WIDTH;
+			
+			switch (direction) {
+			case LEFT:
+				x++;
+				break;
+			case RIGHT:
+				x--;
+				break;
+			case UP:
+				y++;
+				break;
+			case DOWN:
+				y--;
+				break;
+			}
+			
+			if (wallsLayer.getTileID(x, y) != 0) {
+				// there is something at the position
+				return false;
+			}
+		}
+		
+		return canSetXY(newX, newY);
 	}
 	
-	public boolean canSetX(float newX) {
-		return newX > abstractRoom.getFloorX() && newX < abstractRoom.width() + abstractRoom.getFloorX();
+	public boolean canSetXY(float newX, float newY) {
+		return (newY > abstractRoom.getFloorY() && newY < abstractRoom.height() + abstractRoom.getFloorY() &&
+				newX > abstractRoom.getFloorX() && newX < abstractRoom.width() + abstractRoom.getFloorX());
 	}
 
-	public boolean canSetY(float newY, int height) {
-		return canSetY(newY+height);
+	public boolean canSetXY(float newX, float newY, int width, int height) {
+		return canSetXY(newX+width, newY+height);
 	}
-	
-	public boolean canSetX(float newX, int width) {
-		return canSetX(newX+width);
+
+	public boolean canSetXY(float newX, float newY, int width, int height, Player.directions direction) {
+		return canSetXY(newX+width, newY+height, direction);
 	}
 	
 	/**
@@ -260,7 +312,7 @@ public class Room {
 		}
 		return new Carpet(currentObject.props.getProperty("target"),
 				currentObject.props.getProperty("locked", "false"),
-				currentObject.x, currentObject.y);
+				currentObject.x, currentObject.y, currentObject);
 	}
 	
 	/**
@@ -273,11 +325,15 @@ public class Room {
 		for (GroupObject go : roomObjects.objects) {
 			if (go.name.toUpperCase().equals("CARPET")) {
 				if (go.props.getProperty("target").equals(target)) {
-					return new Carpet(target, go.props.getProperty("locked", "NO"), go.x, go.y);
+					return new Carpet(target, go.props.getProperty("locked", "NO"), go.x, go.y, go);
 				}
 			}
 		}
 		
 		return null;
+	}
+
+	public void removeGroupObject(GroupObject go) { 
+				roomObjects.objects.remove(go);
 	}
 }
