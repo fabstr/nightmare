@@ -144,12 +144,12 @@ public class Room {
 //		}
 		for (GroupObject go : roomObjects.objects) {
 			// the x/y coordinates where to draw the image on screen
-			int x = go.x + abstractRoom.getFloorX();
-			int y = go.y + abstractRoom.getFloorY();
-			
-			// get the image to draw and draw it
-			Image img = go.getImage();
-			img.draw(x, y);
+			Image toRender = go.getImage();
+			if (toRender != null) {
+				int x = go.x + abstractRoom.getFloorX();
+				int y = go.y + abstractRoom.getFloorY();
+				toRender.draw(x, y);
+			}
 		}
 	}
 	
@@ -243,6 +243,15 @@ public class Room {
 	public boolean isPlayerOnKey(int x, int y) {
 		GroupObject currentObject = getTheObjectThePlayerIsStandingOn(x, y);
 		if (currentObject == null || !Resources.KEY_STRING_ID.equals(currentObject.name)) {
+			return false;
+		}
+		
+		return true;
+	}
+
+	public boolean isPlayerOnCarpet(int x, int y) {
+		GroupObject currentObject = getTheObjectThePlayerIsStandingOn(x, y);
+		if (currentObject == null || !Resources.CARPET_STRING_ID.equals(currentObject.name)) {
 			return false;
 		}
 		

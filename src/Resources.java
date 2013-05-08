@@ -33,8 +33,9 @@ public class Resources {
 	public static final int GHOST_ANIMATION_SPEED = 100;
 	
 	public static final int WALL_WIDTH = 32;
-	
+
 	public static final String KEY_STRING_ID = "key";
+	public static final String CARPET_STRING_ID = "carpet";
 	
 	/**
 	 * Return the key image.

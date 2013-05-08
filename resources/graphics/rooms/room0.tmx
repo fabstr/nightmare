@@ -12,6 +12,9 @@
   </properties>
   <image source="../sprites/tiles-wall-floor.png" width="128" height="128"/>
  </tileset>
+ <tileset firstgid="49" name="carpet" tilewidth="32" tileheight="32">
+  <image source="../sprites/carpet.png" width="32" height="32"/>
+ </tileset>
  <layer name="floor" width="15" height="15">
   <data encoding="base64" compression="zlib">
    eJzTZGBgUCUDawGxOhAzkoE1RvWO6h1merWBWI0MrAPEAAxACSY=
@@ -23,7 +26,7 @@
     <property name="target" value="EXIT"/>
    </properties>
   </object>
-  <object name="carpet" type="carpet" gid="18" x="304" y="463" width="32" height="32">
+  <object name="carpet" type="carpet" gid="49" x="324" y="431" width="32" height="16">
    <properties>
     <property name="target" value="exit"/>
    </properties>

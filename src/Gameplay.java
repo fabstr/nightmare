@@ -12,8 +12,13 @@ public class Gameplay extends BasicGame {
 	private Image window;
 	private Image heart;
 	
+	private enum STATES {
+		playing, paused, lost
+	}
 	
-	private UnicodeFont font;
+	private STATES state;
+	
+	private UnicodeFont text;
 
 	public Gameplay() {
 		super("Nightmare");
@@ -28,7 +33,7 @@ public class Gameplay extends BasicGame {
 		drawHearts();
 		
 		String timeLeft = String.format("Time left: %3d seconds.", timer.getSecondsLeft());
-		font.drawString(160, 2, timeLeft, Color.black);
+		text.drawString(160, 2, timeLeft, Color.black);
 		
 		player.drawInventory();
 		
@@ -50,10 +55,11 @@ public class Gameplay extends BasicGame {
 		window = Resources.getWindowImage();
 		heart = Resources.getHeartImage();
 
-		font = new UnicodeFont(Resources.ACME_FONT_PATH, 20, false, false);
-		font.addAsciiGlyphs();
-		font.getEffects().add(new ColorEffect());
-		font.loadGlyphs();
+		// the text on the scresen
+		text = new UnicodeFont(Resources.ACME_FONT_PATH, 20, false, false);
+		text.addAsciiGlyphs();
+		text.getEffects().add(new ColorEffect());
+		text.loadGlyphs();
 		
 		timer = new Time(110000);
 		timer.start();		
@@ -63,6 +69,7 @@ public class Gameplay extends BasicGame {
 	public void update(GameContainer gc, int arg1) throws SlickException {
 		Input i = gc.getInput();
 		
+		// move the player and set the right animation
 		if (i.isKeyDown(Input.KEY_DOWN)) {
 			player.moveY(1, currentRoom, true);
 			player.walkDown();
@@ -76,19 +83,26 @@ public class Gameplay extends BasicGame {
 			player.moveX(1, currentRoom, true);
 			player.walkRight();
 		} else {
+			// stop walking, we are not moving
 			player.stopWalking();
 		}
 		
+		// move the ghosts
 		currentRoom.moveGhosts();
 		
+		// if we are on a ghost, decrease the health
 		if (currentRoom.isPlayerOnAGhost(player.x, player.y, Resources.PLAYER_WIDTH, Resources.PLAYER_HEIGHT)) {
 			player.decreaseHealth(1);
 		}
 		
+		// e is the action key, check if we are on an object and do something
 		if (i.isKeyPressed(Input.KEY_E)) {
 			if (currentRoom.isPlayerOnKey(player.x, player.y)) {
 				System.out.println("on key");
 				player.getInventory().addItem(currentRoom.removeKey());
+			} else if (currentRoom.isPlayerOnCarpet(player.x, player.y)) {
+				
+				System.out.println("on carpet");
 			} else {
 				System.out.println("nope");
 			}
