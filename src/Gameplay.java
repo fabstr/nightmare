@@ -96,10 +96,10 @@ public class Gameplay extends BasicGame {
 	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
 		switch (state) {
 		case WON:
-			popup.displayInBox(Resources.MSG_WON);
+			popup.displayInBox(Resources.MSG_WON_PATH);
 			break;
 		case LOST:
-			popup.displayInBox(Resources.MSG_LOST);
+			popup.displayInBox(Resources.MSG_LOST_PATH);
 			break;
 		case PLAYING: case PAUSED:
 			break;
