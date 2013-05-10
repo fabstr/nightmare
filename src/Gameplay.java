@@ -93,6 +93,8 @@ public class Gameplay extends BasicGame {
 		case lost:
 			popup.displayInBox("You have lost!\n\nPress SPACE to start a new game.");
 			break;
+		case playing: case paused:
+			break;
 		}
 
 		window.draw();
@@ -246,6 +248,7 @@ public class Gameplay extends BasicGame {
 					if (go.name.toUpperCase().equals("BED")) {
 						// it is the bed, we have won
 						state = STATES.won;
+						timer.stop();
 					} else if (go.name.toUpperCase().equals("HEART")) {
 						// is is a heart, increase the player's health
 						player.increaseHealth(1);
@@ -269,6 +272,8 @@ public class Gameplay extends BasicGame {
 		app.setDisplayMode(windowWidth, windowHeight, false);
 		g.setGameContainer(app);
 		app.setTargetFrameRate(FRAMERATE);
+		app.setVSync(true);
+		//app.setShowFPS(false);
 		app.start();
 	}
 	

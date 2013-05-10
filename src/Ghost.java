@@ -9,7 +9,7 @@ public class Ghost extends Character {
 	private float ySpeed;
 	
 	// pixels per millisecond
-	private static final float MOVEMENT_SPEED = 0.1f;
+	private static final float MOVEMENT_SPEED = 0.3f;
 	
 	private static SecureRandom r;
 	
