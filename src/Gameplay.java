@@ -59,11 +59,11 @@ public class Gameplay extends BasicGame {
 		room2.addCharacter(Room.CharacterTypes.ghost);
 		room2.addCharacter(Room.CharacterTypes.ghost);
 
-		room3.addCharacter(Room.CharacterTypes.ghost);
-		room3.addCharacter(Room.CharacterTypes.ghost);
-		room3.addCharacter(Room.CharacterTypes.ghost);
 		room3.addCharacter(Room.CharacterTypes.gargoyle);
 		room3.addCharacter(Room.CharacterTypes.gargoyle);
+		room3.addCharacter(Room.CharacterTypes.ghost);
+		room3.addCharacter(Room.CharacterTypes.ghost);
+		room3.addCharacter(Room.CharacterTypes.ghost);
 
 		room4.addCharacter(Room.CharacterTypes.ghost);
 		room4.addCharacter(Room.CharacterTypes.ghost);

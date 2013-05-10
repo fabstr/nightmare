@@ -19,7 +19,7 @@ public class Player extends Character {
 	private Animation standingUp;
 	private Animation standingDown;
 	
-	private static final float MOVEMENT_SPEED = 0.4f;
+	private static final float MOVEMENT_SPEED = 0.2f;
 	
 	// to avoid the player getting hurt twice or more by a ghost within a time period
 	private TimingLock tl;
