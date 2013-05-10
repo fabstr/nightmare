@@ -8,6 +8,9 @@ public class Ghost extends Character {
 	private float xSpeed;
 	private float ySpeed;
 	
+	// pixels per millisecond
+	private static final float MOVEMENT_SPEED = 0.1f;
+	
 	private static SecureRandom r;
 	
 	public Ghost(int health, int x, int y, Image img) throws SlickException {
@@ -23,8 +26,8 @@ public class Ghost extends Character {
 	}
 
 	public void move(Room room, int deltaTime) {
-		float newX = x + xSpeed*deltaTime/10;
-		float newY = y + ySpeed*deltaTime/10;
+		float newX = x + xSpeed * deltaTime * MOVEMENT_SPEED;
+		float newY = y + ySpeed * deltaTime * MOVEMENT_SPEED;
 		
 		// if we are moving to the right, we want to count width the ghost's width.
 		int width = (xSpeed > 0) ? 64 : 0;

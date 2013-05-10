@@ -19,6 +19,8 @@ public class Player extends Character {
 	private Animation standingUp;
 	private Animation standingDown;
 	
+	private static final float MOVEMENT_SPEED = 0.5f;
+	
 	// to avoid the player getting hurt twice or more by a ghost within a time period
 	private TimingLock tl;
 	
@@ -99,7 +101,7 @@ public class Player extends Character {
 	}
 	
 	public void moveX(int amount, Room room, boolean countImageWidth, int deltaTime) {
-		int newX = (int) this.x + amount;
+		float newX = this.x + amount*deltaTime*MOVEMENT_SPEED;
 		
 		if (countImageWidth) {
 			newX += currentAnimation.getWidth();
@@ -117,7 +119,7 @@ public class Player extends Character {
 	}
 	
 	public void moveY(int amount, Room room, boolean countImageWidth, int deltaTime) {
-		int newY = (int) this.y + amount;
+		float newY = this.y + amount*deltaTime*MOVEMENT_SPEED;
 		
 		if (countImageWidth) {
 			newY += currentAnimation.getHeight();
