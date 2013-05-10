@@ -1,8 +1,0 @@
-The rooms should have an object layer called "objects" in which there is 
-at least one key and one carpet. The carpet should have a property "target"
-with a room file (eg "room0.tmx") or "EXIT" as value. When the player walks
-in EXIT, the level is passed.
-
-The key and the carpet MUST be called "key" and "carpet".
-
-If there are multiple carpets, the exit carpet is called "carpet" and the rest are called "carpet-0", "carpet-1" and so on.

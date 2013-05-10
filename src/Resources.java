@@ -52,8 +52,8 @@ public class Resources {
 	public static final int WINDOW_WIDTH = 800;
 	public static final int WINDOW_HEIGHT = 518;
 	public static final int FRAMERATE = 60;
-	public static final int HEART_WIDTH = 42;
-	public static final int HEART_SPACING = 10;
+	public static final int HEART_WIDTH = 32;
+	public static final int HEART_SPACING = 0;
 	public static final int HEART_Y = 2;
 	public static final int TIME_LEFT_STRING_X = 160;
 	public static final int TIME_LEFT_STRING_Y = 2;

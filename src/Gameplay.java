@@ -11,7 +11,7 @@ public class Gameplay extends BasicGame {
 	 * If true, the player can press 0,1,2,3,4,5 to go to the respective room.
 	 * Also, press P or L to increase/decrease the player's lives.
 	 */
-	private static final boolean DEBUGGING = false;
+	private static final boolean DEBUGGING = true;
 	
 	/**
 	 * The player object
@@ -299,9 +299,11 @@ public class Gameplay extends BasicGame {
 						state = STATES.WON;
 						timer.stop();
 					} else if (go.name.toUpperCase().equals(Resources.IDSTRING_HEART)) {
-						// is is a heart, increase the player's health
-						player.increaseHealth(1);
-						currentRoom.removeGroupObject(go);
+						if (player.getHealth() <= 4) {
+							// is is a heart, increase the player's health
+							player.increaseHealth(1);
+							currentRoom.removeGroupObject(go);
+						}
 					}
 				}
 			}
