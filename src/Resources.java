@@ -31,8 +31,6 @@ public class Resources {
 	public static final int PLAYER_ANIMATION_SPEED = 333;
 	public static final int GHOST_ANIMATION_SPEED = 100;
 	public static final int WALL_WIDTH = 32;
-	public static final String IDSTRING_KEY = "key";
-	public static final String CARPET_STRING_ID = "carpet";
 	public static final int POPUP_X = 100;
 	public static final int POPUP_Y = 100;
 	public static final int POPUP_WIDTH = 300;
@@ -62,15 +60,16 @@ public class Resources {
 	public static final String TIME_LEFT_STRING = "Time left: %3d seconds.";
 	public static final String ROOM_TO_START_IN_ID = "0";
 	public static final int TEXT_SIZE = 20;
+	public static final String IDSTRING_KEY = "key";
 	public static final Object IDSTRING_BED = "BED";
 	public static final Object IDSTRING_HEART = "HEART";
 	public static final Object IDSTRING_CARPET_LOCKED = "YES";
 	public static final String IDSTRING_CARPET = "CARPET";
 	public static final String IDSTRING_WALLS = "WALLS";
-	public static final String PROPSSTRING_LOCKED = "LOCKED";
 	public static final String IDSTRING_CARPET_NOT_LOCKED = "NO";
 	public static final String IDSTRING_EXIT = "EXIT";
 	public static final String IDSTRING_ANIMATED = "ANIMATED";
+	public static final String PROPSSTRING_LOCKED = "LOCKED";
 	public static final int GARGOYLE_WIDTH = 64;
 	public static final int GARGOYLE_HEIGHT = 64;
 	public static final float GHOST_MOVEMENT_SPEED = 0.3f;
@@ -92,7 +91,8 @@ public class Resources {
 	public static final String CHAINSAW_PATH = SPRITES_FOLDER + "movingChainsaw.png";
 	public static final String SCREAM_PATH = SPRITES_FOLDER + "movingScream.png";
 	public static final String DRACULA_PATH = SPRITES_FOLDER + "movingDracula.png";
-	
+	public static final String GRUDGE_PATH = SPRITES_FOLDER + "movingGrudge.png";
+	public static final String CLOWN_PATH = SPRITES_FOLDER + "movingDracula.png";
 	
 	/**
 	 * Return the key image.

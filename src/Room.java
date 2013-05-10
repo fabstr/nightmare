@@ -26,7 +26,7 @@ public class Room {
 	private AbstractRoom abstractRoom;
 	
 	public static enum CharacterTypes {
-		ghost, gargoyle, chainsaw, scream, dracula
+		ghost, gargoyle, chainsaw, scream, dracula, grudge, clown
 	}
 
 	/**
@@ -257,6 +257,12 @@ public class Room {
 		case dracula:
 			c = new HostileNPC(x, y, Resources.DRACULA_PATH);
 			break;
+		case grudge:
+			c = new HostileNPC(x, y, Resources.GRUDGE_PATH);
+			break;
+		case clown:
+			c = new HostileNPC(x, y, Resources.CLOWN_PATH);
+			break;
 		}
 		
 		characters.add(c);
@@ -435,7 +441,7 @@ public class Room {
 	 */
 	public Carpet getTheCarpetThePlayerIsStandingOn(int x, int y) {
 		GroupObject currentObject = getTheObjectThePlayerIsStandingOn(x, y);
-		if (currentObject == null || !Resources.CARPET_STRING_ID.equals(currentObject.name)) {
+		if (currentObject == null || !Resources.IDSTRING_CARPET.equals(currentObject.name.toUpperCase())) {
 			return null;
 		}
 		return new Carpet(currentObject.props.getProperty("target"),

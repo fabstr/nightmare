@@ -109,10 +109,12 @@ public class Gameplay extends BasicGame {
 		// the first room (room0) has no characters
 		room1.addCharacter(Room.CharacterTypes.ghost, 1);
 		room2.addCharacter(Room.CharacterTypes.ghost, 2);
-		room3.addCharacter(Room.CharacterTypes.gargoyle, 2);
+		room3.addCharacter(Room.CharacterTypes.gargoyle, 1);
 		room3.addCharacter(Room.CharacterTypes.ghost, 2);
 		room3.addCharacter(Room.CharacterTypes.dracula, 1);
-		room4.addCharacter(Room.CharacterTypes.ghost, 4);
+		room4.addCharacter(Room.CharacterTypes.ghost, 1);
+		room4.addCharacter(Room.CharacterTypes.grudge, 1);
+		room4.addCharacter(Room.CharacterTypes.clown, 1);
 		room5.addCharacter(Room.CharacterTypes.scream, 1);
 		room5.addCharacter(Room.CharacterTypes.chainsaw, 1);
 

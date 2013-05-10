@@ -3,6 +3,7 @@ import org.newdawn.slick.SlickException;
 public class HostileNPC extends NPC {
 	public HostileNPC(int x, int y, String spriteSheetPath) throws SlickException {
 		super(x, y, spriteSheetPath);
+		randomizeDirection();
 	}
 
 	public void move(Room r, int deltaTime) {
@@ -34,7 +35,6 @@ public class HostileNPC extends NPC {
 
 	private void randomizeDirection() {
 		int dir = r.nextInt() % 4;
-		System.out.println(dir);
 		switch (dir) {
 		case 0:
 			setDirection(AnimationManager.directions.LEFT);
