@@ -26,7 +26,7 @@ public class Room {
 	private AbstractRoom abstractRoom;
 	
 	public static enum CharacterTypes {
-		ghost, gargoyle, chainsaw, scream
+		ghost, gargoyle, chainsaw, scream, dracula
 	}
 
 	/**
@@ -253,6 +253,9 @@ public class Room {
 			break;
 		case scream:
 			c = new HostileNPC(x, y, Resources.SCREAM_PATH);
+			break;
+		case dracula:
+			c = new HostileNPC(x, y, Resources.DRACULA_PATH);
 			break;
 		}
 		

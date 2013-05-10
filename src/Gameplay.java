@@ -110,7 +110,8 @@ public class Gameplay extends BasicGame {
 		room1.addCharacter(Room.CharacterTypes.ghost, 1);
 		room2.addCharacter(Room.CharacterTypes.ghost, 2);
 		room3.addCharacter(Room.CharacterTypes.gargoyle, 2);
-		room3.addCharacter(Room.CharacterTypes.ghost, 3);
+		room3.addCharacter(Room.CharacterTypes.ghost, 2);
+		room3.addCharacter(Room.CharacterTypes.dracula, 1);
 		room4.addCharacter(Room.CharacterTypes.ghost, 4);
 		room5.addCharacter(Room.CharacterTypes.scream, 1);
 		room5.addCharacter(Room.CharacterTypes.chainsaw, 1);

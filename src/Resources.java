@@ -9,78 +9,58 @@ public class Resources {
 	public static final String SPRITES_FOLDER = "resources/graphics/sprites/";
 	public static final String FONTS_FOLDER = "resources/fonts/";
 	public static final String ROOM_TILESHEETS_FOLDER = SPRITES_FOLDER;
-	
 	public static final String WINDOW_PATH = "resources/graphics/window.png";
-
 	public static final String ROOM0_PATH = ROOMS_FOLDER + "room0.tmx";
 	public static final String ROOM1_PATH = ROOMS_FOLDER + "room1.tmx";
 	public static final String ROOM2_PATH = ROOMS_FOLDER + "room2.tmx";
 	public static final String ROOM3_PATH = ROOMS_FOLDER + "room3.tmx";
 	public static final String ROOM4_PATH = ROOMS_FOLDER + "room4.tmx";
 	public static final String ROOM5_PATH = ROOMS_FOLDER + "room5.tmx";
-	
 	public static final String GREEN_GUY_PATH = SPRITES_FOLDER + "green_guy.png";
 	public static final String BROWN_GUY_PATH = SPRITES_FOLDER + "brown_guy.png";
 	public static final String GHOST_SPRITESHEET = SPRITES_FOLDER + "ghost.png";
 	public static final String OBJECTS_SPRITESHEET = SPRITES_FOLDER + "objects.png";
 	public static final String HEART_PATH = SPRITES_FOLDER + "heart.png";
-	
 	public static final String ACME_FONT_PATH = FONTS_FOLDER + "acme.TTF";
-	
 	public static final int PLAYER_WIDTH = 26;
 	public static final int PLAYER_HEIGHT = 37;
 	public static final int GHOST_WIDTH = 64;
 	public static final int GHOST_HEIGHT = 50;
-	
 	public static final int OBJECTS_TILES_WIDTH = 32;
 	public static final int OBJECTS_TILES_HEIGHT = 32;
-	
 	public static final int PLAYER_ANIMATION_SPEED = 333;
 	public static final int GHOST_ANIMATION_SPEED = 100;
-	
 	public static final int WALL_WIDTH = 32;
-
 	public static final String IDSTRING_KEY = "key";
 	public static final String CARPET_STRING_ID = "carpet";
-
 	public static final int POPUP_X = 100;
 	public static final int POPUP_Y = 100;
 	public static final int POPUP_WIDTH = 300;
 	public static final int POPUP_HEIGHT = 200;
 	public static final String POPUP_IMAGE = SPRITES_FOLDER + "box.png";
-	
 	public static final String INSTRUCTIONS_IMAGE = SPRITES_FOLDER + "instructions.png";
 	public static final int INSTRUCTIONS_X = 480;
 	public static final int INSTRUCTIONS_Y = 38;
-	
 	public static final String GARGOYLE_SPRITESHEET = SPRITES_FOLDER + "movingGargoyle.png";
 	public static final int DEBUGGING_LIVES = 30;
 	public static final int PLAYER_LIVES = 3;
-	
 	public static final int PLAYER_START_X = 150;
 	public static final int PLAYER_START_Y = 200;
-
 	public static final int DEBUGGING_TIME_LIMIT = 1500000;
 	public static final int PLAYING_TIME_LIMIT = 60000;
-	
 	public static final int WINDOW_WIDTH = 800;
 	public static final int WINDOW_HEIGHT = 518;
 	public static final int FRAMERATE = 60;
-	
 	public static final int HEART_WIDTH = 42;
 	public static final int HEART_SPACING = 10;
 	public static final int HEART_Y = 2;
-	
 	public static final int TIME_LEFT_STRING_X = 160;
 	public static final int TIME_LEFT_STRING_Y = 2;
 	public static final Color TIME_LEFT_COLOUR = Color.black;
-
 	public static final String MSG_WON = "You have won!\n\nPress SPACE to start a new game.";
 	public static final String MSG_LOST = "You have lost!\n\nPress SPACE to start a new game.";
 	public static final String TIME_LEFT_STRING = "Time left: %3d seconds.";
-	
 	public static final String ROOM_TO_START_IN_ID = "0";
-	
 	public static final int TEXT_SIZE = 20;
 	public static final Object IDSTRING_BED = "BED";
 	public static final Object IDSTRING_HEART = "HEART";
@@ -111,6 +91,7 @@ public class Resources {
 	public static final int ANIMATED_OBJECT_ANIMATION_SPEED = 333;
 	public static final String CHAINSAW_PATH = SPRITES_FOLDER + "movingChainsaw.png";
 	public static final String SCREAM_PATH = SPRITES_FOLDER + "movingScream.png";
+	public static final String DRACULA_PATH = SPRITES_FOLDER + "movingDracula.png";
 	
 	
 	/**
