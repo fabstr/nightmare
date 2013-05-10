@@ -56,8 +56,8 @@ public class Resources {
 	public static final int TIME_LEFT_STRING_X = 160;
 	public static final int TIME_LEFT_STRING_Y = 2;
 	public static final Color TIME_LEFT_COLOUR = Color.black;
-	public static final String MSG_WON = "You have won!\n\nPress SPACE to start a new game.";
-	public static final String MSG_LOST = "You have lost!\n\nPress SPACE to start a new game.";
+	public static final String MSG_WON_PATH = "You have won!\n\nPress SPACE to start a new game.";
+	public static final String MSG_LOST_PATH = "You have lost!\n\nPress SPACE to start a new game.";
 	public static final String TIME_LEFT_STRING = "Time left: %3d seconds.";
 	public static final String ROOM_TO_START_IN_ID = "0";
 	public static final int TEXT_SIZE = 20;

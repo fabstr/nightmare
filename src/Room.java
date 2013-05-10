@@ -338,6 +338,8 @@ public class Room {
 				case DOWN:
 					y--;
 					break;
+				default: 
+					break;
 				}
 
 				if (wallsLayer.getTileID(x, y) != 0) {
@@ -350,6 +352,7 @@ public class Room {
 			// to move outside of screen and we cannot allow this
 			return false;
 		}
+		
 		return canSetXY(newX, newY);
 	}
 	
