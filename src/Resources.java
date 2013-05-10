@@ -46,7 +46,7 @@ public class Resources {
 	public static final int PLAYER_START_X = 150;
 	public static final int PLAYER_START_Y = 200;
 	public static final int DEBUGGING_TIME_LIMIT = 1500000;
-	public static final int PLAYING_TIME_LIMIT = 60000;
+	public static final int PLAYING_TIME_LIMIT = 120000;
 	public static final int WINDOW_WIDTH = 800;
 	public static final int WINDOW_HEIGHT = 518;
 	public static final int FRAMERATE = 60;
@@ -76,7 +76,7 @@ public class Resources {
 	public static final float GHOST_MOVEMENT_SPEED = 0.3f;
 	public static final float PLAYER_MOVEMENT_SPEED = 0.2f;
 	public static final int INVENTORY_X = 430;
-	public static final int INVENTORY_Y = 430;
+	public static final int INVENTORY_Y = 2;
 	public static final int INVENTORY_SPACING = 10;
 	public static final int ROOM_WIDTH = 480;
 	public static final int ROOM_HEIGHT = 480;
@@ -93,7 +93,7 @@ public class Resources {
 	public static final String SCREAM_PATH = SPRITES_FOLDER + "movingScream.png";
 	public static final String DRACULA_PATH = SPRITES_FOLDER + "movingDracula.png";
 	public static final String GRUDGE_PATH = SPRITES_FOLDER + "movingGrudge.png";
-	public static final String CLOWN_PATH = SPRITES_FOLDER + "movingDracula.png";
+	public static final String CLOWN_PATH = SPRITES_FOLDER + "movingSaw.png";
 	
 	/**
 	 * Return the key image.

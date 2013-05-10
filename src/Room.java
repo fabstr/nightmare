@@ -320,31 +320,36 @@ public class Room {
 	 * @return
 	 */
 	public boolean canSetXY(float newX, float newY, AnimationManager.directions direction) {
-		if (thereAreWalls == true) {
-			int x = (int) (newX-abstractRoom.getFloorX())/Resources.WALL_WIDTH;
-			int y = (int) (newY-abstractRoom.getFloorY())/Resources.WALL_WIDTH;
-			
-			switch (direction) {
-			case LEFT:
-				x++;
-				break;
-			case RIGHT:
-				x--;
-				break;
-			case UP:
-				y++;
-				break;
-			case DOWN:
-				y--;
-				break;
-			}
-			
-			if (wallsLayer.getTileID(x, y) != 0) {
-				// there is something at the position
-				return false;
-			}
+		try {	
+			if (thereAreWalls == true) {
+				int x = (int) (newX-abstractRoom.getFloorX())/Resources.WALL_WIDTH;
+				int y = (int) (newY-abstractRoom.getFloorY())/Resources.WALL_WIDTH;
+
+				switch (direction) {
+				case LEFT:
+					x++;
+					break;
+				case RIGHT:
+					x--;
+					break;
+				case UP:
+					y++;
+					break;
+				case DOWN:
+					y--;
+					break;
+				}
+
+				if (wallsLayer.getTileID(x, y) != 0) {
+					// there is something at the position
+					return false;
+				}
+			} 
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// ArrayIndexOutOfBoundsException occurs when the player is trying 
+			// to move outside of screen and we cannot allow this
+			return false;
 		}
-		
 		return canSetXY(newX, newY);
 	}
 	

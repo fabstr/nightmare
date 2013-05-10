@@ -11,7 +11,7 @@ public class Gameplay extends BasicGame {
 	 * If true, the player can press 0,1,2,3,4,5 to go to the respective room.
 	 * Also, press P or L to increase/decrease the player's lives.
 	 */
-	private static final boolean DEBUGGING = true;
+	private static final boolean DEBUGGING = false;
 	
 	/**
 	 * The player object
