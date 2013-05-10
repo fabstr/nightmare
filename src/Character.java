@@ -1,8 +1,14 @@
 import java.awt.Rectangle;
+import java.security.SecureRandom;
 
 import org.newdawn.slick.*;
 
 public abstract class Character {
+	/**
+	 * The random number generator, to randomize the directions
+	 */
+	protected static SecureRandom r;
+	
 	/**
 	 * The health of the character.
 	 */

@@ -26,7 +26,7 @@ public class Room {
 	private AbstractRoom abstractRoom;
 	
 	public static enum CharacterTypes {
-		ghost, gargoyle
+		ghost, gargoyle, chainsaw, scream
 	}
 
 	/**
@@ -248,6 +248,12 @@ public class Room {
 		case gargoyle:
 			c = new Gargoyle(x, y);
 			break;
+		case chainsaw: 
+			c = new HostileNPC(x, y, Resources.CHAINSAW_PATH);
+			break;
+		case scream:
+			c = new HostileNPC(x, y, Resources.SCREAM_PATH);
+			break;
 		}
 		
 		characters.add(c);
@@ -272,7 +278,7 @@ public class Room {
 	 * @param direction
 	 * @return
 	 */
-	public boolean canSetXY(float newX, float newY, Player.directions direction) {
+	public boolean canSetXY(float newX, float newY, AnimationManager.directions direction) {
 		if (thereAreWalls == true) {
 			int x = (int) (newX-abstractRoom.getFloorX())/Resources.WALL_WIDTH;
 			int y = (int) (newY-abstractRoom.getFloorY())/Resources.WALL_WIDTH;
@@ -333,7 +339,7 @@ public class Room {
 	 * @param direction
 	 * @return
 	 */
-	public boolean canSetXY(float newX, float newY, int width, int height, Player.directions direction) {
+	public boolean canSetXY(float newX, float newY, int width, int height, AnimationManager.directions direction) {
 		return canSetXY(newX+width, newY+height, direction);
 	}
 	

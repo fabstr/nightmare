@@ -14,11 +14,6 @@ public class Ghost extends Character {
 	private float ySpeed;
 	
 	/**
-	 * The random number generator, to randomize the ghosts directions
-	 */
-	private static SecureRandom r;
-	
-	/**
 	 * Create a ghost at the given position
 	 * @param x
 	 * @param y

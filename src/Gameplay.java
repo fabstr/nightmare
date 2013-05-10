@@ -107,12 +107,13 @@ public class Gameplay extends BasicGame {
 		
 		// add the characters to the rooms
 		// the first room (room0) has no characters
-		room1.addCharacter(Room.CharacterTypes.ghost, 2);
+		room1.addCharacter(Room.CharacterTypes.ghost, 1);
 		room2.addCharacter(Room.CharacterTypes.ghost, 2);
 		room3.addCharacter(Room.CharacterTypes.gargoyle, 2);
 		room3.addCharacter(Room.CharacterTypes.ghost, 3);
 		room4.addCharacter(Room.CharacterTypes.ghost, 4);
-		room5.addCharacter(Room.CharacterTypes.ghost, 5);
+		room5.addCharacter(Room.CharacterTypes.scream, 1);
+		room5.addCharacter(Room.CharacterTypes.chainsaw, 1);
 
 		// add the rooms to the hash map
 		rooms.put("0", room0);

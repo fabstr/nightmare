@@ -106,9 +106,11 @@ public class Resources {
 	public static final int ANIMATED_OBJECT_HEIGHT = 32;
 	public static final String IDSTRING_TORCH = "TORCH";
 	public static final String IDSTRING_CANDLESTICK = "CANDLESTICK";
-	public static final String TORCH_PATH = SPRITES_FOLDER + "torch.png";
-	public static final String CANDLESTICK_PATH = SPRITES_FOLDER + "candlestick.png";
+	public static final String TORCH_PATH = SPRITES_FOLDER + "movingTorch.png";
+	public static final String CANDLESTICK_PATH = SPRITES_FOLDER + "movingCandle.png";
 	public static final int ANIMATED_OBJECT_ANIMATION_SPEED = 333;
+	public static final String CHAINSAW_PATH = SPRITES_FOLDER + "movingChainsaw.png";
+	public static final String SCREAM_PATH = SPRITES_FOLDER + "movingScream.png";
 	
 	
 	/**

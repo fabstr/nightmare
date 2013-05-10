@@ -12,6 +12,9 @@
  <tileset firstgid="34" name="objects" tilewidth="32" tileheight="32">
   <image source="../sprites/objects.png" width="128" height="128"/>
  </tileset>
+ <tileset firstgid="50" name="movingTorch" tilewidth="32" tileheight="32">
+  <image source="../sprites/movingTorch.png" width="128" height="32"/>
+ </tileset>
  <layer name="Tile Layer 1" width="15" height="15">
   <data encoding="base64" compression="zlib">
    eJzjZGBgYCUDcwExOxAzkoE5RvWO6h1mermBmA2IpaE0ISwEpXmAGAC0UQJH
@@ -30,4 +33,9 @@
    eJxjYBjagBOIWfFgLjx62QmYzUEHvcjuJ1UvNjcMZ73cQMyGhnmI1EsqoEQvqQAA0BcBEw==
   </data>
  </layer>
+ <objectgroup name="animated" width="15" height="15">
+  <object type="torch" gid="50" x="198" y="129"/>
+  <object type="torch" gid="50" x="348" y="349"/>
+  <object type="torch" gid="50" x="98" y="394"/>
+ </objectgroup>
 </map>
