@@ -7,19 +7,32 @@
 public class Time {
 
 	/**
-	 * Class Fields.
+	 * The time the timer started
 	 */
 	private long startTime = -1;
+	
+	/**
+	 * The time limit
+	 */
 	private int timeLimit;
+	
+	/**
+	 * The current time
+	 */
 	private long currTime;
+	
+	/**
+	 * The time the timer was paused
+	 */
 	private long paused;
 	
-	// true if the timer is stopped
+	/**
+	 *  true if the timer is stopped
+	 */
 	boolean isStopped;
 
 	/**
-	 * Constructor.
-	 * Sets the timelimit for this Time instance.
+	 * Sets the time limit for this Timer.
 	 * @param limit in milliseconds
 	 */
 	public Time(int limit) {
@@ -27,7 +40,7 @@ public class Time {
 	}
 
 	/**
-	 * Starts the timer.
+	 * Start the timer.
 	 */
 	public void start() {
 		if (isStopped){
@@ -58,6 +71,9 @@ public class Time {
 		}
 	}
 
+	/**
+	 * @return the time left, in seconds
+	 */
 	public long getSecondsLeft() {
 		if (isStopped == false) {
 			currTime = System.currentTimeMillis() - startTime;
@@ -66,6 +82,9 @@ public class Time {
 		return (timeLimit - currTime) / 1000;
 	}
 	
+	/**
+	 * Stop the timer
+	 */
 	public void stop() {
 		isStopped = true;
 	    paused = System.currentTimeMillis();

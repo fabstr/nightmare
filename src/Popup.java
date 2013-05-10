@@ -4,17 +4,30 @@ import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 
 public class Popup {
+	/**
+	 * The object that does the drawing
+	 */
 	private UnicodeFont textDrawer;
 	
-	// the message to draw
+	/**
+	 * the message to draw
+	 */
 	private String msg;
 	
-	// true if we are to draw a box
+	/**
+	 * true if we are to draw a box
+	 */
 	private boolean drawBox;
 	
-	// the image of the box
+	/**
+	 * the image of the box
+	 */
 	private Image boxImage;
 	
+	/**
+	 * Create a new popup object
+	 * @throws SlickException
+	 */
 	@SuppressWarnings("unchecked")
 	public Popup() throws SlickException {
 		// the text on the screen
@@ -26,17 +39,28 @@ public class Popup {
 		boxImage = new Image(Resources.POPUP_IMAGE);
 	}
 	
+	/**
+	 * Display the string
+	 * @param msg
+	 */
 	public void display(String msg) {
 		this.msg = msg;
 		System.out.println(msg);
 		drawBox = false;
 	}
 	
+	/**
+	 * Display the string in a popup box
+	 * @param msg
+	 */
 	public void displayInBox(String msg) {
 		this.msg = msg;
 		drawBox = true;
 	}
 	
+	/**
+	 * Draw the current popup box with the current string
+	 */
 	public void draw() {
 		if (msg == null) {
 			return;

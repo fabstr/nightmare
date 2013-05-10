@@ -6,13 +6,29 @@
 
 public class AbstractRoom {
 	/**
-	 * The width and height (in pixels).
+	 * The width (in pixels) of the room
 	 */
 	private int w;
+	
+	/**
+	 * The height (in pixels) of the room
+	 */
 	private int h;
 	
+	/**
+	 * Were the walkable x area starts
+	 */
 	private int floorX;
+	
+	/**
+	 * Were the walkable y area starts
+	 */
 	private int floorY;
+
+	/**
+	 * The width (and height) of the walls
+	 */
+	private int wallWidth;
 	
 	/**
 	 * @return the floorX
@@ -35,27 +51,27 @@ public class AbstractRoom {
 		return wallWidth;
 	}
 
-	private int wallWidth;
-
-		/**
-		 * Return the width of the room.
-		 */
-		public int width() {
-			return w;
-		}
+	/**
+	 * Return the width of the room.
+	 */
+	public int getWidth() {
+		return w;
+	}
 
 	/**
 	 * Return the height of the room.
 	 */
-	public int height() {
+	public int getHeight() {
 		return h;
 	}
 	
-
 	/**
-	 * Create a new AbstractRoom with the given width and height.
-	 * @param w The width.
-	 * @param h The height.
+	 * Create an abstract room with the given properties.
+	 * @param w The width of the room
+	 * @param h The height of the room
+	 * @param floorX The walkable area x 
+	 * @param floorY The walkable area y
+	 * @param wallWidth The width/height of the walls
 	 */
 	public AbstractRoom(int w, int h, int floorX, int floorY, int wallWidth) {
 		this.w = w;

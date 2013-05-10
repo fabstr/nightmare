@@ -2,26 +2,36 @@ import java.awt.Rectangle;
 
 import org.newdawn.slick.*;
 
-public abstract class Character implements Drawable {
+public abstract class Character {
 	/**
 	 * The health of the character.
 	 */
 	protected int health;
 
 	/**
-	 * The current x and y coordinates of the character.
+	 * The current x coordinate of the character
 	 */
 	protected float x;
+	
+	/**
+	 * The current y coordinate of the character
+	 */
 	protected float y;
 	
+	/**
+	 * The width of the character
+	 */
 	protected int width;
+	
+	/**
+	 * The height of the character
+	 */
 	protected int height;
 
 	/**
 	 * The image of the character.
 	 */
 	protected Animation currentAnimation;
-
 
 	/**
 	 * Create a new character with the given health, the coordinates and
@@ -42,6 +52,9 @@ public abstract class Character implements Drawable {
 		this.height = height;
 	}
 	
+	/**
+	 * @return the character's current bounding box
+	 */
 	public Rectangle getBoundingBox() {
 		return new Rectangle((int) x, (int) y, width, height);
 	}
@@ -136,16 +149,26 @@ public abstract class Character implements Drawable {
 		this.y = y;
 	}
 	
-	public void move(Room r, int deltaTime) {
-		
-	}
+	/**
+	 * Ask the character to move itself. 
+	 * Please implement this in a subclass.
+	 * @param r The room the character is in
+	 * @param deltaTime The time which has passed
+	 */
+	abstract public void move(Room r, int deltaTime);
 	
-	
-	
+	/**
+	 * Move amount on the x axis
+	 * @param amount
+	 */
 	public void moveX(int amount) {
 		this.x += amount;
 	}
 	
+	/**
+	 * Move amount on the y axis
+	 * @param amount
+	 */
 	public void moveY(int amount) {
 		this.y += amount;
 	}

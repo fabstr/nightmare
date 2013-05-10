@@ -1,20 +1,31 @@
 import java.security.SecureRandom;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 
 public class Ghost extends Character {
-
+	/**
+	 * The xSpeed of the ghost
+	 */
 	private float xSpeed;
+	
+	/**
+	 * The ySpeed of the ghost
+	 */
 	private float ySpeed;
 	
-	// pixels per millisecond
-	private static final float MOVEMENT_SPEED = 0.3f;
-	
+	/**
+	 * The random number generator, to randomize the ghosts directions
+	 */
 	private static SecureRandom r;
 	
-	public Ghost(int health, int x, int y, Image img) throws SlickException {
-		super(health, x, y, Resources.GHOST_WIDTH, Resources.GHOST_HEIGHT);
+	/**
+	 * Create a ghost at the given position
+	 * @param x
+	 * @param y
+	 * @throws SlickException
+	 */
+	public Ghost(int x, int y) throws SlickException {
+		super(0, x, y, Resources.GHOST_WIDTH, Resources.GHOST_HEIGHT);
 		currentAnimation = Resources.getGhostsAnimation();
 		
 		if (r == null) {
@@ -25,9 +36,14 @@ public class Ghost extends Character {
 		randomizeDirection();
 	}
 
+	/**
+	 * Move the ghost.
+	 * @param room The room the ghost is in
+	 * @param deltaTime The time which has passed
+	 */
 	public void move(Room room, int deltaTime) {
-		float newX = x + xSpeed * deltaTime * MOVEMENT_SPEED;
-		float newY = y + ySpeed * deltaTime * MOVEMENT_SPEED;
+		float newX = x + xSpeed * deltaTime * Resources.GHOST_MOVEMENT_SPEED;
+		float newY = y + ySpeed * deltaTime * Resources.GHOST_MOVEMENT_SPEED;
 		
 		// if we are moving to the right, we want to count width the ghost's width.
 		int width = (xSpeed > 0) ? 64 : 0;
@@ -49,6 +65,9 @@ public class Ghost extends Character {
 		setY(newY);
 	}
 	
+	/**
+	 * Randomize the ghosts direction
+	 */
 	private void randomizeDirection() {
 		while (xSpeed < 0.2 || xSpeed > 0.8) {
 			xSpeed = r.nextFloat();	

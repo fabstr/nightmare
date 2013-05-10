@@ -19,13 +19,6 @@ public class Room {
 	 * The moving characters (the ghosts) in the room.
 	 */
 	private ArrayList<Character> characters;
-
-	/**
-	 * The doors in the room.
-	 */
-//	private Door[] doors;
-
-	//private Item key;
 	
 	/**
 	 * The AbstractRoom of this room.
@@ -37,28 +30,39 @@ public class Room {
 	}
 
 	/**
-	 * The image of this room.
+	 * The map of the room
 	 */
-//	private Image floorImage;
-
 	private TiledMapPlus map;
 	
-	private Image ghostImage;
-	
+	/**
+	 * The random generator to place the characters
+	 */
 	private static Random r;
 	
-	// true if there are walls in the room (ie there are a "walls" layer in the
-	// tmx map
+	/**
+	 * true if there are walls in the room (ie there are a "walls" layer in the
+	 * tmx map
+	 */
 	private boolean thereAreWalls;
+	
+	/**
+	 * The layer of walls from the tmx map
+	 */
 	private Layer wallsLayer;
 
-	// the id of the room, used for carpet room-switching
+	/**
+	 * the id of the room, used for carpet room-switching
+	 */
 	private String id;
 	
-	// the objects as placed by the map
+	/**
+	 * the objects as placed by the map
+	 */
 	private ObjectGroup roomObjects;
 	
-	// the images for the objects on the map
+	/**
+	 * the images for the objects on the map
+	 */
 	private HashMap<String, Image> objectImageMap;
 
 	/**
@@ -77,20 +81,20 @@ public class Room {
 	 * @throws SlickException
 	 */
 	public Room(String roomFile, String id) throws SlickException {
-		this(480, 480, roomFile, 0, 38, Resources.WALL_WIDTH, id);
+		this(Resources.ROOM_WIDTH, Resources.ROOM_HEIGHT, roomFile, 
+				Resources.ROOM_X, Resources.ROOM_Y, Resources.WALL_WIDTH, id);
 	}
 	
 	private Room(int width, int height, String roomFile, int floorX, 
 			int floorY, int wallWidth, String id) throws SlickException {
+		
 		this.id = id;
 		abstractRoom = new AbstractRoom(width, height, floorX, floorY, wallWidth);
 		map = new TiledMapPlus(roomFile, Resources.ROOM_TILESHEETS_FOLDER);
-		ghostImage = Resources.getGhostImage();
 		
 		characters = new ArrayList<Character>();
 		r = new Random();
 		objectImageMap = new HashMap<String, Image>();
-		//key = new Item("The key", Resources.getKeyImage(), 500, 300);
 		
 		roomObjects = map.getObjectGroup("objects");
 		
@@ -101,9 +105,9 @@ public class Room {
 			String type = go.type;
 			Image toAdd = null;
 			
-			if (type.equals("key")) {
+			if (type.equals(Resources.IDSTRING_KEY)) {
 				toAdd = Resources.getKeyImage();
-			} else if (type.equals("carpet")) {
+			} else if (type.equals(Resources.IDSTRING_CARPET)) {
 				toAdd = Resources.getCarpetImage();
 			}
 			
@@ -112,7 +116,7 @@ public class Room {
 		
 		// check if there are a "walls" layer
 		for (Layer l : map.getLayers()) {
-			if (l.name.toUpperCase().equals("WALLS")) {
+			if (l.name.toUpperCase().equals(Resources.IDSTRING_WALLS)) {
 				// there is a walls layer
 				thereAreWalls = true;
 				wallsLayer = l;
@@ -148,8 +152,11 @@ public class Room {
 		return false;
 	}
 
+	/**
+	 * Draw the room.
+	 * @throws SlickException
+	 */
 	public void draw() throws SlickException {
-//		floorImage.draw(abstractRoom.getFloorX(), abstractRoom.getFloorY());
 		map.render(abstractRoom.getFloorX(), abstractRoom.getFloorY());
 		
 		// draw the objects
@@ -169,29 +176,41 @@ public class Room {
 		}
 	}
 	
+	/**
+	 * @return the id of the room
+	 */
 	public String getId() {
 		return id;
 	}
 	
+	/**
+	 * Move the characters in the room
+	 * @param deltaTime
+	 */
 	public void moveCharaters(int deltaTime) {
 		for (Character g : characters) {
 			g.move(this, deltaTime);
 		}
 	}
 	
+	/**
+	 * Add a character of the given type.
+	 * @param ct
+	 * @throws SlickException
+	 */
 	public void addCharacter(CharacterTypes ct) throws SlickException {
-		int x = r.nextInt(abstractRoom.width()) + abstractRoom.getFloorX();
-		int y = r.nextInt(abstractRoom.height()) + abstractRoom.getFloorY();
+		int x = r.nextInt(abstractRoom.getWidth()) + abstractRoom.getFloorX();
+		int y = r.nextInt(abstractRoom.getHeight()) + abstractRoom.getFloorY();
 
 		while (!canSetXY(x, y, 64, 64)) {
-			x = r.nextInt(abstractRoom.width()) + abstractRoom.getFloorX();
-			y = r.nextInt(abstractRoom.height()) + abstractRoom.getFloorY();
+			x = r.nextInt(abstractRoom.getWidth()) + abstractRoom.getFloorX();
+			y = r.nextInt(abstractRoom.getHeight()) + abstractRoom.getFloorY();
 		}
 		
 		Character c = null;
 		switch (ct) {
 		case ghost:
-			c = new Ghost(4, x, y, ghostImage);
+			c = new Ghost(x, y);
 			break;
 		case gargoyle:
 			c = new Gargoyle(x, y);
@@ -200,7 +219,26 @@ public class Room {
 		
 		characters.add(c);
 	}
+	
+	/**
+	 * Add n characters of the given type
+	 * @param ct
+	 * @param n
+	 * @throws SlickException
+	 */
+	public void addCharacter(CharacterTypes ct, int n) throws SlickException {
+		for (int i=0; i<n; i++) {
+			addCharacter(ct);
+		}
+	}
 
+	/**
+	 * Return true if the position is valid
+	 * @param newX
+	 * @param newY
+	 * @param direction
+	 * @return
+	 */
 	public boolean canSetXY(float newX, float newY, Player.directions direction) {
 		if (thereAreWalls == true) {
 			int x = (int) (newX-abstractRoom.getFloorX())/Resources.WALL_WIDTH;
@@ -230,15 +268,38 @@ public class Room {
 		return canSetXY(newX, newY);
 	}
 	
+	/**
+	 * Return true if the position is valid
+	 * @param newX
+	 * @param newY
+	 * @return
+	 */
 	public boolean canSetXY(float newX, float newY) {
-		return (newY > abstractRoom.getFloorY() && newY < abstractRoom.height() + abstractRoom.getFloorY() &&
-				newX > abstractRoom.getFloorX() && newX < abstractRoom.width() + abstractRoom.getFloorX());
+		return (newY > abstractRoom.getFloorY() && newY < abstractRoom.getHeight() + abstractRoom.getFloorY() &&
+				newX > abstractRoom.getFloorX() && newX < abstractRoom.getWidth() + abstractRoom.getFloorX());
 	}
 
+	/**
+	 * Return true if the position is valid
+	 * @param newX
+	 * @param newY
+	 * @param width
+	 * @param height
+	 * @return
+	 */
 	public boolean canSetXY(float newX, float newY, int width, int height) {
 		return canSetXY(newX+width, newY+height);
 	}
 
+	/**
+	 * Return true if the position is valid
+	 * @param newX
+	 * @param newY
+	 * @param width
+	 * @param height
+	 * @param direction
+	 * @return
+	 */
 	public boolean canSetXY(float newX, float newY, int width, int height, Player.directions direction) {
 		return canSetXY(newX+width, newY+height, direction);
 	}
@@ -274,32 +335,53 @@ public class Room {
 		return null;
 	}
 
-	public boolean isPlayerOnAGhost(Rectangle playerBoundingBox) {
+	/**
+	 * Return true if the player is on a character
+	 * @param playerBoundingBox
+	 * @return
+	 */
+	public boolean isPlayerOnACharacter(Rectangle playerBoundingBox) {
 		
 		for (Character c : characters) {
-			Rectangle ghostBox = c.getBoundingBox();
-			if (playerBoundingBox.intersects(ghostBox)) {
+			Rectangle characterBox = c.getBoundingBox();
+			if (playerBoundingBox.intersects(characterBox)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
+	/**
+	 * Remove and return the key in the room.
+	 * @return
+	 */
 	public GroupObject removeKey() {
-		GroupObject toReturn = roomObjects.getObject(Resources.KEY_STRING_ID);
-		roomObjects.removeObject(Resources.KEY_STRING_ID);
+		GroupObject toReturn = roomObjects.getObject(Resources.IDSTRING_KEY);
+		roomObjects.removeObject(Resources.IDSTRING_KEY);
 		return toReturn;
 	}
 
+	/**
+	 * Return true if the player is on a key.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean isPlayerOnKey(int x, int y) {
 		GroupObject currentObject = getTheObjectThePlayerIsStandingOn(x, y);
-		if (currentObject == null || !Resources.KEY_STRING_ID.equals(currentObject.name)) {
+		if (currentObject == null || !Resources.IDSTRING_KEY.equals(currentObject.name)) {
 			return false;
 		}
 		
 		return true;
 	}
 
+	/**
+	 * Return true if the player is on a carpet
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean isPlayerOnACarpet(int x, int y) {
 		return getTheCarpetThePlayerIsStandingOn(x, y) != null;
 	}
@@ -337,6 +419,10 @@ public class Room {
 		return null;
 	}
 
+	/**
+	 * Remove a groupObject from the room
+	 * @param go
+	 */
 	public void removeGroupObject(GroupObject go) { 
 				roomObjects.objects.remove(go);
 	}

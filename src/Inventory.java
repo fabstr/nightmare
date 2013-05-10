@@ -14,20 +14,30 @@ import org.newdawn.slick.tiled.GroupObject;
 public class Inventory {
 
 	/**
-	 * Class Fields.	
+	 * The items of this inventory
 	 */
 	private ArrayList<Item> items;
-	private final int CAPACITY = 5;  // The inventory's capacity.
-	private int numItems = 0;  // the number of items stored in the inventory.
-	//private int iteratorPosition = -1;
 	
+	/**
+	 * The maximum capacity of the inventory
+	 */
+	private final int CAPACITY = 5;  
+
+	/**
+	 * The current number of items in the inventory
+	 */
+	private int numItems = 0;  
+	
+	/**
+	 * The number of keys in the inventory
+	 */
 	private int numberOfKeys;
 	
 	/**
-	 * Constructor.
+	 * Create a new inventory
 	 */
 	public Inventory() {
-		this.items = new ArrayList<Item>();   // creates an empty list.
+		this.items = new ArrayList<Item>(); 
 	}
 
 	/**
@@ -47,6 +57,12 @@ public class Inventory {
 		}
 	}
 	
+	/**
+	 * Add a GroupObject item.
+	 * @param go
+	 * @return True if the object was added.
+	 * @throws SlickException
+	 */
 	public boolean addItem(GroupObject go) throws SlickException {
 		return addItem(new Item(go));
 	}
@@ -84,30 +100,41 @@ public class Inventory {
 		return false;
 	}
 	
-	
-	
-	//Draws all the objects in the inventory in the status bar.
+	/**
+	 * Draws all the objects in the inventory in the status bar.
+	 */
 	public void drawInventory() {
-		int pos = 430;
+		int pos = Resources.INVENTORY_X;
 		for (Item i : items) {
 			if (i != null) {
 				Image img = i.getImage();
 				int width = img.getWidth();
-				pos += width + 10;
-				img.draw(pos, 1);
+				pos += width + Resources.INVENTORY_SPACING;
+				img.draw(pos, Resources.INVENTORY_Y);
 			}
 		}
 	}
 	
+	/**
+	 * Add one key to the inventory
+	 * @throws SlickException
+	 */
 	public void addAKey() throws SlickException {
 		addItem(new Item("A key", Resources.getKeyImage(), 0, 0));
 		numberOfKeys++;
 	}
 	
+	/**
+	 * True if there is at least one key
+	 * @return
+	 */
 	public boolean hasAKey() {
 		return numberOfKeys > 0;
 	}
 	
+	/**
+	 * Remove a key from the inventory
+	 */
 	public void removeAKey() {
 		numberOfKeys--;
 		// find a key object

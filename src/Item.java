@@ -11,7 +11,7 @@ import org.newdawn.slick.tiled.GroupObject;
 public class Item {
 
 	/**
-	 * Class Fields
+	 * The description of the item
 	 */
 	private String description;
 	
@@ -20,19 +20,34 @@ public class Item {
 	 */
 	private Image img;
 	
+	/**
+	 * The groupObject of the item
+	 */
 	public GroupObject go;
 	
+	/**
+	 * The x position of the item
+	 */
 	private int x;
+	
+	/**
+	 * The y position of the item
+	 */
 	private int y;
 	
+	/**
+	 * The types an item can have
+	 */
 	public static enum ItemTypes {
 		HEART
 	}
 
-
 	/**
-	 * Constructor
+	 * Create a new item
 	 * @param description
+	 * @param img
+	 * @param x
+	 * @param y
 	 */
 	public Item (String description, Image img, int x, int y) {
 		this.description = description;
@@ -41,6 +56,11 @@ public class Item {
 		this.y = y;
 	}
 	
+	/**
+	 * Create an item from a GroupObject
+	 * @param go
+	 * @throws SlickException
+	 */
 	public Item (GroupObject go) throws SlickException {
 		this.description = go.name;
 		this.img = go.getImage();
@@ -77,6 +97,10 @@ public class Item {
 		this.y = y;
 	}
 	
+	/**
+	 * Get the image of the item
+	 * @return
+	 */
 	public Image getImage() {
 		return img;
 	}
@@ -89,6 +113,9 @@ public class Item {
 		return description;
 	}
 	
+	/**
+	 * Draw the item at its x/y position
+	 */
 	public void draw() {
 		img.draw(x, y);
 	}

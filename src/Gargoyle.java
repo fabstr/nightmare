@@ -1,15 +1,19 @@
 import org.newdawn.slick.SlickException;
 
-
 public class Gargoyle extends Character {
-
-	public Gargoyle(int health, int x, int y, int width, int height)
-			throws SlickException {
-		super(health, x, y, width, height);
+	/**
+	 * Create a new gargoyle at the given position.
+	 * @param x
+	 * @param y
+	 * @throws SlickException
+	 */
+	public Gargoyle(int x, int y) throws SlickException {
+		super(0, x, y, Resources.GARGOYLE_WIDTH, Resources.GARGOYLE_HEIGHT);
 		currentAnimation = Resources.getGargoyleAnimation();
 	}
 	
-	public Gargoyle(int x, int y) throws SlickException {
-		this(3, x, y, 64, 64);
-	}
+	/**
+	 * The gargoyle does not move, this method does nothing.
+	 */
+	public void move(Room r, int deltaTime) {}
 }

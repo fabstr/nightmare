@@ -1,3 +1,4 @@
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
@@ -39,7 +40,7 @@ public class Resources {
 	
 	public static final int WALL_WIDTH = 32;
 
-	public static final String KEY_STRING_ID = "key";
+	public static final String IDSTRING_KEY = "key";
 	public static final String CARPET_STRING_ID = "carpet";
 
 	public static final int POPUP_X = 100;
@@ -53,6 +54,53 @@ public class Resources {
 	public static final int INSTRUCTIONS_Y = 38;
 	
 	public static final String GARGOYLE_SPRITESHEET = SPRITES_FOLDER + "movingGargoyle.png";
+	public static final int DEBUGGING_LIVES = 30;
+	public static final int PLAYER_LIVES = 3;
+	
+	public static final int PLAYER_START_X = 150;
+	public static final int PLAYER_START_Y = 200;
+
+	public static final int DEBUGGING_TIME_LIMIT = 1500000;
+	public static final int PLAYING_TIME_LIMIT = 60000;
+	
+	public static final int WINDOW_WIDTH = 800;
+	public static final int WINDOW_HEIGHT = 518;
+	public static final int FRAMERATE = 60;
+	
+	public static final int HEART_WIDTH = 42;
+	public static final int HEART_SPACING = 10;
+	public static final int HEART_Y = 2;
+	
+	public static final int TIME_LEFT_STRING_X = 160;
+	public static final int TIME_LEFT_STRING_Y = 2;
+	public static final Color TIME_LEFT_COLOUR = Color.black;
+
+	public static final String MSG_WON = "You have won!\n\nPress SPACE to start a new game.";
+	public static final String MSG_LOST = "You have lost!\n\nPress SPACE to start a new game.";
+	public static final String TIME_LEFT_STRING = "Time left: %3d seconds.";
+	
+	public static final String ROOM_TO_START_IN_ID = "0";
+	
+	public static final int TEXT_SIZE = 20;
+	public static final Object IDSTRING_BED = "BED";
+	public static final Object IDSTRING_HEART = "HEART";
+	public static final Object IDSTRING_CARPET_LOCKED = "YES";
+	public static final String IDSTRING_CARPET = "CARPET";
+	public static final String IDSTRING_WALLS = "WALLS";
+	public static final String PROPSSTRING_LOCKED = "LOCKED";
+	public static final String IDSTRING_CARPET_NOT_LOCKED = "NO";
+	public static final String IDSTRING_EXIT = "EXIT";
+	public static final int GARGOYLE_WIDTH = 64;
+	public static final int GARGOYLE_HEIGHT = 64;
+	public static final float GHOST_MOVEMENT_SPEED = 0.3f;
+	public static final float PLAYER_MOVEMENT_SPEED = 0.2f;
+	public static final int INVENTORY_X = 430;
+	public static final int INVENTORY_Y = 430;
+	public static final int INVENTORY_SPACING = 10;
+	public static final int ROOM_WIDTH = 480;
+	public static final int ROOM_HEIGHT = 480;
+	public static final int ROOM_X = 0;
+	public static final int ROOM_Y= 38;
 	
 	/**
 	 * Return the key image.
@@ -190,5 +238,9 @@ public class Resources {
 	public static Animation getGargoyleAnimation() throws SlickException {
 		SpriteSheet garg = new SpriteSheet(GARGOYLE_SPRITESHEET, 64, 64);
 		return new Animation(garg, 100);
+	}
+	
+	public static Image getInstructionsImage() throws SlickException {
+		return new Image(INSTRUCTIONS_IMAGE);
 	}
 }

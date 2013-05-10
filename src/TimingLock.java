@@ -3,7 +3,14 @@
 import java.util.Calendar;
 
 public class TimingLock {
+	/**
+	 * The time to wait before releasing the lock
+	 */
 	private long waitTime;
+	
+	/**
+	 * The time the lock was last locked
+	 */
 	private long lastLockTime;
 
 	/**
