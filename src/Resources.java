@@ -90,6 +90,7 @@ public class Resources {
 	public static final String PROPSSTRING_LOCKED = "LOCKED";
 	public static final String IDSTRING_CARPET_NOT_LOCKED = "NO";
 	public static final String IDSTRING_EXIT = "EXIT";
+	public static final String IDSTRING_ANIMATED = "ANIMATED";
 	public static final int GARGOYLE_WIDTH = 64;
 	public static final int GARGOYLE_HEIGHT = 64;
 	public static final float GHOST_MOVEMENT_SPEED = 0.3f;
@@ -101,6 +102,14 @@ public class Resources {
 	public static final int ROOM_HEIGHT = 480;
 	public static final int ROOM_X = 0;
 	public static final int ROOM_Y= 38;
+	public static final int ANIMATED_OBJECT_WIDTH = 32;
+	public static final int ANIMATED_OBJECT_HEIGHT = 32;
+	public static final String IDSTRING_TORCH = "TORCH";
+	public static final String IDSTRING_CANDLESTICK = "CANDLESTICK";
+	public static final String TORCH_PATH = SPRITES_FOLDER + "torch.png";
+	public static final String CANDLESTICK_PATH = SPRITES_FOLDER + "candlestick.png";
+	public static final int ANIMATED_OBJECT_ANIMATION_SPEED = 333;
+	
 	
 	/**
 	 * Return the key image.

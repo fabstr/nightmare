@@ -64,6 +64,16 @@ public class Room {
 	 * the images for the objects on the map
 	 */
 	private HashMap<String, Image> objectImageMap;
+	
+	/**
+	 * True if there are animated objects in this room
+	 */
+	private boolean thereAreAnimatedObjects;
+	
+	/**
+	 * The animated objects of this room
+	 */
+	private AnimatedObject[] animatedObjects;
 
 	/**
 	 * Create a room.
@@ -114,13 +124,30 @@ public class Room {
 			objectImageMap.put(type, toAdd);
 		}
 		
-		// check if there are a "walls" layer
+		// check if there are a "walls" or "animated" layer
 		for (Layer l : map.getLayers()) {
 			if (l.name.toUpperCase().equals(Resources.IDSTRING_WALLS)) {
 				// there is a walls layer
 				thereAreWalls = true;
 				wallsLayer = l;
 				break;
+			} 
+		}
+		
+		// check if there is a "animated" object layer
+		for (ObjectGroup ob : map.getObjectGroups()) {
+			if (ob.name.toUpperCase().equals(Resources.IDSTRING_ANIMATED)) {
+				thereAreAnimatedObjects = true;
+				
+				// since we only position the objects in the tmx map, add them
+				// to the rooms array
+				int len = ob.objects.size();
+				animatedObjects = new AnimatedObject[len];
+				int i = 0;
+				for (GroupObject go : ob.objects) {
+					animatedObjects[i] = new AnimatedObject(go);
+					i++;
+				}
 			}
 		}
 	}
@@ -168,6 +195,10 @@ public class Room {
 				int y = go.y + abstractRoom.getFloorY();
 				toRender.draw(x, y);
 			}
+		}
+		
+		for (AnimatedObject ao : animatedObjects) {
+			ao.draw();
 		}
 		
 		// draw the ghosts		
