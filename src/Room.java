@@ -197,8 +197,10 @@ public class Room {
 			}
 		}
 		
-		for (AnimatedObject ao : animatedObjects) {
-			ao.draw();
+		if (thereAreAnimatedObjects) {
+			for (AnimatedObject ao : animatedObjects) {
+				ao.draw();
+			}
 		}
 		
 		// draw the ghosts		
