@@ -1,3 +1,5 @@
+import java.net.URL;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -94,6 +96,9 @@ public class Resources {
 	public static final String DRACULA_PATH = SPRITES_FOLDER + "movingDracula.png";
 	public static final String GRUDGE_PATH = SPRITES_FOLDER + "movingGrudge.png";
 	public static final String CLOWN_PATH = SPRITES_FOLDER + "movingSaw.png";
+	public static final String WINNING_ANIMATION_PATH = SPRITES_FOLDER + "movingWinning.png";
+	public static final int WINNING_ANIMATION_X = 330;
+	public static final int WINNING_ANIMATION_Y = 250;
 	
 	/**
 	 * Return the key image.
@@ -235,5 +240,10 @@ public class Resources {
 	
 	public static Image getInstructionsImage() throws SlickException {
 		return new Image(INSTRUCTIONS_IMAGE);
+	}
+
+	public static Animation getWinningAnimation() throws SlickException {
+		SpriteSheet anim = new SpriteSheet(WINNING_ANIMATION_PATH, 26, 41);
+		return new Animation(anim, 100);
 	}
 }

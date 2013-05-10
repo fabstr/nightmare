@@ -11,7 +11,7 @@ public class Gameplay extends BasicGame {
 	 * If true, the player can press 0,1,2,3,4,5 to go to the respective room.
 	 * Also, press P or L to increase/decrease the player's lives.
 	 */
-	private static final boolean DEBUGGING = true;
+	private static final boolean DEBUGGING = false;
 	
 	/**
 	 * The player object
@@ -74,6 +74,8 @@ public class Gameplay extends BasicGame {
 	 * The text object draws the time-left message
 	 */
 	private UnicodeFont text;
+
+	private Animation winningAnimation;
 	
 	/**
 	 * Set the title of the window to Nightmare
@@ -118,6 +120,9 @@ public class Gameplay extends BasicGame {
 		instructions.draw(Resources.INSTRUCTIONS_X, Resources.INSTRUCTIONS_Y);
 		
 		popup.draw();		
+		if (state == STATES.WON) {
+			winningAnimation.draw(Resources.WINNING_ANIMATION_X, Resources.WINNING_ANIMATION_Y);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -154,6 +159,8 @@ public class Gameplay extends BasicGame {
 		
 		// create the popup object
 		popup = new Popup();
+		
+		winningAnimation = Resources.getWinningAnimation();
 		
 	}
 
