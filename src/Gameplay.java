@@ -31,7 +31,7 @@ public class Gameplay extends BasicGame {
 	
 	private UnicodeFont text;
 	
-	private static final int FRAMERATE = 60;
+	private static final int FRAMERATE = 10;
 
 	// title of the window
 	public Gameplay() {
