@@ -10,6 +10,7 @@ public class Resources {
 	public static final String FONTS_FOLDER = "resources/fonts/";
 	public static final String ROOM_TILESHEETS_FOLDER = SPRITES_FOLDER;
 	public static final String WINDOW_PATH = "resources/graphics/window.png";
+	public static final String LEVELS_FOLDER = "resources/levels/";
 	public static final String ROOM0_PATH = ROOMS_FOLDER + "room0.tmx";
 	public static final String ROOM1_PATH = ROOMS_FOLDER + "room1.tmx";
 	public static final String ROOM2_PATH = ROOMS_FOLDER + "room2.tmx";

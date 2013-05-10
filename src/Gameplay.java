@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.HashMap;
 
 import org.newdawn.slick.*;
@@ -90,42 +91,6 @@ public class Gameplay extends BasicGame {
 	public void setGameContainer(AppGameContainer app) {
 		this.app = app;
 	}
-
-	/**
-	 * Initializes the rooms (and adds characters) and adds the rooms to the 
-	 * rooms hash map.
-	 * @throws SlickException
-	 */
-	private void initRooms() throws SlickException {
-		// create the rooms
-		Room room0 = new Room(Resources.ROOM0_PATH, "0");
-		Room room1 = new Room(Resources.ROOM1_PATH, "1");
-		Room room2 = new Room(Resources.ROOM2_PATH, "2");
-		Room room3 = new Room(Resources.ROOM3_PATH, "3");
-		Room room4 = new Room(Resources.ROOM4_PATH, "4");
-		Room room5 = new Room(Resources.ROOM5_PATH, "5");
-		
-		// add the characters to the rooms
-		// the first room (room0) has no characters
-		room1.addCharacter(Room.CharacterTypes.ghost, 1);
-		room2.addCharacter(Room.CharacterTypes.ghost, 2);
-		room3.addCharacter(Room.CharacterTypes.gargoyle, 1);
-		room3.addCharacter(Room.CharacterTypes.ghost, 2);
-		room3.addCharacter(Room.CharacterTypes.dracula, 1);
-		room4.addCharacter(Room.CharacterTypes.ghost, 1);
-		room4.addCharacter(Room.CharacterTypes.grudge, 1);
-		room4.addCharacter(Room.CharacterTypes.clown, 1);
-		room5.addCharacter(Room.CharacterTypes.scream, 1);
-		room5.addCharacter(Room.CharacterTypes.chainsaw, 1);
-
-		// add the rooms to the hash map
-		rooms.put("0", room0);
-		rooms.put("1", room1);
-		rooms.put("2", room2);
-		rooms.put("3", room3);
-		rooms.put("4", room4);
-		rooms.put("5", room5);
-	}
 	
 	@Override
 	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
@@ -158,8 +123,13 @@ public class Gameplay extends BasicGame {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
-		// init the rooms and set the current room
-		initRooms();
+		// load the level
+		try {
+			rooms = LevelParser.parseLevel("level0");
+		} catch (IOException e) {
+			System.err.println("Caught fatal IOException while parsing level: " + e);
+			System.exit(1);
+		}
 		currentRoom = rooms.get(Resources.ROOM_TO_START_IN_ID);
 		
 		// create the player with the correct amount of lives

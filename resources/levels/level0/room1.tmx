@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="15" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles-wall-floor" tilewidth="32" tileheight="32">
+  <image source="../sprites/tiles-wall-floor.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="17" name="walls-with-door" tilewidth="32" tileheight="32">
+  <image source="../sprites/walls-with-door.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="33" name="carpet" tilewidth="32" tileheight="32">
+  <image source="../sprites/carpet.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="34" name="objects" tilewidth="32" tileheight="32">
+  <image source="../sprites/objects.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="50" name="movingTorch" tilewidth="32" tileheight="32">
+  <image source="../sprites/movingTorch.png" width="128" height="32"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="15" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzjZGBgYCUDcwExOxAzkoE5RvWO6h1mermBmA2IpaE0ISwEpXmAGAC0UQJH
+  </data>
+ </layer>
+ <objectgroup name="objects" width="15" height="15">
+  <object name="carpet" type="carpet" gid="33" x="63" y="433" width="32" height="16">
+   <properties>
+    <property name="target" value="0"/>
+   </properties>
+  </object>
+  <object name="key" type="key" gid="34" x="228" y="258" width="32" height="16"/>
+ </objectgroup>
+ <layer name="walls" width="15" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBjagBOIWfFgLjx62QmYzUEHvcjuJ1UvNjcMZ73cQMyGhnmI1EsqoEQvqQAA0BcBEw==
+  </data>
+ </layer>
+ <objectgroup name="animated" width="15" height="15">
+  <object type="torch" gid="50" x="198" y="129"/>
+  <object type="torch" gid="50" x="348" y="349"/>
+  <object type="torch" gid="50" x="98" y="394"/>
+ </objectgroup>
+</map>

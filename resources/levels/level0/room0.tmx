@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="15" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles-wall-floor" tilewidth="32" tileheight="32">
+  <image source="../sprites/tiles-wall-floor.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="17" name="walls-with-door" tilewidth="32" tileheight="32">
+  <image source="../sprites/walls-with-door.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="33" name="carpet" tilewidth="32" tileheight="32">
+  <image source="../sprites/carpet.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="34" name="giant carpet" tilewidth="400" tileheight="300">
+  <image source="../sprites/giantCarpet.png" width="400" height="300"/>
+ </tileset>
+ <tileset firstgid="35" name="torch" tilewidth="32" tileheight="32">
+  <image source="../sprites/movingTorch.png" width="128" height="32"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="15" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzjZGBgYAViSShNLOYCYnYgZiQDc4zqHdU7zPRyAzEbCVgaSvMAMQD2KQJP
+  </data>
+ </layer>
+ <objectgroup name="carpet" width="15" height="15">
+  <object gid="34" x="39" y="94"/>
+ </objectgroup>
+ <objectgroup name="objects" width="15" height="15">
+  <object name="carpet" type="carpet" gid="33" x="64" y="33" width="32" height="16">
+   <properties>
+    <property name="target" value="1"/>
+   </properties>
+  </object>
+  <object name="carpet" type="carpet" gid="33" x="384" y="432" width="32" height="16">
+   <properties>
+    <property name="locked" value="yes"/>
+    <property name="target" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="animated" width="15" height="15">
+  <object type="torch" gid="35" x="11" y="290"/>
+  <object type="torch" gid="35" x="437" y="177"/>
+  <object type="torch" gid="35" x="289" y="46"/>
+  <object type="torch" gid="35" x="167" y="465"/>
+ </objectgroup>
+</map>

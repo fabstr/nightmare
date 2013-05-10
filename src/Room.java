@@ -10,6 +10,15 @@ import org.newdawn.slick.tiled.ObjectGroup;
 import org.newdawn.slick.tiled.TiledMapPlus;
 
 public class Room {
+	private static final Object GHOST = "GHOST";
+	private static final String GARGOYLE = "GARGOYLE";
+	private static final String CHAINSAW = "CHAINSAW";
+	private static final String SCREAM = "SCREAM";
+	private static final String DRACULA = "DRACULA";
+	private static final String GRUDGE = "GRUDGE";
+	private static final String CLOWN = "CLOWN";
+
+
 	/**
 	 * The items in the room.
 	 */
@@ -224,6 +233,29 @@ public class Room {
 		for (Character g : characters) {
 			g.move(this, deltaTime);
 		}
+	}
+	
+	public CharacterTypes characterTypeFromString(String characterType) {
+		if (characterType.toUpperCase().equals(GHOST)) {
+			return CharacterTypes.ghost;
+		} else if (characterType.toUpperCase().equals(GARGOYLE)) {
+			return CharacterTypes.gargoyle;
+		} else if (characterType.toUpperCase().equals(CHAINSAW)) {
+			return CharacterTypes.chainsaw;
+		} else if (characterType.toUpperCase().equals(SCREAM)) {
+			return CharacterTypes.scream;
+		} else if (characterType.toUpperCase().equals(DRACULA)) {
+			return CharacterTypes.dracula;
+		} else if (characterType.toUpperCase().equals(GRUDGE)) {
+			return CharacterTypes.grudge;
+		} else if (characterType.toUpperCase().equals(CLOWN)) {
+			return CharacterTypes.clown;
+		} 
+		return null;
+	}
+	
+	public void addCharacter(String type, int n) throws SlickException {
+		addCharacter(characterTypeFromString(type), n);
 	}
 	
 	/**
