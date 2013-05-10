@@ -5,6 +5,8 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.tiled.GroupObject;
 
 public class Gameplay extends BasicGame {
+	private static final boolean DEBUGGING = true;
+	
 	private static int windowWidth = 800;
 	private static int windowHeight = 518;
 	
@@ -31,7 +33,7 @@ public class Gameplay extends BasicGame {
 	
 	private UnicodeFont text;
 	
-	private static final int FRAMERATE = 10;
+	private static final int FRAMERATE = 60;
 
 	// title of the window
 	public Gameplay() {
@@ -44,12 +46,12 @@ public class Gameplay extends BasicGame {
 	}
 
 	private void initRooms() throws SlickException {
-		Room room0 = new Room(480, 480, Resources.ROOM0_PATH, 0, 38, Resources.WALL_WIDTH, "0");
-		Room room1 = new Room(480, 480, Resources.ROOM1_PATH, 0, 38, Resources.WALL_WIDTH, "1");
-		Room room2 = new Room(480, 480, Resources.ROOM2_PATH, 0, 38, Resources.WALL_WIDTH, "2");
-		Room room3 = new Room(480, 480, Resources.ROOM3_PATH, 0, 38, Resources.WALL_WIDTH, "3");
-		Room room4 = new Room(480, 480, Resources.ROOM4_PATH, 0, 38, Resources.WALL_WIDTH, "4");
-		Room room5 = new Room(480, 480, Resources.ROOM5_PATH, 0, 38, Resources.WALL_WIDTH, "5");
+		Room room0 = new Room(Resources.ROOM0_PATH, "0");
+		Room room1 = new Room(Resources.ROOM1_PATH, "1");
+		Room room2 = new Room(Resources.ROOM2_PATH, "2");
+		Room room3 = new Room(Resources.ROOM3_PATH, "3");
+		Room room4 = new Room(Resources.ROOM4_PATH, "4");
+		Room room5 = new Room(Resources.ROOM5_PATH, "5");
 		
 		// the first room (room0) has no ghosts
 
@@ -118,7 +120,8 @@ public class Gameplay extends BasicGame {
 		initRooms();
 		currentRoom = rooms.get("0");
 		
-		player = new Player(30, 200, 150);
+		int lives = (DEBUGGING) ? 30 : 3;
+		player = new Player(lives, 200, 150);
 
 		window = Resources.getWindowImage();
 		heart = Resources.getHeartImage();
@@ -129,7 +132,8 @@ public class Gameplay extends BasicGame {
 		text.getEffects().add(new ColorEffect());
 		text.loadGlyphs();
 		
-		timer = new Time(1500000);
+		int time = (DEBUGGING) ? 1500000 : 60000;
+		timer = new Time(time);
 		timer.start();		
 		
 		popup = new Popup();
@@ -185,6 +189,22 @@ public class Gameplay extends BasicGame {
 		} else {
 			// stop walking, we are not moving
 			player.stopWalking();
+		}
+		
+		if (DEBUGGING) {
+			if (i.isKeyDown(Input.KEY_0)) {
+				currentRoom = rooms.get("" + 0);
+			} else if (i.isKeyDown(Input.KEY_1)) {
+				currentRoom = rooms.get("" + 1);
+			} else if (i.isKeyDown(Input.KEY_2)) {
+				currentRoom = rooms.get("" + 2);
+			} else if (i.isKeyDown(Input.KEY_3)) {
+				currentRoom = rooms.get("" + 3);
+			} else if (i.isKeyDown(Input.KEY_4)) {
+				currentRoom = rooms.get("" + 4);
+			} else if (i.isKeyDown(Input.KEY_5)) {
+				currentRoom = rooms.get("" + 5);
+			} 
 		}
 		
 		// move the ghosts
@@ -273,7 +293,13 @@ public class Gameplay extends BasicGame {
 		g.setGameContainer(app);
 		app.setTargetFrameRate(FRAMERATE);
 		app.setVSync(true);
-		//app.setShowFPS(false);
+		
+		if (DEBUGGING) {
+			app.setShowFPS(true);
+		} else {
+			app.setShowFPS(false);
+		}
+		
 		app.start();
 	}
 	

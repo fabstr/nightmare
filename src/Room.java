@@ -76,7 +76,11 @@ public class Room {
 	 * @param wallWidth The width of the walls
 	 * @throws SlickException
 	 */
-	public Room(int width, int height, String roomFile, int floorX, 
+	public Room(String roomFile, String id) throws SlickException {
+		this(480, 480, roomFile, 0, 38, Resources.WALL_WIDTH, id);
+	}
+	
+	private Room(int width, int height, String roomFile, int floorX, 
 			int floorY, int wallWidth, String id) throws SlickException {
 		this.id = id;
 		abstractRoom = new AbstractRoom(width, height, floorX, floorY, wallWidth);

@@ -32,7 +32,7 @@
     <property name="target" value="4"/>
    </properties>
   </object>
-  <object name="carpet" type="carpet" gid="33" x="386" y="33" width="32" height="16">
+  <object name="carpet" type="carpet" gid="33" x="384" y="32" width="32" height="16">
    <properties>
     <property name="locked" value="yes"/>
     <property name="target" value="5"/>

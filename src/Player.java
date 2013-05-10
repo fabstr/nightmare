@@ -139,8 +139,6 @@ public class Player extends Character {
 		return inventory;
 	}
 
-
-
 	public void drawInventory() {
 		inventory.drawInventory();
 	}
