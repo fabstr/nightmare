@@ -169,9 +169,9 @@ public class Room {
 		return id;
 	}
 	
-	public void moveCharaters() {
+	public void moveCharaters(int deltaTime) {
 		for (Character g : characters) {
-			g.move(this);
+			g.move(this, deltaTime);
 		}
 	}
 	

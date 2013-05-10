@@ -98,7 +98,7 @@ public class Player extends Character {
 		}
 	}
 	
-	public void moveX(int amount, Room room, boolean countImageWidth) {
+	public void moveX(int amount, Room room, boolean countImageWidth, int deltaTime) {
 		int newX = (int) this.x + amount;
 		
 		if (countImageWidth) {
@@ -116,7 +116,7 @@ public class Player extends Character {
 		setX(newX);
 	}
 	
-	public void moveY(int amount, Room room, boolean countImageWidth) {
+	public void moveY(int amount, Room room, boolean countImageWidth, int deltaTime) {
 		int newY = (int) this.y + amount;
 		
 		if (countImageWidth) {

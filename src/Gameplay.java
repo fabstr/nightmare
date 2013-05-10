@@ -139,7 +139,7 @@ public class Gameplay extends BasicGame {
 	}
 	
 	@Override
-	public void update(GameContainer gc, int arg1) throws SlickException {
+	public void update(GameContainer gc, int deltaTime) throws SlickException {
 		Input i = gc.getInput();
 		if (i.isKeyPressed(Input.KEY_P)){
 			if (state == STATES.paused) {
@@ -167,16 +167,16 @@ public class Gameplay extends BasicGame {
 		
 		// move the player and set the right animation
 		if (i.isKeyDown(Input.KEY_DOWN)) {
-			player.moveY(1, currentRoom, true);
+			player.moveY(1, currentRoom, true, deltaTime);
 			player.walkDown();
 		} else if (i.isKeyDown(Input.KEY_UP)){
-			player.moveY(-1, currentRoom, false);
+			player.moveY(-1, currentRoom, false, deltaTime);
 			player.walkUp();
 		} else if (i.isKeyDown(Input.KEY_LEFT)) {
-			player.moveX(-1, currentRoom, false);
+			player.moveX(-1, currentRoom, false, deltaTime);
 			player.walkLeft();
 		} else if (i.isKeyDown(Input.KEY_RIGHT)) {
-			player.moveX(1, currentRoom, true);
+			player.moveX(1, currentRoom, true, deltaTime);
 			player.walkRight();
 		} else {
 			// stop walking, we are not moving
@@ -184,7 +184,7 @@ public class Gameplay extends BasicGame {
 		}
 		
 		// move the ghosts
-		currentRoom.moveCharaters();
+		currentRoom.moveCharaters(deltaTime);
 		
 		// if we are on a ghost, decrease the health
 		if (currentRoom.isPlayerOnAGhost(player.getBoundingBox())) {
@@ -193,26 +193,32 @@ public class Gameplay extends BasicGame {
 
 		// e is the action key, check if we are on an object and do something
 		if (i.isKeyPressed(Input.KEY_E)) {
+			// the action key is pressed
 			if (currentRoom.isPlayerOnKey((int) player.x, (int) player.y)) {
+				// we are on a key, pick it up
 				currentRoom.removeKey();
 				player.addKey();
 			} else if (currentRoom.isPlayerOnACarpet((int) player.x, (int) player.y)) {
+				// we are on a carpet, move to the other room (if we have the key or the carpet isn't locked)
 				Carpet carpet = currentRoom.getTheCarpetThePlayerIsStandingOn((int) player.x, (int) player.y);
 				if (carpet != null) {
 					if (carpet.isLocked()) {
 						if (player.hasKey()) {
+							// we have the key, unlock the carpet
 							carpet.unlock();
 							player.removeAKey();
 						}
 					}
 
 					if (carpet.isExitCarpet()) {
+						// we are on an exit carpet, we have won
 						if (carpet.isLocked() == false) {
-							System.out.println("won");
 							state = STATES.won;
 							timer.stop();
 						}
 					} else if (carpet.isLocked() == false) {
+						// the carpet isn't locked, we can move to the other room
+						
 						// we want the carpet in the other room that points to the current room
 						String currentId = currentRoom.getId();
 						
@@ -230,11 +236,16 @@ public class Gameplay extends BasicGame {
 					}
 				}
 			} else {
+				// we are on another object
+				
+				// get the object
 				GroupObject go = currentRoom.getTheObjectThePlayerIsStandingOn((int) player.x, (int) player.y);
 				if (go != null) {
 					if (go.name.toUpperCase().equals("BED")) {
+						// it is the bed, we have won
 						state = STATES.won;
 					} else if (go.name.toUpperCase().equals("HEART")) {
+						// is is a heart, increase the player's health
 						player.increaseHealth(1);
 						currentRoom.removeGroupObject(go);
 					}
@@ -243,6 +254,7 @@ public class Gameplay extends BasicGame {
 		}
 		
 		if (timer.timeLeft() == false) {
+			// the time's up, we have lost
 			state = STATES.lost;
 			timer.stop();
 		}

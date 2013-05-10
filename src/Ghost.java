@@ -22,9 +22,9 @@ public class Ghost extends Character {
 		randomizeDirection();
 	}
 
-	public void move(Room room) {
-		float newX = x + xSpeed;
-		float newY = y + ySpeed;
+	public void move(Room room, int deltaTime) {
+		float newX = x + xSpeed*deltaTime/10;
+		float newY = y + ySpeed*deltaTime/10;
 		
 		// if we are moving to the right, we want to count width the ghost's width.
 		int width = (xSpeed > 0) ? 64 : 0;

@@ -136,7 +136,7 @@ public abstract class Character implements Drawable {
 		this.y = y;
 	}
 	
-	public void move(Room r) {
+	public void move(Room r, int deltaTime) {
 		
 	}
 	
