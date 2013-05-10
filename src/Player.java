@@ -48,8 +48,6 @@ public class Player extends Character {
 		inventory = new Inventory();
 	}
 
-
-
 	/**
 	 * Decrease the health.
 	 * @param amount The amount to Decrease the health with.

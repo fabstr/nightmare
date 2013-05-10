@@ -30,6 +30,8 @@ public class Gameplay extends BasicGame {
 	private STATES state = STATES.playing;
 	
 	private UnicodeFont text;
+	
+	private static final int FRAMERATE = 60;
 
 	// title of the window
 	public Gameplay() {
@@ -266,6 +268,7 @@ public class Gameplay extends BasicGame {
 		AppGameContainer app = new AppGameContainer(g);
 		app.setDisplayMode(windowWidth, windowHeight, false);
 		g.setGameContainer(app);
+		app.setTargetFrameRate(FRAMERATE);
 		app.start();
 	}
 	
