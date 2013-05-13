@@ -28,15 +28,20 @@ public class Player extends NPC {
 	public Player(int health, int x, int y) throws SlickException {
 		super(health, x, y, Resources.PLAYER_WIDTH, Resources.PLAYER_HEIGHT, Resources.GREEN_GUY_PATH);
 		
+		hurtAnimation = new AnimationManager(Resources.GREEN_GUY_HURT_PATH);
 		tl = new TimingLock(2000);
 		
 		inventory = new Inventory();
 	}
 	
 	@Override
-	public void draw(float x, float y) {
-		
+	public void draw() {
+		if(tl.isLocked()) {   // if player was recently hurt
+			hurtAnimation.getAnimation(direction).draw(x, y);
+		}
+		else {
 		currentAnimation.draw(x, y);
+		}
 	}
 
 	/**

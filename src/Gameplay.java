@@ -254,6 +254,7 @@ public class Gameplay extends BasicGame {
 		// if we are on a ghost, decrease the health
 		if (currentRoom.isPlayerOnACharacter(player.getBoundingBox())) {
 			player.decreaseHealth(1);
+			
 		}
 
 		// e is the action key, check if we are on an object and do something

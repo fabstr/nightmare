@@ -38,6 +38,11 @@ public abstract class Character {
 	 * The image of the character.
 	 */
 	protected Animation currentAnimation;
+	
+	/**
+	 * The image of the character when losing a life.
+	 */
+	protected Animation hurtAnimation;
 
 	/**
 	 * Create a new character with the given health, the coordinates and
@@ -45,7 +50,7 @@ public abstract class Character {
 	 * @param health The (initial) health of the character.
 	 * @param x The x coordinate to start at
 	 * @param y The y coordinate to start at
-	 * @param img The image to draw (as a spritesheet of the animations)
+	 * @param img The image to draw (as a sprite sheet of the animations)
 	 * @throws SlickException If there was an error creating the Image 
 	 * 			  object.
 	 */

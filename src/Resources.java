@@ -101,6 +101,7 @@ public class Resources {
 	public static final String WINNING_ANIMATION_PATH = SPRITES_FOLDER + "movingWinning.png";
 	public static final int WINNING_ANIMATION_X = 330;
 	public static final int WINNING_ANIMATION_Y = 250;
+	public static final String GREEN_GUY_HURT_PATH = SPRITES_FOLDER + "green_guy_hurt.png";
 	
 	/**
 	 * Return the key image.
