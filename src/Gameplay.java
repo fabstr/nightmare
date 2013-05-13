@@ -11,7 +11,7 @@ public class Gameplay extends BasicGame {
 	 * If true, the player can press 0,1,2,3,4,5 to go to the respective room.
 	 * Also, press P or L to increase/decrease the player's lives.
 	 */
-	private static final boolean DEBUGGING = true;
+	private static final boolean DEBUGGING = false;
 	
 	/**
 	 * The player object
@@ -68,7 +68,7 @@ public class Gameplay extends BasicGame {
 	/**
 	 * The current state of the game. We begin with PLAYING
 	 */
-	private STATES state = STATES.PLAYING;
+	private STATES state = STATES.STARTING;
 	
 	/**
 	 * The text object draws the time-left message
@@ -106,7 +106,10 @@ public class Gameplay extends BasicGame {
 		case PAUSED: 
 			popup.displayImage(Resources.MSG_PAUSED_PATH);
 			break;
-		case PLAYING: case STARTING:
+		case PLAYING: 
+			break;
+		case STARTING:
+			popup.displayImage(Resources.MSG_START_PATH );
 			break;
 		}
 
@@ -115,8 +118,11 @@ public class Gameplay extends BasicGame {
 		player.draw();
 		drawHearts();
 
+		//If the game is not in the starting mode, draw the time.
+		if(state != STATES.STARTING) {
 		String timeLeft = String.format(Resources.TIME_LEFT_STRING, timer.getSecondsLeft());
 		text.drawString(Resources.TIME_LEFT_STRING_X, Resources.TIME_LEFT_STRING_Y, timeLeft, Resources.TIME_LEFT_COLOUR);
+		}
 
 		player.drawInventory();
 
@@ -178,6 +184,8 @@ public class Gameplay extends BasicGame {
 	
 	@Override
 	public void update(GameContainer gc, int deltaTime) throws SlickException {
+		
+		//Checks to see if the key P for paused is pressed.
 		Input i = gc.getInput();
 		if (i.isKeyPressed(Input.KEY_P)){
 			if (state == STATES.PAUSED) {
@@ -190,7 +198,7 @@ public class Gameplay extends BasicGame {
 			}
 		}
 		
-		if ((state == STATES.LOST || state == STATES.WON) && 
+		if ((state == STATES.LOST || state == STATES.WON || state == STATES.STARTING) && 
 			 i.isKeyPressed(Input.KEY_SPACE)) {
 			// we want to start a new game
 			restartGame();

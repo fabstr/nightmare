@@ -61,6 +61,7 @@ public class Resources {
 	public static final String MSG_WON_PATH = SPRITES_FOLDER + "winningBox.png";
 	public static final String MSG_LOST_PATH = SPRITES_FOLDER + "losingBox.png";
 	public static final String MSG_PAUSED_PATH = SPRITES_FOLDER + "boxPaused.png";
+	public static final String MSG_START_PATH = SPRITES_FOLDER + "boxStart.png";
 	public static final String TIME_LEFT_STRING = "Time left: %3d seconds.";
 	public static final String ROOM_TO_START_IN_ID = "0";
 	public static final int TEXT_SIZE = 20;

@@ -76,6 +76,13 @@ public class Popup {
 	}
 	
 	/**
+	 * Stops drawing the popup window.
+	 */
+	public void stopImage() {
+		msg = null;
+	}
+	
+	/**
 	 * Draw the current popup box with the current string
 	 */
 	public void draw() {
