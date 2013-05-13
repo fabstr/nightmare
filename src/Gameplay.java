@@ -62,7 +62,7 @@ public class Gameplay extends BasicGame {
 	 * The states the game can be in
 	 */
 	private enum STATES {
-		PLAYING, PAUSED, LOST, WON
+		PLAYING, PAUSED, LOST, WON, STARTING
 	}
 	
 	/**
@@ -103,7 +103,7 @@ public class Gameplay extends BasicGame {
 		case LOST:
 			popup.displayImage(Resources.MSG_LOST_PATH);
 			break;
-		case PLAYING: case PAUSED:
+		case PLAYING: case PAUSED: case STARTING:
 			break;
 		}
 
@@ -161,7 +161,6 @@ public class Gameplay extends BasicGame {
 		popup = new Popup();
 		
 		winningAnimation = Resources.getWinningAnimation();
-		
 	}
 
 	/**
@@ -211,7 +210,7 @@ public class Gameplay extends BasicGame {
 			player.moveX(1, currentRoom, true, deltaTime);
 			player.walkRight();
 		} else {
-			// stop walking, we are not moving
+			// we are not moving
 			player.stopWalking();
 		}
 		
@@ -299,7 +298,7 @@ public class Gameplay extends BasicGame {
 						state = STATES.WON;
 						timer.stop();
 					} else if (go.name.toUpperCase().equals(Resources.IDSTRING_HEART)) {
-						if (player.getHealth() <= 4) {
+						if (player.getHealth() < 4) {
 							// is is a heart, increase the player's health
 							player.increaseHealth(1);
 							currentRoom.removeGroupObject(go);

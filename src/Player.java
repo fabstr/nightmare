@@ -22,7 +22,7 @@ public class Player extends NPC {
 	public Player(int health, int x, int y) throws SlickException {
 		super(health, x, y, Resources.PLAYER_WIDTH, Resources.PLAYER_HEIGHT, Resources.GREEN_GUY_PATH);
 		
-		tl = new TimingLock(1000);
+		tl = new TimingLock(2000);
 		
 		inventory = new Inventory();
 	}
