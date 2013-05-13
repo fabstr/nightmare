@@ -1,3 +1,4 @@
+import java.awt.Rectangle;
 import java.security.SecureRandom;
 import org.newdawn.slick.SlickException;
 
@@ -69,5 +70,14 @@ public class Ghost extends Character {
 		}
 		
 		ySpeed = (float) Math.sqrt(1 - xSpeed * xSpeed);
+	}
+	
+	// Better bounding Box.
+	@Override
+	public Rectangle getBoundingBox() {
+		int w = width - 30;      
+		float xPosition = x + 15;
+	   
+		return new Rectangle((int) xPosition, (int) y, w, height);
 	}
 }

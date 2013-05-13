@@ -204,7 +204,8 @@ public class Gameplay extends BasicGame {
 			restartGame();
 		}
 		
-		if (state == STATES.LOST || state == STATES.PAUSED || state == STATES.WON) {
+		//If the state is not playing, movement does not need to be updated.
+		if (state == STATES.LOST || state == STATES.PAUSED || state == STATES.WON || state == STATES.STARTING) {
 			return;
 		}
 		

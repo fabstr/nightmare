@@ -1,3 +1,4 @@
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.SlickException;
 
 public class Player extends NPC {
@@ -13,6 +14,11 @@ public class Player extends NPC {
 	private Inventory inventory;
 	
 	/**
+	 * The image of the character when losing a life.
+	 */
+	private AnimationManager hurtAnimation;
+	
+	/**
 	 * Create a player
 	 * @param health
 	 * @param x
@@ -25,6 +31,12 @@ public class Player extends NPC {
 		tl = new TimingLock(2000);
 		
 		inventory = new Inventory();
+	}
+	
+	@Override
+	public void draw(float x, float y) {
+		
+		currentAnimation.draw(x, y);
 	}
 
 	/**
