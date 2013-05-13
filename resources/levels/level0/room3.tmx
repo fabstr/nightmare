@@ -24,9 +24,12 @@
  <tileset firstgid="44" name="heart" tilewidth="32" tileheight="32">
   <image source="../../graphics/sprites/heart.png" width="32" height="32"/>
  </tileset>
+ <tileset firstgid="45" name="sand-grey" tilewidth="32" tileheight="32">
+  <image source="../../graphics/sprites/sand-grey.png" width="64" height="64"/>
+ </tileset>
  <layer name="Tile Layer 1" width="15" height="15">
   <data encoding="base64" compression="zlib">
-   eJzjZGBgYAViQSgNw5JofHRxLiBmB2IlMjAHHr3Idg1mvejhhQ3j0ktIHz69QzGshrpeYtIzNxCzAbE0lCaEhaA0DxADAH7bEzc=
+   eJzjZGBgYAViQSgNw5JofHRxLiBmB2IlMjAHHr26SHgw69UlAtNC71AMq6Gul5j0zA3EbEAsDaUJYSEozQPEAHbuGjM=
   </data>
  </layer>
  <layer name="walls" width="15" height="15">
