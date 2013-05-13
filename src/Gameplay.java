@@ -103,7 +103,10 @@ public class Gameplay extends BasicGame {
 		case LOST:
 			popup.displayImage(Resources.MSG_LOST_PATH);
 			break;
-		case PLAYING: case PAUSED: case STARTING:
+		case PAUSED: 
+			popup.displayImage(Resources.MSG_PAUSED_PATH);
+			break;
+		case PLAYING: case STARTING:
 			break;
 		}
 
@@ -179,6 +182,7 @@ public class Gameplay extends BasicGame {
 		if (i.isKeyPressed(Input.KEY_P)){
 			if (state == STATES.PAUSED) {
 				state = STATES.PLAYING;
+				popup.stopImage();
 				timer.start();
 			} else {
 				state = STATES.PAUSED;
