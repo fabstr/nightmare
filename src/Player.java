@@ -1,4 +1,3 @@
-import org.newdawn.slick.Animation;
 import org.newdawn.slick.SlickException;
 
 public class Player extends NPC {

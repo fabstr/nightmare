@@ -4,6 +4,16 @@ import org.newdawn.slick.SlickException;
 public abstract class NPC extends Character {
 	private AnimationManager am;
 	protected AnimationManager.directions direction;
+
+	/**
+	 * The direction in which we previous tried to move
+	 */
+	private AnimationManager.directions prevDirection;
+	
+	/**
+	 * The result of the previous (attempt) to move
+	 */
+	private int moveResult;
 	
 	public NPC(int health, int x, int y, int width, int height, String spriteSheetPath)
 			throws SlickException {
@@ -103,19 +113,27 @@ public abstract class NPC extends Character {
 	 * @return -1 if it was impossible to move, else 0.
 	 */
 	public int moveX(int amount, Room room, boolean countImageWidth, int deltaTime) {
+		if (direction == prevDirection && moveResult == -1) {
+			// the previous attempt to move this way failed, it's not possible now either
+			return -1;
+		}
+		
 		float newX = this.x + amount*deltaTime*Resources.PLAYER_MOVEMENT_SPEED;
 		if (countImageWidth) {
 			newX += currentAnimation.getWidth();
 		}
 		
 		if (!room.canSetXY(newX, y, (getDirection() == AnimationManager.directions.LEFT) ? -32 : 32, height, direction)) {
+			moveResult = -1;
+			prevDirection = direction;
 			return -1;
 		}
 		
 		if (countImageWidth) {
 			newX -= currentAnimation.getWidth();
 		}
-		
+		moveResult = 0;
+		prevDirection = direction;
 		setX(newX);
 		return 0;
 	}
@@ -136,6 +154,8 @@ public abstract class NPC extends Character {
 		}
 		
 		if (!room.canSetXY(x, newY, width, (getDirection() == AnimationManager.directions.UP) ? -32 : 32, direction)) {
+			moveResult = -1;
+			prevDirection = direction;
 			return -1;
 		}
 		

@@ -25,11 +25,6 @@ public class Popup {
 	private Image boxImage;
 	
 	/**
-	 * the default image 
-	 */
-	private Image defaultImage;
-	
-	/**
 	 * Create a new popup object
 	 * @throws SlickException
 	 */
@@ -42,7 +37,6 @@ public class Popup {
 		textDrawer.loadGlyphs();
 		
 		boxImage = new Image(Resources.POPUP_IMAGE);
-		defaultImage = boxImage;
 	}
 	
 	/**

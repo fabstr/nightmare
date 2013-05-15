@@ -1,5 +1,3 @@
-import java.net.URL;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
